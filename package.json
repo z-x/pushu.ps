@@ -1,38 +1,21 @@
 {
-  "name": "pushups",
-  "version": "0.1.0",
-  "description": "",
-  "main": "app.js",
-  "scripts": {
-    "clean": "rimraf ./dist",
-    "init": "npm run clean && mkdirp dist && mkdirp dist/js && mkdirp dist/css && mkdirp dist/img && npm-run-all build:*",
-    "build:html": "html-minifier --input-dir ./src --output-dir ./dist --file-ext html --collapse-boolean-attributes --collapse-inline-tag-whitespace --collapse-whitespace --remove-comments --remove-attribute-quotes",
-    "watch:html": "onchange \"./src/*.html\" -- npm run build:html",
-    "build:img": "imagemin-newer ./src/img ./dist/img",
-    "watch:img": "onchange \"./src/img\" -- npm run build:img",
-    "build": "npm-run-all clean build:*",
-    "serve": "browser-sync start --server \"dist\" --files \"dist/*.html, dist/css/*.css, dist/js/*.js\"",
-    "start": "npm-run-all --parallel serve watch:*"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/z-x/pushups.git"
-  },
-  "keywords": [],
-  "author": "Łukasz Krysiewicz",
-  "bugs": {
-    "url": "https://github.com/z-x/pushups/issues"
-  },
-  "homepage": "https://github.com/z-x/pushups#readme",
-  "devDependencies": {
-    "browser-sync": "^2.26.7",
-    "html-minifier": "^4.0.0",
-    "imagemin-newer": "^1.0.2",
-    "mkdirp": "^1.0.3",
-    "node-sass": "^4.13.1",
-    "npm-run-all": "^4.1.5",
-    "onchange": "^6.1.0",
-    "rimraf": "^3.0.2"
-  },
-  "dependencies": {}
+	"name": "pushu.ps",
+	"version": "0.0.1",
+	"scripts": {
+		"build": "rollup -c",
+		"dev": "rollup -c -w",
+		"start": "sirv public -H 192.168.2.204"
+	},
+	"devDependencies": {
+		"@rollup/plugin-commonjs": "^11.0.0",
+		"@rollup/plugin-node-resolve": "^7.0.0",
+		"rollup": "^1.20.0",
+		"rollup-plugin-livereload": "^1.0.0",
+		"rollup-plugin-svelte": "^5.0.3",
+		"rollup-plugin-terser": "^5.1.2",
+		"svelte": "^3.0.0"
+	},
+	"dependencies": {
+		"sirv-cli": "^0.4.4"
+	}
 }
