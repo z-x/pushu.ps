@@ -7,17 +7,21 @@ Pushu.ps is a simple tracking app for your daily pushups workout. It's main purp
 Development
 =======
 To install the app locally you would need Node.js, npm  and possibly git. Then you need to clone the repository:
+
 	git clone https://github.com/z-x/pushu.ps.git
 
 Next, navigate to the local repository that you've just downloaded
-	cd x:/pushu.ps
+
+    cd x:/pushu.ps
 
 And finally install the whole thing to get all the dependencies:
+
 	npm install
 
 Run the development server
 -----------
 To run the dev server you just need to run
+
 	npm run dev
 
 It should run the server at http://localhost:5000 by default so you can just type this into your browser navigation bar and you should see the app.
