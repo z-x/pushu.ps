@@ -21,6 +21,10 @@
 	let lastDay = ($state.set !== 1) ? training[$state.level][$state.set]['pushups'].reduce((a, b) => a + b, 0) : 0;
 	let commingUp = training[$state.level][$state.set]['pushups'].reduce((a, b) => a + b, 0);
 
+
+	// analytics
+	ga('send', 'event', 'viewed', 'home');
+
 </script>
 
 

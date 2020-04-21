@@ -23,13 +23,15 @@
 	let dispatch = createEventDispatcher();
 
 	let action = () => {
+		// analytics
+		ga('send', 'event', 'mainAction', 'clicked', changePageTo);
+
 		dispatch('mainAction');
 
 		if(changePageTo) {
 			state.setPage(changePageTo);
 		}
-	}
-
+	};
 
 </script>
 

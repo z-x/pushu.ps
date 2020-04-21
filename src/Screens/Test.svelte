@@ -28,6 +28,8 @@
 		if(pushups <= 5) { state.setLevel(1); }
 		else if (pushups > 5 && pushups <= 10) { state.setLevel(2); }
 		else { state.setLevel(3); }
+
+		ga('send', 'event', 'test', 'leveled', '', $state.level);
 	}
 
 
@@ -45,6 +47,12 @@
 			}, 2);
 		}
 	};
+
+	// analytics
+	ga('send', 'event', 'viewed', 'test');
+	function filled(){
+		ga('send', 'event', 'test', 'tested', '', pushups);
+	}
 
 </script>
 
@@ -80,7 +88,7 @@
 	<div class="content content-readable">
 		<h1 class="text-title moveable" class:visible="{ !pushups }">{string.firstTestYourself}</h1>
 		<p class="text-subtitle moveable" class:visible="{ !pushups }">{string.doAsManyPushups}</p>
-		<p class="text-title action-secondary">{string.iDid} <input type="number" placeholder="12" min="0" step="1" bind:value="{ pushups }"> {string.pushups(pushups)}</p>
+		<p class="text-title action-secondary">{string.iDid} <input type="number" placeholder="12" min="0" step="1" bind:value="{ pushups }" on:change="{ filled }"> {string.pushups(pushups)}</p>
 		{#if pushups}
 			<p in:appear="{{ delay: 500 }}" out:appear class="text-subtitle">{string.niceGoRest}</p>
 		{/if}

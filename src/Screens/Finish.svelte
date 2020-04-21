@@ -28,6 +28,9 @@
 	// ------------------------------------------------------------------------
 	function hard(){
 		state.setPage('Home');
+
+		// analytics
+		ga('send', 'event', 'finish', 'hard', 'level: ' + $state.level, $state.set);
 	}
 
 	// purpose:		if user says the set was easy, let's move him to next one
@@ -36,7 +39,14 @@
 	function easy(){
 		state.nextSet();
 		state.setPage('Home');
+
+		// analytics
+		ga('send', 'event', 'finish', 'easy', 'level: ' + $state.level, $state.set);
 	}
+
+
+	// analytics
+	ga('send', 'event', 'viewed', 'finish');
 
 </script>
 
