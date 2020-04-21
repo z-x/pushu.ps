@@ -28,6 +28,7 @@ It should run the server at http://localhost:5000 by default so you can just typ
 
 The code includes comments for easier understanding if you are looking for any particular solution. I am aware it could be better in places, but please keep in mind that this is a after hours project. ;)
 
+
 License
-----------
+==========
 The code and the design files are opened only for learning purposes, please keep in mind that the final app is copyrighted.
