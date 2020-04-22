@@ -11,6 +11,7 @@
 	import { onDestroy } from 'svelte';
 	import string from '../Data/translations.js';
 	import state from '../Data/state.js';
+	import training from '../Data/training.js';
 	import { slide } from '../Helpers/transitions.js';
 	import MainAction from '../UI/MainAction.svelte';
 	import Sidebar from '../UI/Sidebar.svelte';
@@ -37,7 +38,9 @@
 	// return:		sets next training and redirects to home screen
 	// ------------------------------------------------------------------------
 	function easy(){
-		state.nextSet();
+		if(Object.keys(training[$state.level]).length !== $state.set){
+			state.nextSet();
+		}
 		state.setPage('Home');
 
 		// analytics
