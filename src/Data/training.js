@@ -8,7 +8,7 @@
 let training = {
 	1: {
 		1: {
-			rest: 10,
+			rest: 60,
 			pushups: [1, 2, 3, 3, 2]
 		},
 		2: {
