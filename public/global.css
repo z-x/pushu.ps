@@ -91,7 +91,8 @@ html, body {
 	padding-bottom: var(--size-padding-bottom);
 	padding-left: var(--size-spacing);
 	padding-right: var(--size-spacing);
-	overflow: auto;
+	overflow-x: hidden;
+	overflow-y: auto;
 	position: absolute;
 	left: var(--size-sidebar);
 	right: 0;
