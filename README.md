@@ -28,6 +28,14 @@ It should run the server at http://localhost:5000 by default so you can just typ
 
 The code includes comments for easier understanding if you are looking for any particular solution. I am aware it could be better in places, but please keep in mind that this is a after hours project. ;)
 
+Build the final package
+--------
+To build the optimized and pure JavaScript package you need to run
+
+	npm run build
+	
+The output will be placed in `public` directory.
+
 
 License
 ==========
