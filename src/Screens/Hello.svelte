@@ -21,7 +21,7 @@
 
 
 	// analytics
-	ga('send', 'event', 'Page', 'viewed', 'Hello');
+	gtag('event', 'viewed', {'page': 'hello'});
 
 </script>
 
