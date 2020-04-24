@@ -33,6 +33,9 @@ function createStore(){
 		state.isResting = (localStorage.isResting) ? parseInt(localStorage.isResting) : 0;
 		state.pushupsLast = (localStorage.pushupsLast) ? parseInt(localStorage.pushupsLast) : 0;
 		state.pushupsTotal = (localStorage.pushupsTotal) ? parseInt(localStorage.pushupsTotal) : 0;
+		state.popupShown = false;
+		state.language = (localStorage.language) ? localStorage.language : 'en-US';
+		state.lastActive = (localStorage.lastActive) ? parseInt(localStorage.lastActive) : Date.now();
 
 	
 	// purpose:		creates the store with data provided in state object
@@ -135,6 +138,18 @@ function createStore(){
 
 			return state;
 		});
+	};
+
+
+	// purpose:		sets the information about the popup status
+	// arguments: 	if popup is visible (true) or not (false)
+	// ------------------------------------------------------------------------
+	let popupShown = (is) => {
+		update((state) => {
+			state.popupShown = is;
+
+			return state;
+		});
 	}
 
 
@@ -149,7 +164,8 @@ function createStore(){
 		setStep,
 		lastSet,
 		totalUpdate,
-		isResting
+		isResting,
+		popupShown
 	};
 };
 
