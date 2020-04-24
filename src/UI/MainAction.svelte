@@ -24,7 +24,8 @@
 
 	let action = () => {
 		// analytics
-		ga('send', 'event', 'mainAction', 'clicked', changePageTo);
+		gtag('event', 'mainAction', {'clicked': changePageTo});
+
 
 		dispatch('mainAction');
 

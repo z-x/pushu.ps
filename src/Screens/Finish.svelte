@@ -31,7 +31,7 @@
 		state.setPage('Home');
 
 		// analytics
-		ga('send', 'event', 'finish', 'hard', 'level: ' + $state.level, $state.set);
+		gtag('event', 'finished', {'howWasIt': 'hard', 'level': $state.level, 'set': $state.set});
 	}
 
 	// purpose:		if user says the set was easy, let's move him to next one
@@ -44,12 +44,12 @@
 		state.setPage('Home');
 
 		// analytics
-		ga('send', 'event', 'finish', 'easy', 'level: ' + $state.level, $state.set);
+		gtag('event', 'finished', {'howWasIt': 'easy', 'level': $state.level, 'set': $state.set});
 	}
 
 
 	// analytics
-	ga('send', 'event', 'viewed', 'finish');
+	gtag('event', 'viewed', {'page': 'finish'});
 
 </script>
 

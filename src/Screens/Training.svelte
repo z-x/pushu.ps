@@ -129,7 +129,7 @@
 	// ------------------------------------------------------------------------
 	function nextStep(){
 		// analytics
-		ga('send', 'event', 'training', 'nextStep', 'max: ' + currentPushups.length, ($state.currentStep + 1));
+		gtag('event', 'training', {'nextStep': ($state.currentStep + 1), 'maxSteps': currentPushups.length});
 
 		// if it was the last pushups to make
 		if($state.currentStep === currentPushups.length-1){
@@ -200,7 +200,7 @@
 
 
 	// analytics
-	ga('send', 'event', 'viewed', 'training');
+	gtag('event', 'viewed', {'page': 'training'});
 </script>
 
 <style>

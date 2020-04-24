@@ -23,7 +23,7 @@
 
 
 	// analytics
-	ga('send', 'event', 'viewed', 'home');
+	gtag('event', 'viewed', {'page': 'home'});
 
 </script>
 

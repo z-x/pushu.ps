@@ -29,7 +29,8 @@
 		else if (pushups > 5 && pushups <= 10) { state.setLevel(2); }
 		else { state.setLevel(3); }
 
-		ga('send', 'event', 'test', 'leveled', '', $state.level);
+		// analytics
+		gtag('event', 'test', {'leveled': $state.level});
 	}
 
 
@@ -49,9 +50,9 @@
 	};
 
 	// analytics
-	ga('send', 'event', 'viewed', 'test');
+	gtag('event', 'viewed', {'page': 'test'});
 	function filled(){
-		ga('send', 'event', 'test', 'tested', '', pushups);
+		gtag('event', 'test', {'pushups': pushups});
 	}
 
 </script>
