@@ -47,7 +47,7 @@
 		font-weight: 600;
 	}
 
-	@media (max-height: 600px) {
+	@media (min-height: 551px) and (max-height: 650px) {
 		.action-main {
 			font-size: 2rem;
 		}

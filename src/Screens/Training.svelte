@@ -58,8 +58,8 @@
 			if($state.isResting){
 				restingMargin = getComputedStyle(document.documentElement).getPropertyValue('--size-spacing');
 				counterPosition =  'calc(' + sidebarValuePosition + ' + ' + restingMargin + ' * 1.5)';
-		 	} else {
-				 counterPosition = sidebarValuePosition;
+			} else {
+				counterPosition = sidebarValuePosition;
 			}
 		}
 	};
@@ -214,6 +214,13 @@
 
 		transition: transform .2s ease-in-out;
 		transform: translateY(0);
+	}
+
+	@media (max-height: 540px) {
+		.content-training {
+			margin-top: 0;
+			transform: translateY(0) !important;
+		}
 	}
 
 	.training-number {

@@ -40,12 +40,12 @@ q:after, q:before { content: ''; }
 /* variables
 ============================================================================ */
 :root {
-	--color-background: #fff;
-	--color-separator: #f1f1f1;
+	--color-background: #f6bb50;
+	--color-separator: #dda848;
 	--color-text: #000;
-	--color-placeholder: #d2d2d2;
-	--color-input: #eee;
-	--color-focus: #f7bb51;
+	--color-placeholder: #f6bb50;
+	--color-input: #dda848;
+	--color-focus: #000;
 
 	/* the spacing between elements */
 	--size-spacing: 1.5rem;
@@ -66,21 +66,27 @@ q:after, q:before { content: ''; }
 
 /* general styling
 ============================================================================ */
-body {
+html, body {
+	height: 100%;
+
+	background-color: var(--color-background);
+
 	font-family: 'neue-haas-grotesk-display', 'helvetica', 'arial', sans-serif;
+}
+
+@media (max-height: 550px) {
+	html {
+		font-size: .8em;
+	}
 }
 
 
 
 /* page structure
 ============================================================================ */
-html, body {
-	height: 100%;
-}
-
 .app {
 	max-width: 500px;
-	min-height: 100%;
+	height: 100%;
 	overflow: hidden;
 	display: flex;
 	position: relative;
@@ -91,8 +97,7 @@ html, body {
 	padding-bottom: var(--size-padding-bottom);
 	padding-left: var(--size-spacing);
 	padding-right: var(--size-spacing);
-	overflow-x: hidden;
-	overflow-y: auto;
+	overflow: hidden;
 	position: absolute;
 	left: var(--size-sidebar);
 	right: 0;

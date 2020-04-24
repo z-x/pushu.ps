@@ -8,7 +8,7 @@
 
 	// imports
 	// ------------------------------------------------------------------------
-	import { createEventDispatcher } from 'svelte';
+	import { createEventDispatcher, onMount } from 'svelte';
 	import state from '../Data/state.js';
 	import SecondGate from '../UI/SecondGate.svelte';
 	import { appear } from '../Helpers/transitions.js';
@@ -59,12 +59,29 @@
 		font-weight: bold;
 	}
 
+	@media (max-height: 550px){
+		.sidebar-info-value {
+			margin-bottom: .7em;
+		}
+	}
+
+	@media (max-height: 600px){
+		.sidebar-long .sidebar-info {
+			font-size: 1.3rem;
+		}
+
+		.sidebar-long .sidebar-info-value {
+			margin-bottom: .7em;
+		}
+	}
+
 </style>
 
 
 
 
-<aside class="sidebar">
+
+<aside class="sidebar" class:sidebar-long="{ data.length > 5 }">
 	<ul class="sidebar-info">
 		{#each data as item, i}
 			<li

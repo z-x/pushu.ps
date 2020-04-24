@@ -7,7 +7,6 @@
 	import Home from './Screens/Home.svelte';
 	import Training from './Screens/Training.svelte';
 	import Finish from './Screens/Finish.svelte';
-	import Background from './UI/Background.svelte';
 
 	// stores
 	// ------------------------------------------------------------------------
@@ -26,5 +25,3 @@
 <main class="app">
 	<svelte:component this="{ pages[$state.page] }" />
 </main>
-
-<Background />

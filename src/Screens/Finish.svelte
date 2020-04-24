@@ -60,6 +60,12 @@
 		margin-bottom: auto;
 	}
 
+	@media (max-height: 420px){
+		.content {
+			margin-top: 10vh;
+		}
+	}
+
 	p {
 		margin-bottom: .8em;
 	}
