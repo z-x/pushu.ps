@@ -1,0 +1,19 @@
+[
+	{
+		"date": "1587732568655",
+		"pl-PL": {
+			"title": "Cześć<br> mamy coś nowego!",
+			"content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><p>Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.</p>",
+			"actionYes": "Chcę to",
+			"actionClose": "Nie, dzięki"
+		},
+		"en-US": {
+			"title": "Hi there<br> we have some news!",
+			"content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><p>Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.</p>",
+			"actionYes": "I will",
+			"actionClose": "No, thanks"
+		},
+		"action": "url",
+		"url": "http://google.com"
+	}
+]

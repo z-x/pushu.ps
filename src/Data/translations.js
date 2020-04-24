@@ -7,7 +7,7 @@
 // the variable that sets the app language
 // hardcoded currently as there are no translations available
 // ------------------------------------------------------------------------
-let lang = 'en-US';
+let lang = localStorage.language;
 
 
 // purpose:		checks if the PluralRules API is available and returns

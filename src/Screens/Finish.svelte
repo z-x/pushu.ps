@@ -9,8 +9,8 @@
 	// imports
 	// ------------------------------------------------------------------------
 	import { onDestroy } from 'svelte';
-	import string from '../Data/translations.js';
 	import state from '../Data/state.js';
+	import string from '../Data/translations.js';
 	import training from '../Data/training.js';
 	import { slide } from '../Helpers/transitions.js';
 	import MainAction from '../UI/MainAction.svelte';

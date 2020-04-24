@@ -41,11 +41,13 @@ q:after, q:before { content: ''; }
 ============================================================================ */
 :root {
 	--color-background: #f6bb50;
+	--color-pure: #e7e7df;
 	--color-separator: #dda848;
 	--color-text: #000;
 	--color-placeholder: #f6bb50;
 	--color-input: #dda848;
 	--color-focus: #000;
+	--color-link: #b58020;
 
 	/* the spacing between elements */
 	--size-spacing: 1.5rem;
@@ -68,6 +70,8 @@ q:after, q:before { content: ''; }
 ============================================================================ */
 html, body {
 	height: 100%;
+	max-height: 100%;
+	overflow: hidden;
 
 	background-color: var(--color-background);
 
@@ -85,11 +89,20 @@ html, body {
 /* page structure
 ============================================================================ */
 .app {
-	max-width: 500px;
 	height: 100%;
-	overflow: hidden;
+	max-width: 500px;
 	display: flex;
 	position: relative;
+
+	filter: blur(0);
+
+	transition: filter .3s linear;
+}
+
+.app-outOfPlan {
+	filter: blur(4px);
+
+	transition-delay: 1s;
 }
 
 .main {
