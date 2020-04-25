@@ -36,7 +36,7 @@ export let appear = function(node, {
 // ------------------------------------------------------------------------
 export let slide = function(node, {
 	delay = 0,
-	duration = 600,
+	duration = 500,
 	direction = 'in'
 }){
 	return {

@@ -7,6 +7,7 @@
 // the variable that sets the app language
 // hardcoded currently as there are no translations available
 // ------------------------------------------------------------------------
+if(!localStorage.language){ localStorage.language = 'en-US'; }
 let lang = localStorage.language;
 
 

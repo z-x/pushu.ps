@@ -1,12 +1,5 @@
 <script>
 
-	// set defaults
-	// ------------------------------------------------------------------------
-	if(!localStorage.language){ localStorage.language = 'en-US'; }
-	localStorage.lastActive = Date.now();
-
-	import { onMount } from 'svelte';
-
 	// pages
 	// ------------------------------------------------------------------------
 	import Hello from './Screens/Hello.svelte';
@@ -15,6 +8,7 @@
 	import Training from './Screens/Training.svelte';
 	import Finish from './Screens/Finish.svelte';
 	import News from './Screens/News.svelte';
+	import Menu from './Screens/Menu.svelte';
 
 	// stores
 	// ------------------------------------------------------------------------
@@ -31,13 +25,20 @@
 	// ------------------------------------------------------------------------
 	let lastActive = $state.lastActive;
 
-
 </script>
 
 
 <News />
 
 
-<main class="app" class:app-outOfPlan="{ $state.popupShown }">
+<main
+	class="app"
+	class:app-unfocused="{ $state.popupShown || $state.menuShown }"
+	class:app-menuShown="{ $state.menuShown }"
+>
 	<svelte:component this="{ pages[$state.page] }" />
 </main>
+
+{#if $state.menuShown}
+	<Menu />
+{/if}

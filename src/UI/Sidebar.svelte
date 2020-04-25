@@ -10,7 +10,7 @@
 	// ------------------------------------------------------------------------
 	import { createEventDispatcher, onMount } from 'svelte';
 	import state from '../Data/state.js';
-	import SecondGate from '../UI/SecondGate.svelte';
+	import MenuToggle from '../UI/MenuToggle.svelte';
 	import { appear } from '../Helpers/transitions.js';
 	import SidebarIndicator from '../UI/SidebarIndicator.svelte';
 
@@ -44,6 +44,8 @@
 
 		border-right: 1px solid var(--color-separator);
 		background-color: var(--color-background);
+
+		transition: filter .5s ease-in-out;
 	}
 
 	.sidebar-info {
@@ -95,5 +97,5 @@
 		{/each}
 	</ul>
 	{#if markActive && showSidebarIndicator } <SidebarIndicator /> {/if}
-	<SecondGate />
+	<MenuToggle />
 </aside>

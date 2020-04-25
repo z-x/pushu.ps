@@ -42,6 +42,7 @@ q:after, q:before { content: ''; }
 :root {
 	--color-background: #f6bb50;
 	--color-pure: #e7e7df;
+	--color-pureSeparator: #cfcfc8;
 	--color-separator: #dda848;
 	--color-text: #000;
 	--color-placeholder: #f6bb50;
@@ -56,6 +57,15 @@ q:after, q:before { content: ''; }
 	--size-padding-bottom: 3rem;
 	/* sidebar width */
 	--size-sidebar: 77px;
+
+	--icon-arrowRight: url('data:image/svg+xml;utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 62 36"%3E%3Cpath d="M61.75 17.31l-16-17a1 1 0 00-1.42 0 1.06 1.06 0 000 1.43L58.69 17H1a1 1 0 000 2h57.69L44.28 34.31a1 1 0 000 1.42 1 1 0 001.42 0l16-17a1.08 1.08 0 000-1.38z"/%3E%3C/svg%3E');
+
+	/* z-indexes */
+	--z-menu: 20;
+	--z-overlay: 60;
+
+	/* fonts */
+	--font-condensed: urw-din-condensed, 'helvetica', 'arial', sans-serif;
 }
 
 @media (max-height: 600px) {
@@ -70,10 +80,9 @@ q:after, q:before { content: ''; }
 ============================================================================ */
 html, body {
 	height: 100%;
-	max-height: 100%;
 	overflow: hidden;
 
-	background-color: var(--color-background);
+	background-color: var(--color-pure);
 
 	font-family: 'neue-haas-grotesk-display', 'helvetica', 'arial', sans-serif;
 }
@@ -90,22 +99,39 @@ html, body {
 ============================================================================ */
 .app {
 	height: 100%;
-	max-width: 500px;
+	max-height: 100%;
+	overflow: hidden;
 	display: flex;
 	position: relative;
+	z-index: 50;
+	
+	background-color: var(--color-background);
 
 	filter: blur(0);
 
-	transition: filter .3s linear;
+	transition-property: transform, border-radius, box-shadow;
+	transition-duration: .4s, .2s, .2s;
+	transition-timing-function: ease-in-out, ease-in-out, ease-in-out;
 }
 
-.app-outOfPlan {
-	filter: blur(4px);
+.app:not(.app-menuShown){
+	transition-delay: 0s, .2s, .3s;
+}
 
-	transition-delay: 1s;
+.app-menuShown {
+	border-bottom-left-radius: 14px;
+	border-bottom-right-radius: 14px;
+	box-shadow: 0 3px 3px rgba(0, 0, 0, .4);
+	transition-delay: 0s;
+}
+
+.app-unfocused .main,
+.app-unfocused .sidebar {
+	filter: blur(4px);
 }
 
 .main {
+	max-width: 500px;
 	padding-top: var(--size-padding);
 	padding-bottom: var(--size-padding-bottom);
 	padding-left: var(--size-spacing);
@@ -119,6 +145,8 @@ html, body {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+
+	transition: filter .5s ease-in-out;
 }
 
 
@@ -166,6 +194,43 @@ html, body {
 	.action-secondary {
 		font-size: 2rem;
 	}
+}
+
+.article {
+	overflow: auto;
+}
+
+.article h2 {
+	margin-bottom: .2em;
+
+	font-family: var(--font-condensed);
+	font-size: 2em;
+	font-weight: 600;
+}
+
+.article p + h2,
+.article ul + h2 {
+	margin-top: 1em;
+}
+
+.article p + p,
+.article li + li {
+	margin-top: .5em;
+}
+
+.article p,
+.article li {
+	line-height: 1.4em;
+}
+
+.article ul {
+	margin-left: 1.1em;
+	list-style-type: '— '
+}
+
+.article a {
+	text-decoration: underline;
+	color: var(--color-link);
 }
 
 
