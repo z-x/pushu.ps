@@ -70,8 +70,9 @@
 </script>
 
 
-<News />
+<svelte:body class="{ test }" />
 
+<News />
 
 <main
 	class="app"

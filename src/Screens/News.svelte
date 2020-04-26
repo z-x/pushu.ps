@@ -50,6 +50,30 @@
 	// set the state as with popup when needed
 	$: if(news){ state.popupShown(true); } else { state.popupShown(false); }
 
+
+	// purpose:		iOS PWA takes the status bar color from the background color
+	//				this means we need to change it when popup appears
+	//				compensating for animation times
+	//				css transitions won't work, the status bar will transition
+	//				from white at page load :<
+	//				SERIOUSLY APPLE GROW UP
+	// ------------------------------------------------------------------------
+	$: $state.popupShown, transitionBackground();
+
+	let transitionTimeout = '';
+
+	function transitionBackground(){
+		if($state.popupShown){
+			clearTimeout(transitionTimeout);
+			document.body.classList = 'app-popupShown';
+		} else {
+			clearTimeout(transitionTimeout);
+			transitionTimeout = setTimeout(() => {
+				document.body.classList = '';
+			}, 600);
+		}
+	}
+
 </script>
 
 
@@ -151,7 +175,7 @@
 
 {#if news}
 	<section class="infoPopup" on:click="{ () => action() }">
-		<div on:click|stopPropagation in:fromTop="{ {duration: 1000, delay: 500} }" out:fromTop="{ {duration: 400} }" class="infoPopup-content">
+		<div on:click|stopPropagation in:fromTop="{ {duration: 700, delay: 500} }" out:fromTop="{ {duration: 700} }" class="infoPopup-content">
 			<h1 class="infoPopup-heading">{@html news[$state.language].title}</h1>
 			{@html news[$state.language].content}
 

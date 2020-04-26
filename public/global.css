@@ -82,10 +82,31 @@ html, body {
 	height: 100%;
 	overflow: hidden;
 
-	background-color: var(--color-pure);
+	background-color: var(--color-background);
 
 	font-family: 'neue-haas-grotesk-display', 'helvetica', 'arial', sans-serif;
 }
+
+/* this is needed to set the proper colors for iOS PWA that takes the
+status bar color from the body background color */
+body:before {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+
+	background-color: var(--color-pure);
+
+	content: '';
+}
+
+.app-popupShown {
+	background-color: var(--color-pure);
+
+	transition: background-color .1s linear .5s;
+}
+
 
 @media (max-height: 550px) {
 	html {

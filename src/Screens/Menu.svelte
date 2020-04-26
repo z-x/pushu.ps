@@ -48,7 +48,12 @@
 	// returns:		if the menu is opened or closed (bool)
 	// ------------------------------------------------------------------------
 	function closeMenu(){
-		return state.menuShown(false);
+		setMenuHeight('', 0);
+
+		setTimeout(() => {
+			return state.menuShown(false);
+		}, 400);
+		
 	};
 
 
@@ -71,7 +76,7 @@
 	});
 
 	onDestroy(() => {
-		setMenuHeight('', 0);
+
 	});
 
 </script>
@@ -89,8 +94,9 @@
 		right: 0;
 		overflow-x: hidden;
 		overflow-y: auto;
-
 		z-index: var(--z-menu);
+
+		background-color: var(--color-pure);
 	}
 
 	.menu-list {
@@ -184,7 +190,7 @@
 	}
 
 	.secondgate {
-		padding-left: 2em;
+		padding-left: 2.3em;
 
 		background-image: url('data:image/svg+xml;utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 15"%3E%3Cpath d="M0 0h3v15H0zM7 15H6v-2H5v2H4V2h3v13zM8 0h3v15H8zM12 0h3v15h-3zM16 0h3v15h-3z"/%3E%3C/svg%3E');
 		background-repeat: no-repeat;
