@@ -136,7 +136,7 @@
 	}
 
 	.menu-next {
-		padding-right: 2em;
+		padding-right: 1.8em;
 		background-image: var(--icon-arrowRight);
 		background-position: right var(--size-padding) center;
 		background-repeat: no-repeat;
@@ -301,6 +301,23 @@
 		</article>
 		<div class="menu-navigation">
 			<button class="menu-back" on:click="{ () => { setMenu('menu') } }">Back</button>
+		</div>
+	</section>
+{:else if menu === 'reset'}
+	<!-- reset the progress -->
+	<section id="reset" class="menu article" in:slide|local out:slide|local>
+		<p>{@html string.resetQuestion}</p>
+		<div class="menu-navigation">
+			<button class="menu-back" on:click="{ () => setMenu('menu') }">{string.cancel}</button>
+			<button class="menu-next" on:click="{ () => { localStorage.clear(); state.setPage('Hello'); closeMenu(); } }">{string.iAmSure}</button>
+		</div>
+	</section>
+{:else if menu === 'instructions'}
+	<!-- instructions -->
+	<section id="instructions" class="menu article" in:slide|local out:slide|local>
+		{@html string.instructions}
+		<div class="menu-navigation">
+			<button class="menu-back" on:click="{ () => setMenu('menu') }">{string.back}</button>
 		</div>
 	</section>
 {/if}

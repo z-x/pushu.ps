@@ -197,6 +197,9 @@ html, body {
 }
 
 .article {
+	max-width: 800px;
+	margin-left: auto;
+	margin-right: auto;
 	overflow: auto;
 }
 
@@ -214,7 +217,8 @@ html, body {
 }
 
 .article p + h2,
-.article ul + h2 {
+.article ul + h2,
+.article .video + h2 {
 	margin-top: 1em;
 }
 
@@ -236,6 +240,27 @@ html, body {
 .article a {
 	text-decoration: underline;
 	color: var(--color-link);
+}
+
+.article strong {
+	font-weight: bold;
+}
+
+.article .video {
+	max-width: 100%;
+	height: 0;
+	margin: 1em 0;
+	padding-bottom: 56.25%;
+	position: relative;
+	overflow: hidden;
+}
+
+.article .video iframe {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
 }
 
 .form-row + .form-row {
