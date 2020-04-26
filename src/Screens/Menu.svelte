@@ -99,8 +99,12 @@
 		background-color: var(--color-pure);
 	}
 
+	:global(.app-appleFullscreen .menu) {
+		padding-bottom: 7em !important;
+	}
+
 	.menu-list {
-		padding-bottom: var(--size-spacing);
+		padding-bottom: var(--size-spacing) !important;
 	}
 
 	.menu-items {
@@ -139,6 +143,16 @@
 
 		border-top: 1px solid var(--color-pureSeparator);
 		background-color: var(--color-pure);
+	}
+
+	:global(.app-appleFullscreen .menu-navigation) {
+		padding-bottom: 3rem !important;
+	}
+
+	@media (display-mode: standalone){
+		.menu-navigation {
+			padding-bottom: 3rem;
+		}
 	}
 
 	.menu-next {

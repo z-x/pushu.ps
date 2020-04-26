@@ -54,7 +54,7 @@ q:after, q:before { content: ''; }
 	--size-spacing: 1.5rem;
 	/* the top and bottom spacing fot the whole app */
 	--size-padding: 1.5rem;
-	--size-padding-bottom: 3rem;
+	--size-padding-bottom: 1.5rem;
 	/* sidebar width */
 	--size-sidebar: 77px;
 
@@ -63,6 +63,7 @@ q:after, q:before { content: ''; }
 	/* z-indexes */
 	--z-menu: 20;
 	--z-overlay: 60;
+	--z-app: 30;
 
 	/* fonts */
 	--font-condensed: urw-din-condensed, 'helvetica', 'arial', sans-serif;
@@ -72,6 +73,16 @@ q:after, q:before { content: ''; }
 	:root {
 		--size-padding-bottom: 1.5rem;
 	}
+}
+
+@media (display-mode: standalone) {
+	:root {
+		--size-padding-bottom: 3rem;
+	}
+}
+
+.app-appleFullscreen {
+	--size-padding-bottom: 3rem;
 }
 
 
@@ -128,8 +139,6 @@ body:before {
 	
 	background-color: var(--color-background);
 
-	filter: blur(0);
-
 	transition-property: transform, border-radius, box-shadow;
 	transition-duration: .4s, .2s, .2s;
 	transition-timing-function: ease-in-out, ease-in-out, ease-in-out;
@@ -163,11 +172,12 @@ body:before {
 	right: 0;
 	top: 0;
 	bottom: 0;
+	z-index: var(-z-app);
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 
-	transition: filter .5s ease-in-out;
+	transition: filter .5s linear;
 }
 
 

@@ -31,6 +31,13 @@
 	let lastActive = $state.lastActive;
 
 
+	// if iOS app in fullscreen mode add class
+	// ------------------------------------------------------------------------
+	if(window.navigator.standalone === true){
+		document.documentElement.classList.add('app-appleFullscreen');
+	}
+
+
 	// enable 'add to home screen' on chrome mobile
 	// ------------------------------------------------------------------------
 	// register the (empty) service worker
@@ -70,7 +77,7 @@
 </script>
 
 
-<svelte:body class="{ test }" />
+
 
 <News />
 
