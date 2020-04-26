@@ -59,7 +59,7 @@
 		gtag('event', 'app', {'mobileInstalled': 1});
 	});
 
-	if($state.page === 'Home' || localStorage.installPromptShown === 'false'){
+	if($state.page === 'Home' || localStorage.installPromptShown === 'false' || deferredInstallPrompt){
 		deferredInstallPrompt.prompt();
 		localStorage.installPromptShown = true;
 

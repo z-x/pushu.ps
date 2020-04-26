@@ -90,8 +90,10 @@
 		<h1 class="text-title moveable" class:visible="{ !pushups }">{string.firstTestYourself}</h1>
 		<p class="text-subtitle moveable" class:visible="{ !pushups }">{string.doAsManyPushups}</p>
 		<p class="text-title action-secondary">{string.iDid} <input type="number" placeholder="12" min="0" step="1" bind:value="{ pushups }" on:change="{ filled }"> {string.pushups(pushups)}</p>
-		{#if pushups}
+		{#if pushups > 2}
 			<p in:appear="{{ delay: 500 }}" out:appear class="text-subtitle">{string.niceGoRest}</p>
+		{:else if pushups <= 2 && pushups > 0}
+			<p in:appear="{{ delay: 500 }}" out:appear class="text-subtitle">{string.tryHalfPushups}</p>
 		{/if}
 	</div>
 			
