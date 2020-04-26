@@ -10,12 +10,17 @@
 	// ------------------------------------------------------------------------
 	import { onMount, onDestroy } from 'svelte';
 	import state from '../Data/state.js';
+	import string from '../Data/translations.js';
 	import { slide } from '../Helpers/transitions.js';
 
 	// component variables
 	// ------------------------------------------------------------------------
 	// the currently visible menu id (string)
 	let menu = 'menu';
+	// the skill that user sets manually (int)
+	let skill = $state.level.toString();
+	// the set that user sets manually (int)
+	let set = $state.set.toString();
 
 
 	// purpose:		calculate the height for the given menu page
@@ -114,8 +119,10 @@
 		background-size: .7em;
 	}
 
-	.menu-back {
+	.menu-navigation {
 		width: 100%;
+		display: flex;
+		justify-content: space-between;
 		position: fixed;
 		left: 0;
 		right: 0;
@@ -126,7 +133,18 @@
 
 		border-top: 1px solid var(--color-pureSeparator);
 		background-color: var(--color-pure);
+	}
 
+	.menu-next {
+		padding-right: 2em;
+		background-image: var(--icon-arrowRight);
+		background-position: right var(--size-padding) center;
+		background-repeat: no-repeat;
+		background-size: .7em;
+	}
+
+	.menu-back,
+	.menu-next {
 		text-align: left;
 		text-transform: uppercase;
 		letter-spacing: -1px;
@@ -193,6 +211,8 @@
 
 
 
+<svelte:window on:resize="{ () => setMenuHeight(menu) }" />
+
 <div class="overlay" on:click="{ closeMenu }"></div>
 
 {#if menu === 'menu'}
@@ -207,7 +227,7 @@
 				{/if}
 				{#if $state.page === 'Home' || $state.page === 'Hello' || $state.page === 'Test'}
 					<li class="menu-item">
-						<button on:click="{ () => setMenu('trainingLevel') }">Manually set your training level</button>
+						<button on:click="{ () => setMenu('manualTrainingLevel') }">Manually set your training level</button>
 					</li>
 				{/if}
 				{#if $state.page === 'Training' || $state.page === 'Finish'}
@@ -225,6 +245,45 @@
 			<a href="http://secondgate.pl" class="secondgate">App created behind the Second Gate</a>
 		</nav>
 	</section>
+{:else if menu === 'manualTrainingLevel'}
+	<!-- manually set your training level -->
+	<section id="manualTrainingLevel" class="menu form" in:slide|local out:slide|local>
+		<div class="form-row">
+			<h2 class="form-label">{string.setYourSkillTo}</h2>
+			<select bind:value="{ skill }">
+				<option value="1">{string.beginner}</option>
+				<option value="2">{string.intermediate}</option>
+				<option value="3">{string.advanced}</option>
+			</select>
+		</div>
+		<div class="form-row">
+			<h2 class="form-label">{string.setYourLevelTo}</h2>
+			<select bind:value="{ set }">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+				<option value="9">9</option>
+				<option value="10">10</option>
+				<option value="11">11</option>
+				<option value="12">12</option>
+				<option value="13">13</option>
+				<option value="14">14</option>
+				<option value="15">15</option>
+				<option value="16">16</option>
+				<option value="17">17</option>
+				<option value="18">18</option>
+			</select>
+		</div>
+		<div class="menu-navigation">
+			<button class="menu-back" on:click="{ () => { setMenu('menu') } }">{string.cancel}</button>
+			<button class="menu-next" on:click="{ () => { state.setLevel(parseInt(skill)); state.setSet(parseInt(set)); closeMenu(); state.setPage('Home'); } }">{string.accept}</button>
+		</div>
+	</section>
 {:else if menu === 'privacyPolicy'}
 	<!-- privacy policy -->
 	<section id="privacyPolicy" class="menu" in:slide|local out:slide|local>
@@ -240,6 +299,8 @@
 			<p>We collect the data so we could improve the app in future. For example we would like to implement machine learning to prepare personalised trainings instead predefined ones.</p>
 			<p>We also collect the data to know if anyone is really using the app. :)</p>
 		</article>
-		<button class="menu-back" on:click="{ () => { setMenu('menu') } }">Back</button>
+		<div class="menu-navigation">
+			<button class="menu-back" on:click="{ () => { setMenu('menu') } }">Back</button>
+		</div>
 	</section>
 {/if}

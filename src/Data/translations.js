@@ -46,6 +46,10 @@ let translations = {
 			return intlNumber(howMany, strings);
 		},
 
+		back: 'Back',
+		cancel: 'Cancel',
+		accept: 'Accept',
+
 		// screen: 	hello
 		// ------------------------------------------------------------------------
 		helloThere: 'Hello there, this is a simple pushups tracking app',
@@ -83,7 +87,15 @@ let translations = {
 		youveMadeIt: 'You’ve made it',
 		wasItHard: 'Was it hard?',
 		itWasHard: 'It was hard',
-		itWasOk: 'It was ok'
+		itWasOk: 'It was ok',
+
+		// screen: 	menu, manually set your training level
+		// ------------------------------------------------------------------------
+		setYourSkillTo: 'Set your skill to:',
+		beginner: 'beginner',
+		intermediate: 'intermediate',
+		advanced: 'advanced',
+		setYourLevelTo: 'Set your level to:'
 	}
 };
 

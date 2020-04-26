@@ -200,9 +200,14 @@ html, body {
 	overflow: auto;
 }
 
+.article + .article {
+	margin-top: 2em;
+}
+
 .article h2 {
 	margin-bottom: .2em;
 
+	line-height: 1em;
 	font-family: var(--font-condensed);
 	font-size: 2em;
 	font-weight: 600;
@@ -231,6 +236,43 @@ html, body {
 .article a {
 	text-decoration: underline;
 	color: var(--color-link);
+}
+
+.form-row + .form-row {
+	margin-top: 1rem;
+}
+
+.form-label {
+	display: inline-block;
+
+	font-family: var(--font-condensed);
+	font-size: 1.6rem;
+}
+
+.form select {
+	width: 100%;
+	padding: .5em;
+
+	border-bottom: 4px solid var(--color-text);
+	background-color: transparent;
+}
+
+@media (min-width: 800px){
+	.form-row {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.form select {
+		width: auto;
+		min-width: 200px;
+		margin-left: 2em;
+	}
+
+	.form-label {
+		min-width: 15%;
+	}
 }
 
 

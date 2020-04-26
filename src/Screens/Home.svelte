@@ -19,7 +19,8 @@
 	// get the training data
 	// ------------------------------------------------------------------------
 	let lastDay = ($state.set !== 1) ? training[$state.level][$state.set]['pushups'].reduce((a, b) => a + b, 0) : 0;
-	let commingUp = training[$state.level][$state.set]['pushups'].reduce((a, b) => a + b, 0);
+	$: commingUp = training[$state.level][$state.set]['pushups'].reduce((a, b) => a + b, 0);
+	$: sidebarData = [$state.pushupsLast, commingUp, $state.set];
 
 
 	// analytics
@@ -30,7 +31,7 @@
 
 
 
-<Sidebar data="{ [$state.pushupsLast, commingUp, $state.set] }" />
+<Sidebar data="{ sidebarData }" />
 
 <section class="main" out:slide="{ {direction: 'out'} }">
 	<div class="content">
