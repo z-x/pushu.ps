@@ -234,7 +234,7 @@
 		padding-right: 2em;
 		display: inline-block;
 
-		background-image: url('data:image/svg+xml;utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 62 36"%3E%3Cpath d="M61.75 17.31l-16-17a1 1 0 00-1.42 0 1.06 1.06 0 000 1.43L58.69 17H1a1 1 0 000 2h57.69L44.28 34.31a1 1 0 000 1.42 1 1 0 001.42 0l16-17a1.08 1.08 0 000-1.38z"/%3E%3C/svg%3E');
+		background-image: var(--icon-arrowRight);
 		background-position: right center;
 		background-repeat: no-repeat;
 		background-size: 1.5em;

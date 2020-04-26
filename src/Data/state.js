@@ -34,6 +34,7 @@ function createStore(){
 		state.pushupsLast = (localStorage.pushupsLast) ? parseInt(localStorage.pushupsLast) : 0;
 		state.pushupsTotal = (localStorage.pushupsTotal) ? parseInt(localStorage.pushupsTotal) : 0;
 		state.popupShown = false;
+		state.menuShown = false;
 		state.language = (localStorage.language) ? localStorage.language : 'en-US';
 		state.lastActive = (localStorage.lastActive) ? parseInt(localStorage.lastActive) : Date.now();
 
@@ -150,7 +151,22 @@ function createStore(){
 
 			return state;
 		});
-	}
+	};
+
+
+	// purpose:		sets the menu visibility status
+	// arguments: 	if menu is visible (true) or not (false)
+	// returns:		the state of the menu
+	// ------------------------------------------------------------------------
+	let menuShown = (is) => {
+		update((state) => {
+			state.menuShown = is;
+
+			return state;
+		});
+
+		return state.menuShown;
+	};
 
 
 	// purpose:		returns publicly visible methods to manage the store
@@ -165,7 +181,8 @@ function createStore(){
 		lastSet,
 		totalUpdate,
 		isResting,
-		popupShown
+		popupShown,
+		menuShown
 	};
 };
 
