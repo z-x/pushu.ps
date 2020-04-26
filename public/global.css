@@ -263,6 +263,10 @@ html, body {
 	left: 0;
 }
 
+.article .question {
+	text-align: center;
+}
+
 .form-row + .form-row {
 	margin-top: 1rem;
 }

@@ -49,6 +49,7 @@ let translations = {
 		back: 'Back',
 		cancel: 'Cancel',
 		accept: 'Accept',
+		yes: 'Yes',
 
 		// screen: 	hello
 		// ------------------------------------------------------------------------
@@ -129,7 +130,11 @@ let translations = {
 		<p>You can install the app by adding this website to your Home Screen.</p>
 		<p>For Apple users this is the only way for the app to remember your progress. Apple devices tend to remove the saved data after a week of not using any website and the only way to prevent this is by adding it to Home Screen.</p>
 		<p>Android users can add this website to their Home Screen as well to be able to use it as a normal system application.</p>
-		`
+		`,
+
+		// screen: 	menu, cancel current training
+		// ------------------------------------------------------------------------
+		sureToCancel: 'Are you sure to cancel the training?'
 	}
 };
 

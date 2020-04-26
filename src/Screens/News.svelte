@@ -151,7 +151,7 @@
 
 {#if news}
 	<section class="infoPopup" on:click="{ () => action() }">
-		<div on:click|stopPropagation in:fromTop="{ {duration: 1000, delay: 1000} }" out:fromTop="{ {duration: 400} }" class="infoPopup-content">
+		<div on:click|stopPropagation in:fromTop="{ {duration: 1000, delay: 500} }" out:fromTop="{ {duration: 400} }" class="infoPopup-content">
 			<h1 class="infoPopup-heading">{@html news[$state.language].title}</h1>
 			{@html news[$state.language].content}
 

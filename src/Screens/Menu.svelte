@@ -80,7 +80,7 @@
 <style>
 
 	.menu {
-		max-height: calc(100vh - 50px);
+		max-height: calc(100% - 50px);
 		padding: var(--size-spacing);
 		padding-bottom: 5em;
 		position: absolute;
@@ -242,7 +242,7 @@
 				{/if}
 			</ul>
 
-			<a href="http://secondgate.pl" class="secondgate">App created behind the Second Gate</a>
+			<a href="http://secondgate.pl" target="_blank" class="secondgate">App created behind the Second Gate</a>
 		</nav>
 	</section>
 {:else if menu === 'manualTrainingLevel'}
@@ -309,7 +309,7 @@
 		<p>{@html string.resetQuestion}</p>
 		<div class="menu-navigation">
 			<button class="menu-back" on:click="{ () => setMenu('menu') }">{string.cancel}</button>
-			<button class="menu-next" on:click="{ () => { localStorage.clear(); state.setPage('Hello'); closeMenu(); } }">{string.iAmSure}</button>
+			<button class="menu-next" on:click="{ () => { localStorage.clear(); state.setPage('Hello'); state.setLevel(1); state.setSet(1); state.setStep(0); closeMenu(); } }">{string.iAmSure}</button>
 		</div>
 	</section>
 {:else if menu === 'instructions'}
@@ -318,6 +318,15 @@
 		{@html string.instructions}
 		<div class="menu-navigation">
 			<button class="menu-back" on:click="{ () => setMenu('menu') }">{string.back}</button>
+		</div>
+	</section>
+{:else if menu === 'cancelTraining'}
+	<!-- cancel training -->
+	<section id="cancelTraining" class="menu article" in:slide|local out:slide|local>
+		<h2 class="question">{string.sureToCancel}</h2>
+		<div class="menu-navigation">
+			<button class="menu-back" on:click="{ () => setMenu('menu') }">{string.back}</button>
+			<button class="menu-next" on:click="{ () => { state.setPage('Home'); state.isResting(false); state.setStep(0); closeMenu(); } }">{string.yes}</button>
 		</div>
 	</section>
 {/if}

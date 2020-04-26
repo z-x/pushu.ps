@@ -31,6 +31,9 @@
 
 	onDestroy(() => {
 		StayAwake.disable();
+
+		// remove the resting timeout when navigating away from this page
+		finishResting();
 	});
 
 
@@ -75,13 +78,13 @@
 	// for webkit and chromium to allow any playback on the page
 	let audioContextWarmed = false;
 	// creating new audio context
-	let audioContext = new (window.AudioContext || window.webkitAudioContext)();;
+	let audioContext = new (window.AudioContext || window.webkitAudioContext)();
 	// this will store the alert audio file for future use
 	let alertSoundBuffer = null;
 
 	// first we need to get the audio file and store it for later
 	// wav is heavies but also has the best support
-	fetch('audio/alert.wav').then((response) => {
+	fetch('/audio/alert.wav').then((response) => {
 		// we return the response as an array buffer
 		// this is a binary representation of the audio file
 		return response.arrayBuffer();
@@ -98,8 +101,8 @@
 		console.error(error);
 	});
 
-	function playAlert(){
-		// warm up the AudioContext
+	// warm up the AudioContext
+	function warmUpAudioContext(){
 		if(!audioContextWarmed){
 			// create empty buffer
 			let buffer = audioContext.createBuffer(1, 1, 22050)
@@ -113,7 +116,10 @@
 			// the context was warmed up, nice
 			audioContextWarmed = true;
 		}
+	};
 
+	// play the sound
+	function playAlert(){
 		// create new audio source
 		let source = audioContext.createBufferSource();
 		// load our previously stored audio buffer into the source
@@ -143,6 +149,7 @@
 		}
 		// if there are more to do
 		else {
+			warmUpAudioContext();
 			rest().then(() => {
 				state.setStep($state.currentStep + 1);
 			});
@@ -189,7 +196,9 @@
 		clearInterval(restInterval);
 		state.isResting(0);
 		currentRest = defaultRest;
-		restingPromiseResolve();
+		if(restingPromiseResolve){
+			restingPromiseResolve();
+		}
 	};
 
 	// when user closed the app before finishing the rest, let's resume the rest
