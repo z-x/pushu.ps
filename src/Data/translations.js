@@ -64,7 +64,7 @@ let translations = {
 		doAsManyPushups: 'Do as many pushups in a single try as you can',
 		iDid: 'I did',
 		niceGoRest: 'Nice! Remember to take a full day of rest before you start the training.',
-		tryHalfPushups: 'Nice! If you feel that it might be too hard, you might be doing knee push ups instead. Either way, take a day of rest before next training.',
+		tryHalfPushups: 'Nice! If you feel that it might be too hard, you might train by doing knee push ups. Either way, take a day of rest before next training.',
 		whatsNext: 'Ok, what’s next?',
 
 		// screen: 	home
