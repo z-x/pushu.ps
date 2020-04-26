@@ -4,6 +4,8 @@
 	// ------------------------------------------------------------------------
 	if(!localStorage.language){ localStorage.language = 'en-US'; }
 	localStorage.lastActive = Date.now();
+	
+
 
 	import { onMount } from 'svelte';
 
@@ -26,11 +28,44 @@
 	// app state info
 	// ------------------------------------------------------------------------
 	let pages = {Hello, Test, Home, Training, Finish};
-
-
-	// handle news loading
-	// ------------------------------------------------------------------------
 	let lastActive = $state.lastActive;
+
+
+	// enable 'add to home screen' on chrome mobile
+	// ------------------------------------------------------------------------
+	// register the (empty) service worker
+	if('serviceWorker' in navigator){
+		navigator.serviceWorker.register('/service-worker.js')
+			.then((reg) => {
+				console.log('Service worker registered');
+			})
+			.catch((error) => {
+				console.log('Service worker registration failed.', error);
+			});
+	};
+
+	// cache the install prompt
+	let deferredInstallPrompt;
+
+	window.addEventListener('beforeinstallprompt', (event) => {
+		// prevent the infobar from appearing on mobile
+		event.preventDefault();
+		// save the event to trigger it later
+		deferredInstallPrompt = event;
+	});
+
+	// analytics
+	window.addEventListener('appinstalled', () => {
+		gtag('event', 'app', {'mobileInstalled': 1});
+	});
+
+	if($state.page === 'Home' || localStorage.installPromptShown === 'false'){
+		deferredInstallPrompt.prompt();
+		localStorage.installPromptShown = true;
+
+		// analytics
+		gtag('event', 'app', {'mobileInstallInfoShown': 1});
+	}
 
 </script>
 
