@@ -308,16 +308,7 @@
 	<!-- privacy policy -->
 	<section id="privacyPolicy" class="menu" in:slide|local out:slide|local>
 		<article class="article">
-			<h2>We do:</h2>
-			<ul>
-				<li>Collect the data about how you are using the app.</li>
-				<li>Collect the data about your progress and your level.</li>
-				<li>Collect the data about the browser and the device you are using with help of Google Analytics, please refer to their <a href="https://policies.google.com/privacy">Privacy Policy</a> for the detailed information about what data is being collected.</li>
-				<li>Save the data on this device (information about your settings and your progress) using localStorage API.</li>
-			</ul>
-			<h2>Why?</h2>
-			<p>We collect the data so we could improve the app in future. For example we would like to implement machine learning to prepare personalised trainings instead predefined ones.</p>
-			<p>We also collect the data to know if anyone is really using the app. :)</p>
+			{string.privacyPolicy}
 		</article>
 		<div class="menu-navigation">
 			<button class="menu-back" on:click="{ () => { setMenu('menu') } }">Back</button>

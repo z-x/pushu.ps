@@ -108,7 +108,7 @@ let translations = {
 		<p>You just need to do the initial test to tell the app on what level are you. Then you need to take a day of rest. After that the app will provide you with a set of pushups to do. I recomend you do this three days a week and <strong>after each set you should take a day of rest</strong>. Monday, Wednesday and Friday for example.</p>
 		<p>It may be hard at the begining, so don’t give up easily. It gets better down the road.</p>
 		<h2>I barely can do a single pushup</h2>
-		<p>If you feel your muscles are too week you might consider training with half push ups. This will give you time to build some muscle. When you’ll find you are ready, you can reset the app and start all over with full push up.</p>
+		<p>If you feel your muscles are too weak you might consider training with knee push ups. This will give you time to build some muscle. When you’ll find you are ready, you can reset the app and start all over with full push up.</p>
 		<h2>Is this a professional workout?</h2>
 		<p>I am no professional trainer and this is just a simple training for simple people that I found useful to maintain a good form.</p>
 		<h2>How to do a good push up?</h2>
@@ -134,7 +134,22 @@ let translations = {
 
 		// screen: 	menu, cancel current training
 		// ------------------------------------------------------------------------
-		sureToCancel: 'Are you sure to cancel the training?'
+		sureToCancel: 'Are you sure to cancel the training?',
+
+		// screen: 	menu, privacy policy
+		// ------------------------------------------------------------------------
+		privacyPolicy: `
+		<h2>I do:</h2>
+		<ul>
+			<li>Collect the data about how you are using the app.</li>
+			<li>Collect the data about your progress and your level.</li>
+			<li>Collect the data about the browser and the device you are using with help of Google Analytics, please refer to their <a href="https://policies.google.com/privacy">Privacy Policy</a> for the detailed information about what data is being collected.</li>
+			<li>Save the data on this device (information about your settings and your progress) using localStorage API.</li>
+		</ul>
+		<h2>Why?</h2>
+		<p>I collect the data so I could improve the app in future. For example by implementing machine learning algorithm that could prepare personalised trainings instead predefined ones.</p>
+		<p>I also collect the data to know if anyone is really using the app. :)</p>
+		`
 	}
 };
 
