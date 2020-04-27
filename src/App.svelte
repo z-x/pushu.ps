@@ -17,7 +17,15 @@
 	import Training from './Screens/Training.svelte';
 	import Finish from './Screens/Finish.svelte';
 	import News from './Screens/News.svelte';
-	import Menu from './Screens/Menu.svelte';
+
+	// submenus
+	// ------------------------------------------------------------------------
+	import Main from './Menu/Main.svelte';
+	import ResetApp from './Menu/ResetApp.svelte';
+	import ManualTrainingLevel from './Menu/ManualTrainingLevel.svelte';
+	import Instructions from './Menu/Instructions.svelte'
+	import PrivacyPolicy from './Menu/PrivacyPolicy.svelte';
+	import CancelTraining from './Menu/CancelTraining.svelte';
 
 	// stores
 	// ------------------------------------------------------------------------
@@ -28,6 +36,7 @@
 	// app state info
 	// ------------------------------------------------------------------------
 	let pages = {Hello, Test, Home, Training, Finish};
+	let submenus = {Main, ResetApp, ManualTrainingLevel, Instructions, PrivacyPolicy, CancelTraining};
 	let lastActive = $state.lastActive;
 
 
@@ -83,12 +92,12 @@
 
 <main
 	class="app"
-	class:app-unfocused="{ $state.popupShown || $state.menuShown }"
-	class:app-menuShown="{ $state.menuShown }"
+	class:app-unfocused="{ $state.popupShown || $state.submenu }"
+	class:app-menuShown="{ $state.submenu }"
 >
 	<svelte:component this="{ pages[$state.page] }" />
 </main>
 
-{#if $state.menuShown}
-	<Menu />
+{#if $state.submenu}
+	<svelte:component this="{ submenus[$state.submenu] }" />
 {/if}

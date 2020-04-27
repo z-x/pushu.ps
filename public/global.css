@@ -1,11 +1,13 @@
 /*
 	reset
-	fonts
 	variables
 	general styling
 	page structure
 	texts
 	inputs
+	menu
+	menu forms
+	menu texts
 */
 
 
@@ -57,6 +59,8 @@ q:after, q:before { content: ''; }
 	--size-padding-bottom: 1.5rem;
 	/* sidebar width */
 	--size-sidebar: 77px;
+	/* the max width of text content */
+	--size-contentMax: 800px;
 
 	--icon-arrowRight: url('data:image/svg+xml;utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 62 36"%3E%3Cpath d="M61.75 17.31l-16-17a1 1 0 00-1.42 0 1.06 1.06 0 000 1.43L58.69 17H1a1 1 0 000 2h57.69L44.28 34.31a1 1 0 000 1.42 1 1 0 001.42 0l16-17a1.08 1.08 0 000-1.38z"/%3E%3C/svg%3E');
 
@@ -144,10 +148,6 @@ body:before {
 	transition-timing-function: ease-in-out, ease-in-out, ease-in-out;
 }
 
-.app:not(.app-menuShown){
-	transition-delay: 0s, .2s, .3s;
-}
-
 .app-menuShown {
 	border-bottom-left-radius: 14px;
 	border-bottom-right-radius: 14px;
@@ -227,118 +227,6 @@ body:before {
 	}
 }
 
-.article {
-	max-width: 800px;
-	margin-left: auto;
-	margin-right: auto;
-	overflow: auto;
-}
-
-.article + .article {
-	margin-top: 2em;
-}
-
-.article h2 {
-	margin-bottom: .2em;
-
-	line-height: 1em;
-	font-family: var(--font-condensed);
-	font-size: 2em;
-	font-weight: 600;
-}
-
-.article p + h2,
-.article ul + h2,
-.article .video + h2 {
-	margin-top: 1em;
-}
-
-.article p + p,
-.article li + li {
-	margin-top: .5em;
-}
-
-.article p,
-.article li {
-	line-height: 1.4em;
-}
-
-.article ul {
-	margin-left: 1.1em;
-}
-
-.article li:before {
-	margin-left: -1.2em;
-	content: '— ';
-}
-
-.article a {
-	text-decoration: underline;
-	color: var(--color-link);
-}
-
-.article strong {
-	font-weight: bold;
-}
-
-.article .video {
-	max-width: 100%;
-	height: 0;
-	margin: 1em 0;
-	padding-bottom: 56.25%;
-	position: relative;
-	overflow: hidden;
-}
-
-.article .video iframe {
-	width: 100%;
-	height: 100%;
-	position: absolute;
-	top: 0;
-	left: 0;
-}
-
-.article .question {
-	text-align: center;
-}
-
-.form-row + .form-row {
-	margin-top: 1rem;
-}
-
-.form-label {
-	display: inline-block;
-
-	font-family: var(--font-condensed);
-	font-size: 1.6rem;
-}
-
-.form select {
-	width: 100%;
-	padding: .5em;
-
-	border-bottom: 4px solid var(--color-text);
-	background-color: transparent;
-}
-
-@media (min-width: 800px){
-	.form-row {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-
-	.form select {
-		width: auto;
-		min-width: 200px;
-		margin-left: 2em;
-	}
-
-	.form-label {
-		min-width: 15%;
-	}
-}
-
 
 
 /* inputs
@@ -388,4 +276,131 @@ input:focus {
 
 .content-info-value {
 	margin-bottom: 1.5rem;
+}
+
+
+
+/* menu
+============================================================================ */
+.menu button {
+	line-height: 1em;
+	letter-spacing: -1px;
+	text-align: left;
+	text-transform: uppercase;
+	font-family: var(--font-condensed);
+	font-size: 2rem;
+	font-weight: 700;
+}
+
+.menu-question {
+	text-align: center;
+}
+
+
+
+/* menu forms
+============================================================================ */
+.form-row + .form-row {
+	margin-top: 1rem;
+}
+
+.form-label {
+	display: inline-block;
+
+	font-family: var(--font-condensed);
+	font-size: 1.6rem;
+}
+
+.menu-form select {
+	width: 100%;
+	padding: .5em;
+
+	border-bottom: 4px solid var(--color-text);
+	background-color: transparent;
+}
+
+@media (min-width: 800px){
+	.form-row {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.menu-form select {
+		width: auto;
+		min-width: 200px;
+		margin-left: 2em;
+	}
+
+	.form-label {
+		min-width: 15%;
+	}
+}
+
+
+
+/* menu texts
+============================================================================ */
+.menu-article h2 {
+	margin-bottom: .2em;
+
+	line-height: 1em;
+	font-family: var(--font-condensed);
+	font-size: 2em;
+	font-weight: 600;
+}
+
+.menu-article p + h2,
+.menu-article ul + h2,
+.menu-article .video + h2 {
+	margin-top: 1em;
+}
+
+.menu-article p + p,
+.menu-article li + li {
+	margin-top: .5em;
+}
+
+.menu-article p,
+.menu-article li {
+	line-height: 1.4em;
+}
+
+.menu-article ul {
+	margin-left: 1.1em;
+}
+
+.menu-article li:before {
+	margin-left: -1.15em;
+	content: '— ';
+}
+
+.menu-article a {
+	text-decoration: underline;
+	color: var(--color-link);
+}
+
+.menu-article strong {
+	font-weight: bold;
+}
+
+.menu-article .video {
+	max-width: 100%;
+	height: 0;
+	margin: 1em 0;
+	padding-bottom: 56.25%;
+	position: relative;
+	overflow: hidden;
+}
+
+.menu-article .video iframe {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.menu-article .question {
+	text-align: center;
 }

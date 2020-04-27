@@ -37,4 +37,4 @@
 
 
 
-<button on:click="{ () => state.menuShown(true) }" class="menu-toggle" title="Show menu">Menu</button>
+<button on:click="{ () => state.setSubmenu('Main') }" class="menu-toggle" title="Show menu">Menu</button>
