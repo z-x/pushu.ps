@@ -265,7 +265,11 @@ body:before {
 
 .article ul {
 	margin-left: 1.1em;
-	list-style-type: '— '
+}
+
+.article li:before {
+	margin-left: -1.2em;
+	content: '— ';
 }
 
 .article a {
