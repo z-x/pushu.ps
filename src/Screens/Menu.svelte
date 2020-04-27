@@ -308,7 +308,7 @@
 	<!-- privacy policy -->
 	<section id="privacyPolicy" class="menu" in:slide|local out:slide|local>
 		<article class="article">
-			{string.privacyPolicy}
+			{@html string.privacyPolicy}
 		</article>
 		<div class="menu-navigation">
 			<button class="menu-back" on:click="{ () => { setMenu('menu') } }">Back</button>
