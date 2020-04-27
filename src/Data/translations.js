@@ -50,6 +50,7 @@ let translations = {
 		cancel: 'Cancel',
 		accept: 'Accept',
 		yes: 'Yes',
+		menuEmpty: 'This menu seems to be empty',
 
 		// screen: 	hello
 		// ------------------------------------------------------------------------
@@ -91,19 +92,29 @@ let translations = {
 		itWasHard: 'It was hard',
 		itWasOk: 'It was ok',
 
+		// screen: 	menu, main
+		// ------------------------------------------------------------------------
+		appCreatedSecondGate: 'App created behind the Second Gate',
+		privacyPolicy: 'Privacy Policy',
+		instructions: 'Instructions',
+		cancelTraining: 'Cancel this training',
+		manuallySetTrainingLevel: 'Manually set your training level',
+		resetApp: 'Reset the app',
+
 		// screen: 	menu, manually set your training level
 		// ------------------------------------------------------------------------
 		setYourSkillTo: 'Set your skill to:',
-		beginner: 'beginner',
-		intermediate: 'intermediate',
-		advanced: 'advanced',
+		beginner: 'Beginner',
+		intermediate: 'Intermediate',
+		advanced: 'Advanced',
 		setYourLevelTo: 'Set your level to:',
 
 		// screen: 	menu, reset the app
 		// ------------------------------------------------------------------------
-		resetQuestion: 'Are you sure that you want to reset the app? Please keep in mind that this will <strong>erase all your progress</strong>.',
+		resetQuestion: 'Are you sure that you want to reset the app?',
+		resetNote: 'Please keep in mind that this will <strong>erase all your progress</strong>.',
 		iAmSure: 'I am sure',
-		instructions: `
+		instructionsContent: `
 		<h2>How to start?</h2>
 		<p>You just need to do the initial test to tell the app on what level are you. Then you need to take a day of rest. After that the app will provide you with a set of pushups to do. I recomend you do this three days a week and <strong>after each set you should take a day of rest</strong>. Monday, Wednesday and Friday for example.</p>
 		<p>It may be hard at the begining, so don’t give up easily. It gets better down the road.</p>
@@ -138,7 +149,7 @@ let translations = {
 
 		// screen: 	menu, privacy policy
 		// ------------------------------------------------------------------------
-		privacyPolicy: `
+		privacyPolicyContent: `
 		<h2>I do:</h2>
 		<ul>
 			<li>Collect the data about how you are using the app.</li>

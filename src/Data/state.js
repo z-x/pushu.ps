@@ -33,10 +33,11 @@ function createStore(){
 		state.isResting = (localStorage.isResting) ? parseInt(localStorage.isResting) : 0;
 		state.pushupsLast = (localStorage.pushupsLast) ? parseInt(localStorage.pushupsLast) : 0;
 		state.pushupsTotal = (localStorage.pushupsTotal) ? parseInt(localStorage.pushupsTotal) : 0;
-		state.popupShown = false;
-		state.menuShown = false;
 		state.language = (localStorage.language) ? localStorage.language : 'en-US';
 		state.lastActive = (localStorage.lastActive) ? parseInt(localStorage.lastActive) : Date.now();
+		state.popupShown = false;
+		state.menuShown = false;
+		state.submenu = false;
 
 	
 	// purpose:		creates the store with data provided in state object
@@ -154,18 +155,18 @@ function createStore(){
 	};
 
 
-	// purpose:		sets the menu visibility status
-	// arguments: 	if menu is visible (true) or not (false)
-	// returns:		the state of the menu
+	// purpose:		sets the information about currently active submenu
+	// arguments: 	submenu id (string)
+	// returns:		currently active submenu id (string)
 	// ------------------------------------------------------------------------
-	let menuShown = (is) => {
+	let setSubmenu = (id) => {
 		update((state) => {
-			state.menuShown = is;
+			state.submenu = id;
 
 			return state;
 		});
 
-		return state.menuShown;
+		return state.submenu;
 	};
 
 
@@ -182,7 +183,7 @@ function createStore(){
 		totalUpdate,
 		isResting,
 		popupShown,
-		menuShown
+		setSubmenu
 	};
 };
 
