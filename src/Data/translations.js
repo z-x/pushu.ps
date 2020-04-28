@@ -4,13 +4,6 @@
 
 
 
-// the variable that sets the app language
-// hardcoded currently as there are no translations available
-// ------------------------------------------------------------------------
-if(!localStorage.language){ localStorage.language = 'en-US'; }
-let lang = localStorage.language;
-
-
 // purpose:		checks if the PluralRules API is available and returns
 //				corresponding string based on given number
 // arguments: 	number of items (int)
@@ -19,7 +12,7 @@ let lang = localStorage.language;
 // ------------------------------------------------------------------------
 function intlNumber(number, strings){
 	if('PluralRules' in Intl){
-		let rules = new Intl.PluralRules(lang);
+		let rules = new Intl.PluralRules(localStorage.language);
 
 		return strings[rules.select(number)];
 	} else {
@@ -31,6 +24,9 @@ function intlNumber(number, strings){
 // purpose:		the translations
 // ************************************************************************
 let translations = {
+
+	// purpose:		english
+	// ************************************************************************
 	'en-US': {
 		// shared in the whole app
 		// ------------------------------------------------------------------------
@@ -66,7 +62,7 @@ let translations = {
 		doAsManyPushups: 'Do as many pushups in a single try as you can',
 		iDid: 'I did',
 		niceGoRest: 'Nice! Remember to take a full day of rest before you start the training.',
-		tryHalfPushups: 'Nice! If you feel that it might be too hard, you might train by doing knee push ups. Either way, take a day of rest before next training.',
+		tryHalfPushups: 'If you feel that it might be too hard, you might train by doing knee push ups. Either way, take a day of rest before next training.',
 		whatsNext: 'Ok, what’s next?',
 
 		// screen: 	home
@@ -114,6 +110,9 @@ let translations = {
 		resetQuestion: 'Are you sure that you want to reset the app?',
 		resetNote: 'Please keep in mind that this will <strong>erase all your progress</strong>.',
 		iAmSure: 'I am sure',
+
+		// screen: 	menu, instructions
+		// ------------------------------------------------------------------------
 		instructionsContent: `
 		<h2>How to start?</h2>
 		<p>You just need to do the initial test to tell the app on what level are you. Then you need to take a day of rest. After that the app will provide you with a set of pushups to do. I recomend you do this three days a week and <strong>after each set you should take a day of rest</strong>. Monday, Wednesday and Friday for example.</p>
@@ -161,6 +160,143 @@ let translations = {
 		<p>I collect the data so I could improve the app in future. For example by implementing machine learning algorithm that could prepare personalised trainings instead predefined ones.</p>
 		<p>I also collect the data to know if anyone is really using the app. :)</p>
 		`
+	},
+
+	// purpose:		polish
+	// ************************************************************************
+	'pl-PL': {
+		// shared in the whole app
+		// ------------------------------------------------------------------------
+		pushups: (howMany) => {
+			let strings = {many: 'pompek', few: 'pompki', one: 'pompkę', other: 'pompek'};
+			
+			return intlNumber(howMany, strings);
+		},
+
+		seconds: (howMany) => {
+			let strings = {many: 'sekund', few: 'sekundy', one: 'sekundę', other: 'sekundy'}
+
+			return intlNumber(howMany, strings);
+		},
+
+		back: 'Cofnij',
+		cancel: 'Anuluj',
+		accept: 'Akceptuj',
+		yes: 'Tak',
+		menuEmpty: 'To menu wydaje się być puste',
+
+		// screen: 	hello
+		// ------------------------------------------------------------------------
+		helloThere: 'Cześć, ta apka pomoże Ci ćwiczyć pompki',
+		progressRemember: 'Twoje postępy zostaną zapisane tylko na tym urządzeniu',
+		saveAppApple: 'Jeśli używasz urządzeń Apple musisz dodać tę apkę do swojego ekranu domowego, inaczej dane o Twoich postępach mogą zostać usunięte. :<',
+		saveAppAndroid: 'Możesz zainstalować tę apkę na swoim ekranie głównym, żeby mieć do niej szybszy dostęp.',
+		wantToStart: 'Dobra, zaczynamy',
+
+		// screen: 	test
+		// ------------------------------------------------------------------------
+		firstTestYourself: 'Na początek musisz się przetestować',
+		doAsManyPushups: 'Sprawdź jak dużo pompek jesteś w stanie zrobić naraz',
+		iDid: 'Robię',
+		niceGoRest: 'Nieźle! Pamiętaj o dniu odpoczytku po każdej sesji treningowej.',
+		tryHalfPushups: 'Jeśli czujesz, że to za trudne, możesz na początek spróbować ćwiczyć opierając się na kolanach. Tak czy inaczej – pamiętaj o dniu przerwy po każdym treningu.',
+		whatsNext: 'Dobra, co dalej?',
+
+		// screen: 	home
+		// ------------------------------------------------------------------------
+		lastDay: 'Poprzedni',
+		comingUp: 'Kolejny',
+		currentLevel: 'Obecny poziom',
+		startNextTraining: 'Zaczynamy trening',
+
+		// screen: 	training
+		// ------------------------------------------------------------------------
+		perform: 'Zrób',
+		letsJust: 'Odpocznij',
+		restFor: 'przez',
+		skipTheWait: 'Pomiń odpoczynek',
+		madeIt: 'Zrobione',
+
+		// screen: 	finish
+		// ------------------------------------------------------------------------
+		nice: 'Nieźle,',
+		youveMadeIt: 'Udało się :-)',
+		wasItHard: 'Jak było?',
+		itWasHard: 'Było trudno',
+		itWasOk: 'Było w porządku',
+
+		// screen: 	menu, main
+		// ------------------------------------------------------------------------
+		appCreatedSecondGate: 'Apka stworzona za drugą bramą',
+		privacyPolicy: 'Polityka prywatności',
+		instructions: 'Instrukcje',
+		cancelTraining: 'Przerwij trening',
+		manuallySetTrainingLevel: 'Ustaw swój poziom ręcznie',
+		resetApp: 'Zresetuj aplikację',
+
+		// screen: 	menu, manually set your training level
+		// ------------------------------------------------------------------------
+		setYourSkillTo: 'Twój stopień zaawansowania:',
+		beginner: 'Początkujący',
+		intermediate: 'Średni',
+		advanced: 'Zaawansowany',
+		setYourLevelTo: 'Twój poziom:',
+
+		// screen: 	menu, reset the app
+		// ------------------------------------------------------------------------
+		resetQuestion: 'Na pewno chcesz zresetować apkę?',
+		resetNote: 'Pamiętaj, że to <strong>usunie informacje o całym Twoim postępie</strong>.',
+		iAmSure: 'Resetuj',
+
+		// screen: 	menu, instructions
+		// ------------------------------------------------------------------------
+		instructionsContent: `
+		<h2>Jak zacząć?</h2>
+		<p>Na początek musisz się przetestować, żeby apka mogła dopasować trening do Ciebie. Po dniu przerwy apka będzie proponować Ci kolejne zestawy ćwiczeń. Proponuję ćwiczyć trzy razy w tygodniu i <strong>po każdym zestawie robić dzień odpoczynku</strong>.</p>
+		<p>Nie będzie łatwo jeśli dopiero zaczynasz, ale po kilku sesjach zaczniesz zauważać postępy.</p>
+		<h2>Robię ledwo jedną pompkę</h2>
+		<p>Jeśli czujesz, że jest Ci za ciężko, spróbuj robić pompki opierając się na kolanach. Po kilku tygodniach treningu wzmocnisz mięśnie na tyle, żeby zresetować apkę i zacząć od początku robiąc pełne pompki.
+		<h2>To profesjonalny zestaw ćwiczeń?</h2>
+		<p>Zupełnie nie. Zrobiłem tę aplikację, żeby ułatwić sobie treningi, ale nie zajmuję się tym profesjonalnie.
+		<h2>Jak robić poprawne pompki?</h2>
+		<p>Najprościej szukać instrukcji na YouTube. :)</p>
+		<p>Ja sam bardzo polecam zaopatrzyć się w uchwyty do pompek. Przy bardziej intensywnych treningach cierpiały mi nadgarstki, a uchwyty ten problem rozwiązały.</p>
+		<div class="video">
+			<iframe width="560" height="315" src="https://www.youtube.com/embed/_spPWlYR0bE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		</div>
+		<p>Jeśli dopiero zaczynasz i ciężko jest ci zrobić kilka pompek, możesz zacząć od treningu opierając ciężar ciała na kolanach.</p>
+		<div class="video">
+			<iframe width="560" height="315" src="https://www.youtube.com/embed/nbBPTCnebSw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		</div>
+		<h2>Czy to ma jakiś cel?</h2>
+		<p>Cel zależy od Ciebie. Po każdym treningu apka zapyta Cię czy było ciężko. Jeśli odpowiesz, że tak – pozwoli Ci powtarzać serię aż uznasz, że jest łatwiej.</p>
+		<p>Nie musisz ścigać się z innymi, wystarczy że dojdziesz do poziomu, który Cię zadowoli i pozwoli Ci utrzymać formę.</p>
+		<p>Polecam od czasu do czasu zresetować apkę i zacząć od początku, wtedy fajnie widać jak duże postępy zrobiliśmy.</p>
+		<h2>Jak używać Pushu.ps?</h2>
+		<p>Najlepiej chyba otworzyć apkę na telefonie – będzie najłatwiej kontrolować przebieg treningu.</p>
+		<p>Można ją też „zainstalować”, czyli dodać ikonkę do ekranu głównego. Będzie wtedy zawsze pod ręką.</p>
+		<p>Użytkownicy sprzętu Apple nie mają wyboru, bo iOS usuwa dane aplikacji po tygodniu ich nieużywania. Żeby iPhone i iPad zapamiętywał dane, trzeba dodać stronę do ekranu głównego.</p>
+		<p>Uzytkownicy Androida też mogą to zrobić, dzięki czemu będzie się jej używało jak każdej zwykłej aplikacji.</p>
+		`,
+
+		// screen: 	menu, cancel current training
+		// ------------------------------------------------------------------------
+		sureToCancel: 'Na pewno chcesz przerwać trening?',
+
+		// screen: 	menu, privacy policy
+		// ------------------------------------------------------------------------
+		privacyPolicyContent: `
+		<h2>Zbieram:</h2>
+		<ul>
+			<li>Dane o tym w jaki sposób używasz aplikacji.</li>
+			<li>Dane o tym jakie robisz postępy w treningu.</li>
+			<li>Dane o Twojej przeglądarce i użądzeniu przy pomocy Google Analytics. Dokładne informacje znajdziesz na stronie <a href="https://policies.google.com/privacy?hl=pl">polityki prywatności</a> w Google.</p>
+		</ul>
+		<p>Dane o Twoich postępach przechowywane są tylko na tym urządzeniu przy użyciu localStorage.</p>
+		<h2>Dlaczego?</h2>
+		<p>Dane zbierane są w sposób anonimowy dla mnie, choć Google pewnie jest w stanie namierzyć Cię dokładniej. Potrzebuję ich, żeby ulepszać apkę, np. chciałbym w przyszłosci posłużyć się uczeniem maszynowym, żeby automatycznie tworzyć program treningowy dostosowany jak najlepiej do Ciebie.</p>
+		<p>Jestem też zwyczajnie ciekawy czy ktoś tego wszystkiego używa. :)</p>
+		`
 	}
 };
 
@@ -168,4 +304,27 @@ let translations = {
 
 // exports
 // ------------------------------------------------------------------------
-export default translations[lang];
+// supported languages list
+let supportedLanguages = {
+	'en-US': ['en-US', 'en', 'en-GB'],
+	'pl-PL': ['pl-PL', 'pl']
+}
+
+// check for supported languages and if found, set it
+if(!localStorage.language && navigator.language){
+	let userLanguage = navigator.language;
+
+	for(let [key, value] of Object.entries(supportedLanguages)){
+		if(value.indexOf(userLanguage) >= 0){
+			localStorage.language = key;
+		}
+	}
+}
+
+// if not found, set the default
+if(!localStorage.language){
+	localStorage.language = 'en-US';
+}
+
+// export the strings
+export default translations[localStorage.language];

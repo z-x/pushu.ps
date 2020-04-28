@@ -33,7 +33,6 @@ function createStore(){
 		state.isResting = (localStorage.isResting) ? parseInt(localStorage.isResting) : 0;
 		state.pushupsLast = (localStorage.pushupsLast) ? parseInt(localStorage.pushupsLast) : 0;
 		state.pushupsTotal = (localStorage.pushupsTotal) ? parseInt(localStorage.pushupsTotal) : 0;
-		state.language = (localStorage.language) ? localStorage.language : 'en-US';
 		state.lastActive = (localStorage.lastActive) ? parseInt(localStorage.lastActive) : Date.now();
 		state.popupShown = false;
 		state.menuShown = false;

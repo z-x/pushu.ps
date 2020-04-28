@@ -1,12 +1,5 @@
 <script>
 
-	// set defaults
-	// ------------------------------------------------------------------------
-	if(!localStorage.language){ localStorage.language = 'en-US'; }
-	localStorage.lastActive = Date.now();
-	
-
-
 	import { onMount } from 'svelte';
 
 	// pages
@@ -33,11 +26,10 @@
 	import translations from './Data/translations.js';
 
 
-	// app state info
+	// app possible states
 	// ------------------------------------------------------------------------
 	let pages = {Hello, Test, Home, Training, Finish};
 	let submenus = {Main, ResetApp, ManualTrainingLevel, Instructions, PrivacyPolicy, CancelTraining};
-	let lastActive = $state.lastActive;
 
 
 	// if iOS app in fullscreen mode add class
@@ -75,7 +67,7 @@
 		gtag('event', 'app', {'mobileInstalled': 1});
 	});
 
-	if($state.page === 'Home' && localStorage.installPromptShown === 'false' && deferredInstallPrompt){
+	if($state.page === 'Home' && $state.level > 1 && localStorage.installPromptShown === 'false' && deferredInstallPrompt){
 		deferredInstallPrompt.prompt();
 		localStorage.installPromptShown = true;
 

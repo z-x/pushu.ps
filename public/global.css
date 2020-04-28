@@ -161,7 +161,7 @@ body:before {
 }
 
 .main {
-	max-width: 500px;
+	max-width: 550px;
 	padding-top: var(--size-padding);
 	padding-bottom: var(--size-padding-bottom);
 	padding-left: var(--size-spacing);
@@ -333,7 +333,8 @@ input:focus {
 	}
 
 	.form-label {
-		min-width: 15%;
+		width: 30%;
+		text-align: right;
 	}
 }
 
@@ -342,7 +343,7 @@ input:focus {
 /* menu texts
 ============================================================================ */
 .menu-article h2 {
-	margin-bottom: .2em;
+	margin-bottom: .3em;
 
 	line-height: 1em;
 	font-family: var(--font-condensed);
@@ -357,7 +358,8 @@ input:focus {
 }
 
 .menu-article p + p,
-.menu-article li + li {
+.menu-article li + li,
+.menu-article ul + p {
 	margin-top: .5em;
 }
 
