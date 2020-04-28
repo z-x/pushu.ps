@@ -1,7 +1,7 @@
 {
 	"theme_color": "#f6bb50",
 	"background_color": "#f6bb50",
-	"description": "Shows random fox pictures. Hey, at least it isn't cats.",
+	"description": "A simple workout tracking app",
 	"display": "standalone",
 	"icons": [
 		{
