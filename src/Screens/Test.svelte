@@ -19,7 +19,7 @@
 	// component variables
 	// ------------------------------------------------------------------------
 	// how many pushups the user did in the test (int)
-	let pushups = null;
+	let pushups;
 
 
 	// purpose:		sets the user level based on pushups he did in the test
@@ -37,7 +37,7 @@
 	// when there is an on-screen keyboard on mobile and we hide the title
 	// the screen needs to be smoothly scrolled to the top to give a better
 	// feel for the user
-	$: if(pushups){
+	$: if(pushups !== null && pushups !== ''){
 		if(window.scrollY > 0){
 			let interval = setInterval(() => {
 				window.scrollTo({
@@ -54,6 +54,8 @@
 	function filled(){
 		gtag('event', 'test', {'pushups': pushups});
 	}
+
+	$: console.log(pushups);
 
 </script>
 
@@ -87,17 +89,17 @@
 
 <section class="main" in:slide="{{ direction: 'in' }}" out:appear="{ {duration: 100} }">
 	<div class="content content-readable">
-		<h1 class="text-title moveable" class:visible="{ !pushups }">{string.firstTestYourself}</h1>
-		<p class="text-subtitle moveable" class:visible="{ !pushups }">{string.doAsManyPushups}</p>
+		<h1 class="text-title moveable" class:visible="{ typeof pushups === 'undefined' }">{string.firstTestYourself}</h1>
+		<p class="text-subtitle moveable" class:visible="{ typeof pushups === 'undefined' }">{string.doAsManyPushups}</p>
 		<p class="text-title action-secondary">{string.iDid} <input type="number" placeholder="12" min="0" step="1" bind:value="{ pushups }" on:change="{ filled }"> {string.pushups(pushups)}</p>
 		{#if pushups > 2}
 			<p in:appear="{{ delay: 500 }}" out:appear class="text-subtitle">{string.niceGoRest}</p>
-		{:else if pushups <= 2 && pushups > 0}
+		{:else if pushups <= 2 && typeof pushups !== 'undefined'}
 			<p in:appear="{{ delay: 500 }}" out:appear class="text-subtitle">{string.tryHalfPushups}</p>
 		{/if}
 	</div>
 			
-	{#if pushups}
+	{#if typeof pushups !== 'undefined'}
 		<MainAction delay="900" on:mainAction="{ setLevel }" changePageTo="Home">{string.whatsNext}</MainAction>
 	{/if}
 </section>
