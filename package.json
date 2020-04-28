@@ -1,6 +1,6 @@
 {
 	"name": "pushu.ps",
-	"version": "3.0.1",
+	"version": "3.0.2",
 	"scripts": {
 		"build": "rollup -c",
 		"dev": "rollup -c -w",
