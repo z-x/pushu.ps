@@ -76,6 +76,16 @@
 		gtag('event', 'app', {'mobileInstallInfoShown': 1});
 	}
 
+
+	// if user came here after a day, reset his training
+	// ------------------------------------------------------------------------
+	if(Date.now() - $state.lastActive > 86400000){
+		console.log(Date.now() - $state.lastActive);
+		state.setStep(0)
+		state.isResting(0);
+		state.setPage('Home');
+	}
+
 </script>
 
 
