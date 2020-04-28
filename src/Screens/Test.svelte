@@ -80,6 +80,16 @@
 		margin-bottom: 2rem;
 	}
 
+	input[type="number"] {
+		-moz-appearance:textfield;		
+	}
+
+	input[type="number"]::-webkit-outer-spin-button,
+	input[type="number"]::-webkit-inner-spin-button {
+		margin: 0;
+		-webkit-appearance: none;
+	}
+
 </style>
 
 
