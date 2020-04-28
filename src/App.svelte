@@ -19,6 +19,7 @@
 	import Instructions from './Menu/Instructions.svelte'
 	import PrivacyPolicy from './Menu/PrivacyPolicy.svelte';
 	import CancelTraining from './Menu/CancelTraining.svelte';
+	import ManualLanguage from './Menu/ManualLanguage.svelte';
 
 	// stores
 	// ------------------------------------------------------------------------
@@ -29,7 +30,7 @@
 	// app possible states
 	// ------------------------------------------------------------------------
 	let pages = {Hello, Test, Home, Training, Finish};
-	let submenus = {Main, ResetApp, ManualTrainingLevel, Instructions, PrivacyPolicy, CancelTraining};
+	let submenus = {Main, ResetApp, ManualTrainingLevel, Instructions, PrivacyPolicy, CancelTraining, ManualLanguage};
 
 
 	// if iOS app in fullscreen mode add class

@@ -96,6 +96,7 @@ let translations = {
 		cancelTraining: 'Cancel this training',
 		manuallySetTrainingLevel: 'Manually set your training level',
 		resetApp: 'Reset the app',
+		setLanguage: 'Set app language',
 
 		// screen: 	menu, manually set your training level
 		// ------------------------------------------------------------------------
@@ -159,7 +160,11 @@ let translations = {
 		<h2>Why?</h2>
 		<p>I collect the data so I could improve the app in future. For example by implementing machine learning algorithm that could prepare personalised trainings instead predefined ones.</p>
 		<p>I also collect the data to know if anyone is really using the app. :)</p>
-		`
+		`,
+
+		// screen: 	menu, manually set language
+		// ------------------------------------------------------------------------
+		setYourLanguageTo: 'Set your language to:'
 	},
 
 	// purpose:		polish
@@ -233,6 +238,7 @@ let translations = {
 		cancelTraining: 'Przerwij trening',
 		manuallySetTrainingLevel: 'Ustaw swój poziom ręcznie',
 		resetApp: 'Zresetuj aplikację',
+		setLanguage: 'Zmień język (set lang)',
 
 		// screen: 	menu, manually set your training level
 		// ------------------------------------------------------------------------
@@ -296,7 +302,11 @@ let translations = {
 		<h2>Dlaczego?</h2>
 		<p>Dane zbierane są w sposób anonimowy dla mnie, choć Google pewnie jest w stanie namierzyć Cię dokładniej. Potrzebuję ich, żeby ulepszać apkę, np. chciałbym w przyszłosci posłużyć się uczeniem maszynowym, żeby automatycznie tworzyć program treningowy dostosowany jak najlepiej do Ciebie.</p>
 		<p>Jestem też zwyczajnie ciekawy czy ktoś tego wszystkiego używa. :)</p>
-		`
+		`,
+	
+		// screen: 	menu, manually set language
+		// ------------------------------------------------------------------------
+		setYourLanguageTo: 'Zmień język na:'
 	}
 };
 
@@ -306,8 +316,8 @@ let translations = {
 // ------------------------------------------------------------------------
 // supported languages list
 let supportedLanguages = {
-	'en-US': ['en-US', 'en', 'en-GB'],
-	'pl-PL': ['pl-PL', 'pl']
+	'en-US': ['English', 'en-US', 'en', 'en-GB'],
+	'pl-PL': ['Polski', 'pl-PL', 'pl']
 }
 
 // check for supported languages and if found, set it
@@ -327,4 +337,6 @@ if(!localStorage.language){
 }
 
 // export the strings
-export default translations[localStorage.language];
+let exports = {...translations[localStorage.language], supportedLanguages}
+
+export default exports;

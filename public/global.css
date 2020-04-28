@@ -305,8 +305,6 @@ input:focus {
 }
 
 .form-label {
-	display: inline-block;
-
 	font-family: var(--font-condensed);
 	font-size: 1.6rem;
 }
@@ -320,10 +318,13 @@ input:focus {
 }
 
 @media (min-width: 800px){
+	.menu-form div {
+		width: 100%;
+		display: table;
+	}
+
 	.form-row {
-		display: flex;
-		align-items: center;
-		justify-content: center;
+		display: table-row;
 	}
 
 	.menu-form select {
@@ -333,7 +334,8 @@ input:focus {
 	}
 
 	.form-label {
-		width: 30%;
+		width: 50%;
+		display: table-cell;
 		text-align: right;
 	}
 }

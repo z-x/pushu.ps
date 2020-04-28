@@ -91,6 +91,14 @@
 				{string.instructions}
 			</button>
 		</li>
+
+		{#if $state.page === 'Hello' || $state.page === 'Home'}
+			<li class="menu-item">
+				<button on:click="{ () => state.setSubmenu('ManualLanguage') }">
+					{string.setLanguage}
+				</button>
+			</li>
+		{/if}
 	
 		{#if $state.page !== 'Training'}
 			<li class="menu-item">
