@@ -51,6 +51,9 @@ q:after, q:before { content: ''; }
 	--color-input: #dda848;
 	--color-focus: #000;
 	--color-link: #b58020;
+	--color-hover: #503b15;
+	--color-active: var(--color-text);
+	--color-hoverMenu: #56564c;
 
 	/* the spacing between elements */
 	--size-spacing: 1.5rem;
@@ -278,6 +281,24 @@ input:focus {
 	margin-bottom: 1.5rem;
 }
 
+button {
+	transition: color .1s linear;
+}
+
+.app button:hover {
+	color: var(--color-hover);
+}
+
+.app button:focus {
+	outline: none;
+	color: var(--color-hover);
+}
+
+.app button:active {
+	outline: none;
+	color: var(--color-active);
+}
+
 
 
 /* menu
@@ -294,6 +315,20 @@ input:focus {
 
 .menu-question {
 	text-align: center;
+}
+
+.menu button:hover {
+	color: var(--color-hoverMenu);
+}
+
+.menu button:focus {
+	outline: none;
+	color: var(--color-hoverMenu);
+}
+
+.menu button:active {
+	outline: none;
+	color: var(--color-active);
 }
 
 
