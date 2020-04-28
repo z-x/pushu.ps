@@ -164,7 +164,7 @@ body:before {
 }
 
 .main {
-	max-width: 450px;
+	max-width: 440px;
 	padding-top: var(--size-padding);
 	padding-bottom: var(--size-padding-bottom);
 	padding-left: var(--size-spacing);
