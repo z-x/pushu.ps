@@ -46,7 +46,7 @@
 	if('serviceWorker' in navigator){
 		navigator.serviceWorker.register('/service-worker.js')
 			.then((reg) => {
-				console.log('Service worker registered');
+				// console.log('Service worker registered');
 			})
 			.catch((error) => {
 				console.log('Service worker registration failed.', error);
@@ -80,7 +80,6 @@
 	// if user came here after a day, reset his training
 	// ------------------------------------------------------------------------
 	if(Date.now() - $state.lastActive > 86400000){
-		console.log(Date.now() - $state.lastActive);
 		state.setStep(0)
 		state.isResting(0);
 		state.setPage('Home');

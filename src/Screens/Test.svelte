@@ -55,8 +55,6 @@
 		gtag('event', 'test', {'pushups': pushups});
 	}
 
-	$: console.log(pushups);
-
 </script>
 
 <style>
