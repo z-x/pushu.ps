@@ -201,7 +201,7 @@ let translations = {
 		// screen: 	test
 		// ------------------------------------------------------------------------
 		firstTestYourself: 'Na początek musisz się przetestować',
-		doAsManyPushups: 'Sprawdź jak dużo pompek jesteś w stanie zrobić naraz',
+		doAsManyPushups: 'Sprawdź jak dużo pompek naraz jesteś w stanie zrobić',
 		iDid: 'Robię',
 		niceGoRest: 'Nieźle! Pamiętaj o dniu odpoczytku po każdej sesji treningowej.',
 		tryHalfPushups: 'Jeśli czujesz, że to za trudne, możesz na początek spróbować ćwiczyć opierając się na kolanach. Tak czy inaczej – pamiętaj o dniu przerwy po każdym treningu.',
