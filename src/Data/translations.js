@@ -209,9 +209,9 @@ let translations = {
 
 		// screen: 	home
 		// ------------------------------------------------------------------------
-		lastDay: 'Poprzedni',
+		lastDay: 'Poprzednio',
 		comingUp: 'Kolejny',
-		currentLevel: 'Obecny poziom',
+		currentLevel: 'Twój poziom',
 		startNextTraining: 'Zaczynamy trening',
 
 		// screen: 	training
