@@ -1,6 +1,8 @@
 <script>
 
 	import { onMount } from 'svelte';
+	import handleError from './Helpers/handleError.js';
+	import Error from './UI/Error.svelte';
 
 	// pages
 	// ------------------------------------------------------------------------
@@ -45,9 +47,6 @@
 	// register the (empty) service worker
 	if('serviceWorker' in navigator){
 		navigator.serviceWorker.register('/service-worker.js')
-			.then((reg) => {
-				// console.log('Service worker registered');
-			})
 			.catch((error) => {
 				console.log('Service worker registration failed.', error);
 			});
@@ -103,3 +102,5 @@
 {#if $state.submenu}
 	<svelte:component this="{ submenus[$state.submenu] }" />
 {/if}
+
+<Error />

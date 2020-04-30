@@ -37,6 +37,7 @@ function createStore(){
 		state.popupShown = false;
 		state.menuShown = false;
 		state.submenu = false;
+		state.error = false;
 
 	
 	// purpose:		creates the store with data provided in state object
@@ -169,6 +170,21 @@ function createStore(){
 	};
 
 
+	// purpose:		sets the error information visible to the user
+	// arguments:	user-friendly error message
+	// returns:		the error object
+	// ------------------------------------------------------------------------
+	let setError = (error) => {
+		update((state) => {
+			state.error = error;
+
+			return state;
+		});
+
+		return error;
+	}
+
+
 	// purpose:		returns publicly visible methods to manage the store
 	// ------------------------------------------------------------------------
 	return {
@@ -182,7 +198,8 @@ function createStore(){
 		totalUpdate,
 		isResting,
 		popupShown,
-		setSubmenu
+		setSubmenu,
+		setError
 	};
 };
 
