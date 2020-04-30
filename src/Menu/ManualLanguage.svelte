@@ -10,7 +10,7 @@
 	// ------------------------------------------------------------------------
 	import state from '../Data/state.js';
 	import string from '../Data/translations.js';
-	import Submenu from '../UI/Submenu.svelte';
+	import Menu from '../UI/Menu.svelte';
 
 
 	// local properties
@@ -30,7 +30,7 @@
 
 
 
-<Submenu
+<Menu
 	menuId="ManualLanguage"
 	contentClass="menu-form"
 	buttonBackLabel="{ string.cancel }"
@@ -45,4 +45,4 @@
 			{/each}
 		</select>
 	</div>
-</Submenu>
+</Menu>

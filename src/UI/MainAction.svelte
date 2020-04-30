@@ -1,5 +1,6 @@
 <!--  
 	The main call to action button that switches to next page
+	Usage: <MainAction>Button label</MainAction>
 -->
 
 
@@ -12,6 +13,7 @@
 	import { appear } from '../Helpers/transitions.js';
 	import { createEventDispatcher } from 'svelte';
 
+
 	// properties
 	// ------------------------------------------------------------------------
 	// what page do you want to switch to
@@ -20,13 +22,16 @@
 	export let delay = 400;
 
 
+	// local variables
+	// ------------------------------------------------------------------------
 	let dispatch = createEventDispatcher();
 
+
+	// purpose:		performs the main action assigned to the button
+	//				most likely changes the page or just dispatches an event
+	// returns:		shows changed page, or dispatches an 'mainAction' event
+	// ------------------------------------------------------------------------
 	let action = () => {
-		// analytics
-		gtag('event', 'mainAction', {'clicked': changePageTo});
-
-
 		dispatch('mainAction');
 
 		if(changePageTo) {

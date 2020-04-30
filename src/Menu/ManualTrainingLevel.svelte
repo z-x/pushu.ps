@@ -10,7 +10,7 @@
 	// ------------------------------------------------------------------------
 	import state from '../Data/state.js';
 	import string from '../Data/translations.js';
-	import Submenu from '../UI/Submenu.svelte';
+	import Menu from '../UI/Menu.svelte';
 
 
 	// local properties
@@ -19,9 +19,12 @@
 	let userSet = $state.set.toString();
 
 
-	// purpose:		resets all the app data
+	// purpose:		sets the user info according to user input
+	// returns:		dispatches a 'manualSkill' event and redirects to Home page
 	// ------------------------------------------------------------------------
 	function setSkill(){
+		window.dispatchEvent(new CustomEvent('manualSkill', { detail: {level: parseInt(userSkill), set: parseInt(userSet)} }));
+
 		state.setLevel(parseInt(userSkill));
 		state.setSet(parseInt(userSet));
 		state.setPage('Home');
@@ -32,7 +35,7 @@
 
 
 
-<Submenu
+<Menu
 	menuId="ManualTrainingLevel"
 	contentClass="menu-form"
 	buttonBackLabel="{ string.cancel }"
@@ -70,4 +73,4 @@
 			<option value="18">18</option>
 		</select>
 	</div>
-</Submenu>
+</Menu>

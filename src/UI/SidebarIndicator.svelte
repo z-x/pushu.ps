@@ -8,7 +8,6 @@
 
 	// imports
 	// ------------------------------------------------------------------------
-	import { onMount } from 'svelte';
 	import state from '../Data/state.js';
 	import { fade } from 'svelte/transition';
 
@@ -55,4 +54,8 @@
 
 
 
-<div in:fade="{ {duration: 200} }" class="sidebar-info-indicator" style="transform: translateY({ position });"></div>
+<div
+	in:fade="{ {duration: 200} }"
+	class="sidebar-info-indicator"
+	style="transform: translateY({ position })"
+></div>

@@ -46,6 +46,7 @@
 		width: 2.5rem;
 		height: 2.5rem;
 		margin-left: 1em;
+		margin-right: -.7em;
 		flex-shrink: 0;
 		overflow: hidden;
 

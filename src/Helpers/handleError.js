@@ -15,18 +15,23 @@ import state from '../Data/state.js';
 // arguments:	the user friendly message to show (optional, string)
 // returns:		an JS error with full stack trace in the console
 //				and optionally a visible message on the screen
+//				triggers 'appError' global event
 // ------------------------------------------------------------------------
 class handleError extends Error {
-	constructor(userFriendlyError, ...args){
+	constructor(userFriendlyError, showMessage = true, ...args){
 		super(...args);
 		Error.captureStackTrace(this, handleError);
 
 		if(userFriendlyError){
-			state.setError(userFriendlyError);
+			if(showMessage){
+				state.setError(userFriendlyError);
+			}
 			console.log(userFriendlyError);
 		}
 
 		console.log(this);
+
+		window.dispatchEvent(new CustomEvent('appError', { detail: { text: userFriendlyError} }));
 	}
 };
 

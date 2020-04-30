@@ -1,9 +1,14 @@
 <!--  
-	Just the secondgate logo in sidebar
+	The menu toggle button
 -->
 
 <script>
+
+	// imports
+	// ------------------------------------------------------------------------
 	import state from '../Data/state.js';
+	import string from '../Data/translations.js';
+
 </script>
 
 
@@ -47,4 +52,10 @@
 
 
 
-<button on:click="{ (event) => { state.setSubmenu('Main'); event.srcElement.blur(); } }" class="menu-toggle" title="Show menu">Menu</button>
+<button
+	on:click="{ (event) => { state.setMenu('Main'); event.srcElement.blur(); } }"
+	class="menu-toggle"
+	title="{string.showMenu}"
+>
+	{string.menu}
+</button>
