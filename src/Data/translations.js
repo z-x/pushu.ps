@@ -47,6 +47,7 @@ let translations = {
 		accept: 'Accept',
 		yes: 'Yes',
 		menuEmpty: 'This menu seems to be empty',
+		errorDismiss: 'Dismiss this message',
 
 		// screen: 	hello
 		// ------------------------------------------------------------------------
@@ -189,6 +190,7 @@ let translations = {
 		accept: 'Akceptuj',
 		yes: 'Tak',
 		menuEmpty: 'To menu wydaje się być puste',
+		errorDismiss: 'Schowaj tę informację',
 
 		// screen: 	hello
 		// ------------------------------------------------------------------------

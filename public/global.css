@@ -54,6 +54,8 @@ q:after, q:before { content: ''; }
 	--color-hover: #503b15;
 	--color-active: var(--color-text);
 	--color-hoverMenu: #56564c;
+	--color-errorBackground: rgba(80, 59, 21, .95);
+	--color-error: var(--color-pure);
 
 	/* the spacing between elements */
 	--size-spacing: 1.5rem;
@@ -69,8 +71,9 @@ q:after, q:before { content: ''; }
 
 	/* z-indexes */
 	--z-menu: 20;
-	--z-overlay: 60;
 	--z-app: 30;
+	--z-overlay: 60;
+	--z-error: 70;
 
 	/* fonts */
 	--font-condensed: urw-din-condensed, 'helvetica', 'arial', sans-serif;
