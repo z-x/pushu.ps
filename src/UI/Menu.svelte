@@ -1,5 +1,5 @@
 <!--  
-	submenus template
+	menus template
 -->
 
 
@@ -8,13 +8,13 @@
 
 	// imports
 	// ------------------------------------------------------------------------
-	import { onMount, onDestroy } from 'svelte';
+	import { onMount } from 'svelte';
 	import string from '../Data/translations.js';
 	import state from '../Data/state.js';
 	import { slide } from '../Helpers/transitions.js';
 
 
-	// component properties
+	// properties
 	// ------------------------------------------------------------------------
 	// the id of the menu that is being shown (string)
 	export let menuId = 'Main';
@@ -39,7 +39,7 @@
 	// initialization
 	// ------------------------------------------------------------------------
 	onMount(() => {
-		setMenuHeight($state.submenu);
+		setMenuHeight($state.menu);
 	});
 
 
@@ -67,13 +67,14 @@
 
 
 	// purpose:		closes the menu completely
-	// returns:		the state of the menu (false)
+	// returns:		the state of the menu that is false (bool)
 	// ------------------------------------------------------------------------
 	function closeMenu(){
 		setMenuHeight('', 0);
 
-		return state.setSubmenu(false);
+		return state.setMenu(false);
 	};
+
 </script>
 
 <style>
@@ -192,7 +193,7 @@
 				{#if allowButtonBack}
 					<button
 						class="menu-back"
-						on:click="{ () => state.setSubmenu('Main') }"
+						on:click="{ () => state.setMenu('Main') }"
 					>
 						{ buttonBackLabel }
 					</button>

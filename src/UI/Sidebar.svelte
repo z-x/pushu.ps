@@ -8,13 +8,11 @@
 
 	// imports
 	// ------------------------------------------------------------------------
-	import { createEventDispatcher, onMount } from 'svelte';
+	import { createEventDispatcher } from 'svelte';
 	import state from '../Data/state.js';
 	import MenuToggle from '../UI/MenuToggle.svelte';
 	import { appear } from '../Helpers/transitions.js';
 	import SidebarIndicator from '../UI/SidebarIndicator.svelte';
-
-	let dispatch = new createEventDispatcher();
 
 
 	// properties
@@ -24,6 +22,10 @@
 	// do you want to mark the active item (bool)
 	export let markActive = false;
 
+
+	// local variables
+	// ------------------------------------------------------------------------
+	let dispatch = new createEventDispatcher();
 	// the active mark switch
 	let showSidebarIndicator = false;
 
@@ -78,7 +80,6 @@
 	}
 
 </style>
-
 
 
 

@@ -28,9 +28,6 @@
 		if(pushups <= 5) { state.setLevel(1); }
 		else if (pushups > 5 && pushups <= 10) { state.setLevel(2); }
 		else { state.setLevel(3); }
-
-		// analytics
-		gtag('event', 'test', {'leveled': $state.level});
 	}
 
 
@@ -49,10 +46,13 @@
 		}
 	};
 
-	// analytics
-	gtag('event', 'viewed', {'page': 'test'});
+
+	// purpose:		function executed after user fills the training data
+	//				used mainly for analytics purposes
+	// returns:		triggers an event 'testDataFilled' with test data
+	// ------------------------------------------------------------------------
 	function filled(){
-		gtag('event', 'test', {'pushups': pushups});
+		window.dispatchEvent(new CustomEvent('testDataFilled', {detail: {pushups: pushups}}));
 	}
 
 </script>

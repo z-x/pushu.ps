@@ -1,6 +1,18 @@
 {
 	"name": "pushu.ps",
-	"version": "3.0.8",
+	"version": "3.2.0",
+	"homepage": "https://pushu.ps",
+	"bugs": "https://github.com/z-x/pushu.ps/issues",
+	"license": "The sources are open only for learning purposes, final app is copyrighted",
+	"autor": {
+		"name": "Łukasz Krysiewicz",
+		"email": "zx@secondgate.pl",
+		"url": "http://secondgate.pl"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/z-x/pushu.ps.git"
+	},
 	"scripts": {
 		"build": "rollup -c",
 		"dev": "rollup -c -w",
@@ -8,12 +20,12 @@
 	},
 	"devDependencies": {
 		"@rollup/plugin-commonjs": "^11.0.0",
-		"@rollup/plugin-node-resolve": "^7.0.0",
+		"@rollup/plugin-node-resolve": "^7.1.3",
 		"rollup": "^1.20.0",
-		"rollup-plugin-livereload": "^1.0.0",
+		"rollup-plugin-livereload": "^1.3.0",
 		"rollup-plugin-svelte": "^5.0.3",
 		"rollup-plugin-terser": "^5.1.2",
-		"svelte": "^3.0.0"
+		"svelte": "^3.21.0"
 	},
 	"dependencies": {
 		"sirv-cli": "^0.4.4"

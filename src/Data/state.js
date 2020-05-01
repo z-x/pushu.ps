@@ -36,7 +36,8 @@ function createStore(){
 		state.lastActive = (localStorage.lastActive) ? parseInt(localStorage.lastActive) : Date.now();
 		state.popupShown = false;
 		state.menuShown = false;
-		state.submenu = false;
+		state.menu = false;
+		state.error = false;
 
 	
 	// purpose:		creates the store with data provided in state object
@@ -154,19 +155,34 @@ function createStore(){
 	};
 
 
-	// purpose:		sets the information about currently active submenu
-	// arguments: 	submenu id (string)
-	// returns:		currently active submenu id (string)
+	// purpose:		sets the information about currently active menu
+	// arguments: 	menu id (string)
+	// returns:		currently active menu id (string)
 	// ------------------------------------------------------------------------
-	let setSubmenu = (id) => {
+	let setMenu = (id) => {
 		update((state) => {
-			state.submenu = id;
+			state.menu = id;
 
 			return state;
 		});
 
-		return state.submenu;
+		return state.menu;
 	};
+
+
+	// purpose:		sets the error information visible to the user
+	// arguments:	user-friendly error message
+	// returns:		the error object
+	// ------------------------------------------------------------------------
+	let setError = (error) => {
+		update((state) => {
+			state.error = error;
+
+			return state;
+		});
+
+		return error;
+	}
 
 
 	// purpose:		returns publicly visible methods to manage the store
@@ -182,7 +198,8 @@ function createStore(){
 		totalUpdate,
 		isResting,
 		popupShown,
-		setSubmenu
+		setMenu,
+		setError
 	};
 };
 

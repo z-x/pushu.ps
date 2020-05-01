@@ -134,9 +134,6 @@
 	// purpose:		moves the user to next step of pushups/resting
 	// ------------------------------------------------------------------------
 	function nextStep(){
-		// analytics
-		gtag('event', 'training', {'nextStep': ($state.currentStep + 1), 'maxSteps': currentPushups.length});
-
 		// if it was the last pushups to make
 		if($state.currentStep === currentPushups.length-1){
 			// update the user info about the amount of pushups he just did
@@ -207,9 +204,6 @@
 	// every time the currentRest variable is changing updates the counter in html
 	$: secondsFormated = string.seconds(currentRest);
 
-
-	// analytics
-	gtag('event', 'viewed', {'page': 'training'});
 </script>
 
 <style>
