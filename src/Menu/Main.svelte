@@ -10,7 +10,7 @@
 	// ------------------------------------------------------------------------
 	import state from '../Data/state.js';
 	import string from '../Data/translations.js';
-	import Submenu from '../UI/Submenu.svelte';
+	import Menu from '../UI/Menu.svelte';
 
 </script>
 
@@ -54,7 +54,7 @@
 
 
 
-<Submenu
+<Menu
 	menuId="Main"
 	allowButtonBack="{ false }"
 	transitionInModifier="{ {direction: 'out'} }"
@@ -64,7 +64,7 @@
 
 		{#if $state.page === 'Home'}
 			<li class="menu-item">
-				<button on:click="{ () => state.setSubmenu('ResetApp') }">
+				<button on:click="{ () => state.setMenu('ResetApp') }">
 					{string.resetApp}
 				</button>
 			</li>
@@ -72,7 +72,7 @@
 
 		{#if $state.page === 'Home' || $state.page === 'Hello' || $state.page === 'Test'}
 			<li class="menu-item">
-				<button on:click="{ () => state.setSubmenu('ManualTrainingLevel') }">
+				<button on:click="{ () => state.setMenu('ManualTrainingLevel') }">
 					{string.manuallySetTrainingLevel}
 				</button>
 			</li>
@@ -80,21 +80,21 @@
 
 		{#if $state.page === 'Training' || $state.page === 'Finish'}
 			<li class="menu-item">
-				<button on:click="{ () => state.setSubmenu('CancelTraining') }">
+				<button on:click="{ () => state.setMenu('CancelTraining') }">
 					{string.cancelTraining}
 				</button>
 			</li>
 		{/if}
 
 		<li class="menu-item">
-			<button on:click="{ () => state.setSubmenu('Instructions') }">
+			<button on:click="{ () => state.setMenu('Instructions') }">
 				{string.instructions}
 			</button>
 		</li>
 
 		{#if $state.page === 'Hello' || $state.page === 'Home'}
 			<li class="menu-item">
-				<button on:click="{ () => state.setSubmenu('ManualLanguage') }">
+				<button on:click="{ () => state.setMenu('ManualLanguage') }">
 					{string.setLanguage}
 				</button>
 			</li>
@@ -102,7 +102,7 @@
 	
 		{#if $state.page !== 'Training'}
 			<li class="menu-item">
-				<button on:click="{ () => state.setSubmenu('PrivacyPolicy') }">
+				<button on:click="{ () => state.setMenu('PrivacyPolicy') }">
 					{string.privacyPolicy}
 				</button>
 			</li>
@@ -111,4 +111,4 @@
 	</ul>
 
 	<a href="http://secondgate.pl" target="_blank" class="secondgate">{string.appCreatedSecondGate}</a>
-</Submenu>
+</Menu>

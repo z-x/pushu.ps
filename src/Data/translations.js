@@ -47,7 +47,10 @@ let translations = {
 		accept: 'Accept',
 		yes: 'Yes',
 		menuEmpty: 'This menu seems to be empty',
+		menu: 'Menu',
+		showMenu: 'Show menu',
 		errorDismiss: 'Dismiss this message',
+		errorServiceWorker: 'For unknown reason the offline mode was not initialized. The app will work, but you need the internet connection.',
 
 		// screen: 	hello
 		// ------------------------------------------------------------------------
@@ -190,7 +193,10 @@ let translations = {
 		accept: 'Akceptuj',
 		yes: 'Tak',
 		menuEmpty: 'To menu wydaje się być puste',
+		menu: 'Menu',
+		showMenu: 'Pokaż menu',
 		errorDismiss: 'Schowaj tę informację',
+		errorServiceWorker: 'Z jakiegoś powodu nie udało się uruchomić trybu offline. Applikacja będzie działała, ale wymaga połączenia z internetem.',
 
 		// screen: 	hello
 		// ------------------------------------------------------------------------

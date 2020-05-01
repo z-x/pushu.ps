@@ -25,17 +25,16 @@
 
 
 	// purpose:		we want the user to repeat this set if it was hard for him
-	// return: 		redirects to the home screen
+	// return: 		triggers an 'finished' event and redirects to the home screen
 	// ------------------------------------------------------------------------
 	function hard(){
 		state.setPage('Home');
 
-		// analytics
-		gtag('event', 'finished', {'howWasIt': 'hard', 'level': $state.level, 'set': $state.set});
-	}
+		window.dispatchEvent(new CustomEvent('finished', {detail: {howWasIt: 'hard', 'level': $state.level, 'set': $state.set}}));
+	};
 
 	// purpose:		if user says the set was easy, let's move him to next one
-	// return:		sets next training and redirects to home screen
+	// return:		triggers an 'finished', sets next training and redirects to home screen
 	// ------------------------------------------------------------------------
 	function easy(){
 		if(Object.keys(training[$state.level]).length !== $state.set){
@@ -43,13 +42,8 @@
 		}
 		state.setPage('Home');
 
-		// analytics
-		gtag('event', 'finished', {'howWasIt': 'easy', 'level': $state.level, 'set': $state.set});
-	}
-
-
-	// analytics
-	gtag('event', 'viewed', {'page': 'finish'});
+		window.dispatchEvent(new CustomEvent('finished', {detail: {howWasIt: 'hard', 'level': $state.level, 'set': $state.set}}));
+	};
 
 </script>
 

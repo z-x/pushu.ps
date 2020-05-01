@@ -8,6 +8,7 @@
 
 	// imports
 	// ------------------------------------------------------------------------
+	import handleError from '../Helpers/handleError.js';
 	import { onMount } from 'svelte';
 	import state from '../Data/state.js';
 	import { fromTop } from '../Helpers/transitions.js';
@@ -28,6 +29,8 @@
 			if(data[0].date > $state.lastActive){
 				news = data[0];
 			}
+		}).catch((error) => {
+			new handleError('News could not be fetched', false);
 		});
 	});
 
@@ -45,7 +48,7 @@
 			window.open(news.url, '_blank');
 			action();
 		}
-	}
+	};
 
 	// set the state as with popup when needed
 	$: if(news){ state.popupShown(true); } else { state.popupShown(false); }
@@ -56,7 +59,6 @@
 	//				compensating for animation times
 	//				css transitions won't work, the status bar will transition
 	//				from white at page load :<
-	//				SERIOUSLY APPLE GROW UP
 	// ------------------------------------------------------------------------
 	$: $state.popupShown, transitionBackground();
 
@@ -72,7 +74,7 @@
 				document.body.classList = '';
 			}, 600);
 		}
-	}
+	};
 
 </script>
 

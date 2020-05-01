@@ -19,10 +19,6 @@
 	let isIOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
 	let isAndroid = navigator.userAgent.toLowerCase().indexOf('android') > -1;
 
-
-	// analytics
-	gtag('event', 'viewed', {'page': 'hello'});
-
 </script>
 
 <style>

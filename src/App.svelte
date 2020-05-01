@@ -1,8 +1,10 @@
 <script>
 
 	import { onMount } from 'svelte';
-	import handleError from './Helpers/handleError.js';
+	import string from './Data/translations.js';
+	import Analytics from './Helpers/Analytics.svelte';
 	import Error from './UI/Error.svelte';
+	import handleError from './Helpers/handleError.js';
 
 	// pages
 	// ------------------------------------------------------------------------
@@ -13,7 +15,7 @@
 	import Finish from './Screens/Finish.svelte';
 	import News from './Screens/News.svelte';
 
-	// submenus
+	// menus
 	// ------------------------------------------------------------------------
 	import Main from './Menu/Main.svelte';
 	import ResetApp from './Menu/ResetApp.svelte';
@@ -32,7 +34,7 @@
 	// app possible states
 	// ------------------------------------------------------------------------
 	let pages = {Hello, Test, Home, Training, Finish};
-	let submenus = {Main, ResetApp, ManualTrainingLevel, Instructions, PrivacyPolicy, CancelTraining, ManualLanguage};
+	let menus = {Main, ResetApp, ManualTrainingLevel, Instructions, PrivacyPolicy, CancelTraining, ManualLanguage};
 
 
 	// if iOS app in fullscreen mode add class
@@ -45,62 +47,66 @@
 	// enable 'add to home screen' on chrome mobile
 	// ------------------------------------------------------------------------
 	// register the (empty) service worker
-	if('serviceWorker' in navigator){
-		navigator.serviceWorker.register('/service-worker.js')
-			.catch((error) => {
-				console.log('Service worker registration failed.', error);
-			});
-	};
+	// doing this in onMount so the <Analytics /> code would be already available
+	onMount(() => {
+		if('serviceWorker' in navigator){
+			navigator.serviceWorker.register('/service-worker.js')
+				.catch((error) => {
+					new handleError(string.errorServiceWorker);
+				});
+		};
 
-	// cache the install prompt
-	let deferredInstallPrompt;
+		// cache the install prompt
+		let deferredInstallPrompt;
 
-	window.addEventListener('beforeinstallprompt', (event) => {
-		// prevent the infobar from appearing on mobile
-		event.preventDefault();
-		// save the event to trigger it later
-		deferredInstallPrompt = event;
+		window.addEventListener('beforeinstallprompt', (event) => {
+			// prevent the infobar from appearing on mobile
+			event.preventDefault();
+			// save the event to trigger it later
+			deferredInstallPrompt = event;
+		});
+
+		if($state.page === 'Home' && localStorage.installPromptShown === 'false' && deferredInstallPrompt){
+			deferredInstallPrompt.prompt();
+			localStorage.installPromptShown = true;
+
+			// trigger the event for the analytics data
+			window.dispatchEvent(new CustomEvent('installPromptShown'));
+		}
+
 	});
 
-	// analytics
-	window.addEventListener('appinstalled', () => {
-		gtag('event', 'app', {'mobileInstalled': 1});
-	});
 
-	if($state.page === 'Home' && localStorage.installPromptShown === 'false' && deferredInstallPrompt){
-		deferredInstallPrompt.prompt();
-		localStorage.installPromptShown = true;
-
-		// analytics
-		gtag('event', 'app', {'mobileInstallInfoShown': 1});
-	}
-
-
-	// if user came here after a day, reset his training
+	// if user came here after a day, reset his training or test
 	// ------------------------------------------------------------------------
-	if(Date.now() - $state.lastActive > 86400000){
-		state.setStep(0)
-		state.isResting(0);
-		state.setPage('Home');
+	if((Date.now() - $state.lastActive > 86400000)){
+		if($state.page === 'Training') {
+			state.setStep(0)
+			state.isResting(0);
+			state.setPage('Home');
+		}
+		else if($state.page === 'Test'){
+			state.setPage('Hello');
+		}
 	}
 
 </script>
 
 
-
+<Analytics />
 
 <News />
 
 <main
 	class="app"
-	class:app-unfocused="{ $state.popupShown || $state.submenu }"
-	class:app-menuShown="{ $state.submenu }"
+	class:app-unfocused="{ $state.popupShown || $state.menu }"
+	class:app-menuShown="{ $state.menu }"
 >
 	<svelte:component this="{ pages[$state.page] }" />
 </main>
 
-{#if $state.submenu}
-	<svelte:component this="{ submenus[$state.submenu] }" />
+{#if $state.menu}
+	<svelte:component this="{ menus[$state.menu] }" />
 {/if}
 
 <Error />

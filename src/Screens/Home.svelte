@@ -22,10 +22,6 @@
 	$: commingUp = training[$state.level][$state.set]['pushups'].reduce((a, b) => a + b, 0);
 	$: sidebarData = [$state.pushupsLast, commingUp, $state.set];
 
-
-	// analytics
-	gtag('event', 'viewed', {'page': 'home'});
-
 </script>
 
 
