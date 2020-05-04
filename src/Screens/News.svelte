@@ -26,7 +26,7 @@
 		fetch('/data/news.json').then((response) => {
 			return response.json();
 		}).then((data) => {
-			if(data[0].date > $state.lastActive){
+			if(data[0].date > $state.lastActive && $state.pushupsTotal > 0){
 				news = data[0];
 			}
 		}).catch((error) => {
