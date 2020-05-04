@@ -1,19 +1,19 @@
 [
 	{
-		"date": "1",
+		"date": "1588607730853",
 		"pl-PL": {
-			"title": "Cześć<br> mamy coś nowego!",
-			"content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><p>Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.</p>",
-			"actionYes": "Chcę to",
-			"actionClose": "Nie, dzięki"
+			"title": "Nieźle nam idzie!",
+			"content": "<p>Przez ostatni tydzień zrobiliśmy razem 3668 pompek! Wydaje mi się, że to całkiem nieźle. Gratuluję zwłaszcza wszystkim, którzy pompować dopiero zaczynają (a to aż 70%), bo przecież dobrze wiemy, że zabrać się za coś takiego nie jest łatwo. ;) Trzymam kciuki za wytrwałość!</p>",
+			"actionYes": "",
+			"actionClose": "Fajnie!"
 		},
 		"en-US": {
-			"title": "Hi there<br> we have some news!",
-			"content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><p>Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.</p>",
-			"actionYes": "I will",
-			"actionClose": "No, thanks"
+			"title": "We’re doing great!",
+			"content": "<p>During the last week we made 3668 pushups together! I will consider this a pretty neat score. I especially salute those who are new to that kind of training (and it’s 70% of you) as it’s not an easy task to motivate yourself to start. I wish you all a lot of persistence!</p>",
+			"actionYes": "",
+			"actionClose": "Nice!"
 		},
-		"action": "url",
-		"url": "http://google.com"
+		"action": "",
+		"url": ""
 	}
 ]

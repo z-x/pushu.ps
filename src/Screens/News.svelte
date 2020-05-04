@@ -178,22 +178,22 @@
 {#if news}
 	<section class="infoPopup" on:click="{ () => action() }">
 		<div on:click|stopPropagation in:fromTop="{ {duration: 700, delay: 500} }" out:fromTop="{ {duration: 700} }" class="infoPopup-content">
-			<h1 class="infoPopup-heading">{@html news[$state.language].title}</h1>
-			{@html news[$state.language].content}
+			<h1 class="infoPopup-heading">{@html news[localStorage.language].title}</h1>
+			{@html news[localStorage.language].content}
 
-			{#if news[$state.language].actionClose}
+			{#if news[localStorage.language].actionClose}
 				<button
 					on:click="{ () => action() }"
-					class:infoButton-choices="{ news[$state.language].actionClose && news[$state.language].actionYes }"
+					class:infoButton-choices="{ news[localStorage.language].actionClose && news[localStorage.language].actionYes }"
 					class="infoPopup-action"
-				>{@html news[$state.language].actionClose}</button>
+				>{@html news[localStorage.language].actionClose}</button>
 			{/if}
-			{#if news[$state.language].actionYes}
+			{#if news[localStorage.language].actionYes}
 				<button
 					on:click="{ () => action(news.action) }"
-					class:infoButton-choices="{ news[$state.language].actionClose && news[$state.language].actionYes }"
+					class:infoButton-choices="{ news[localStorage.language].actionClose && news[localStorage.language].actionYes }"
 					class="infoPopup-action"
-				>{@html news[$state.language].actionYes}</button>
+				>{@html news[localStorage.language].actionYes}</button>
 			{/if}
 		</div>
 	</section>
