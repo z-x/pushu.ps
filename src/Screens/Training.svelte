@@ -81,8 +81,6 @@
 	let audioContext = new (window.AudioContext || window.webkitAudioContext)();
 	// this will store the alert audio file for future use
 	let alertSoundBuffer = null;
-	// TEMP: Vader sound effect for May the 4th
-	let vader = null;
 
 	// first we need to get the audio file and store it for later
 	// wav is heavies but also has the best support
@@ -97,24 +95,6 @@
 		audioContext.decodeAudioData(binaryAudio, (decodedData) => {
 			// we will store the buffered audio data into variable
 			alertSoundBuffer = decodedData;
-		});
-	})
-	.catch((error) => {
-		console.error(error);
-	});
-
-	// TEMP: fetch Vader sound
-	fetch('/audio/vader.mp3').then((response) => {
-		// we return the response as an array buffer
-		// this is a binary representation of the audio file
-		return response.arrayBuffer();
-	})
-	.then((binaryAudio) => {
-		// then we need to get the binary data and decode
-		// it into a real audio
-		audioContext.decodeAudioData(binaryAudio, (decodedData) => {
-			// we will store the buffered audio data into variable
-			vader = decodedData;
 		});
 	})
 	.catch((error) => {
@@ -138,17 +118,6 @@
 		}
 	};
 
-	function playVader(){
-		// create new audio source
-		let source = audioContext.createBufferSource();
-		// load our previously stored audio buffer into the source
-		source.buffer = vader;
-		// connect the source to destination (the speakers)
-		source.connect(audioContext.destination);
-		// play the sound
-		source.start(0);
-	}
-
 	// play the sound
 	function playAlert(){
 		// create new audio source
@@ -171,9 +140,6 @@
 			state.lastSet(currentPushups.reduce((a, b) => a + b, 0));
 			// and add those to the total he made
 			state.totalUpdate(currentPushups.reduce((a, b) => a + b, 0));
-
-			// TEMP: Vader voice
-			playVader();
 
 			// finally redirect the user to the finish screen
 			state.setPage('Finish');
