@@ -15,6 +15,7 @@
 	import { slide } from '../Helpers/transitions.js';
 	import { fade } from 'svelte/transition';
 	import StayAwake from '../Helpers/stayAwake.js';
+	import Sound from '../Helpers/sound.js';
 	import MainAction from '../UI/MainAction.svelte';
 	import Sidebar from '../UI/Sidebar.svelte';
 
@@ -72,65 +73,6 @@
 	$: $state.isResting, $state.currentStep, positionCounter();
 
 
-	// purpose:		plays the alert sound
-	// ------------------------------------------------------------------------
-	// indicates if the audio context was warmed (user needs to click somewhere)
-	// for webkit and chromium to allow any playback on the page
-	let audioContextWarmed = false;
-	// creating new audio context
-	let audioContext = new (window.AudioContext || window.webkitAudioContext)();
-	// this will store the alert audio file for future use
-	let alertSoundBuffer = null;
-
-	// first we need to get the audio file and store it for later
-	// wav is heavies but also has the best support
-	fetch('/audio/alert.mp3').then((response) => {
-		// we return the response as an array buffer
-		// this is a binary representation of the audio file
-		return response.arrayBuffer();
-	})
-	.then((binaryAudio) => {
-		// then we need to get the binary data and decode
-		// it into a real audio
-		audioContext.decodeAudioData(binaryAudio, (decodedData) => {
-			// we will store the buffered audio data into variable
-			alertSoundBuffer = decodedData;
-		});
-	})
-	.catch((error) => {
-		console.error(error);
-	});
-
-	// warm up the AudioContext
-	function warmUpAudioContext(){
-		if(!audioContextWarmed){
-			// create empty buffer
-			let buffer = audioContext.createBuffer(1, 1, 22050)
-			let source = audioContext.createBufferSource();
-			source.buffer = buffer;
-			// contect the empty buffer to audio destination
-			source.connect(audioContext.destination);
-			// play the empty audio
-			source.start(0);
-
-			// the context was warmed up, nice
-			audioContextWarmed = true;
-		}
-	};
-
-	// play the sound
-	function playAlert(){
-		// create new audio source
-		let source = audioContext.createBufferSource();
-		// load our previously stored audio buffer into the source
-		source.buffer = alertSoundBuffer;
-		// connect the source to destination (the speakers)
-		source.connect(audioContext.destination);
-		// play the sound
-		source.start(0);
-	};
-
-
 	// purpose:		moves the user to next step of pushups/resting
 	// ------------------------------------------------------------------------
 	function nextStep(){
@@ -146,7 +88,6 @@
 		}
 		// if there are more to do
 		else {
-			warmUpAudioContext();
 			rest().then(() => {
 				state.setStep($state.currentStep + 1);
 			});
@@ -162,7 +103,9 @@
 	let currentRest = defaultRest;
 	// the interval for resting behaviour
 	let restInterval;
-
+	// the alert sound
+	let alert = new Sound('/audio/alert.mp3');
+	// the variable holding the resolve method for resting promise
 	let restingPromiseResolve = null;
 
 	let rest = () => {
@@ -176,7 +119,7 @@
 
 				// if the resting is near the end, play the alert sound
 				if(currentRest <= 5 && currentRest > 0 ){
-					playAlert();
+					alert.play();
 				}
 
 				// when the resting finishes
