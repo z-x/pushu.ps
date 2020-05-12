@@ -84,7 +84,7 @@
 
 	// first we need to get the audio file and store it for later
 	// wav is heavies but also has the best support
-	fetch('/audio/alert.wav').then((response) => {
+	fetch('/audio/alert.mp3').then((response) => {
 		// we return the response as an array buffer
 		// this is a binary representation of the audio file
 		return response.arrayBuffer();
