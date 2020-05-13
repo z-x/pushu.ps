@@ -9,6 +9,7 @@
 
 	// imports
 	// ------------------------------------------------------------------------
+	import { onMount } from 'svelte';
 	import state from '../Data/state.js';
 	import { appear } from '../Helpers/transitions.js';
 	import { createEventDispatcher } from 'svelte';
@@ -38,6 +39,13 @@
 			state.setPage(changePageTo);
 		}
 	};
+
+	
+	// it seems that the button is getting :focus on mobile safari event
+	// when it was destroyed and recreated
+	onMount(() => {
+		document.activeElement.blur()
+	});
 
 </script>
 

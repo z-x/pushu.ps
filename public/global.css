@@ -290,8 +290,10 @@ button {
 	transition: color .1s linear;
 }
 
-.app button:hover {
-	color: var(--color-hover);
+@media (hover: hover) {
+	.app button:hover {
+		color: var(--color-hover);
+	}
 }
 
 .app button:focus {
