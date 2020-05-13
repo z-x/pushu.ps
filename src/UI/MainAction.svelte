@@ -40,13 +40,6 @@
 		}
 	};
 
-	
-	// it seems that the button is getting :focus on mobile safari event
-	// when it was destroyed and recreated
-	onMount(() => {
-		document.activeElement.blur()
-	});
-
 </script>
 
 <style>
