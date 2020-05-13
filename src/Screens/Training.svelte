@@ -24,10 +24,9 @@
 	// ------------------------------------------------------------------------
 	onMount(() => {
 		StayAwake.init();
-		document.addEventListener('click', function enableNoSleep() {
-			document.removeEventListener('click', enableNoSleep, false);
+		document.addEventListener('click', () => {
 			StayAwake.enable();
-		}, false);
+		}, {once: true});
 	});
 
 	onDestroy(() => {
