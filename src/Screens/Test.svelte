@@ -102,8 +102,10 @@
 		<p class="text-title action-secondary">{string.iDid} <input type="number" placeholder="12" min="0" step="1" bind:value="{ pushups }" on:change="{ filled }"> {string.pushups(pushups)}</p>
 		{#if pushups > 2}
 			<p in:appear="{{ delay: 500 }}" out:appear class="text-subtitle">{string.niceGoRest}</p>
-		{:else if pushups <= 2 && typeof pushups !== 'undefined'}
+		{:else if pushups <= 2 && pushups >= 0 && typeof pushups !== 'undefined'}
 			<p in:appear="{{ delay: 500 }}" out:appear class="text-subtitle">{string.tryHalfPushups}</p>
+		{:else if pushups < 0}
+			<p in:appear="{{ delay: 500 }}" out:appear class="text-subtitle">{string.levitationJoke}</p>
 		{/if}
 	</div>
 			

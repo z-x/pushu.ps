@@ -68,6 +68,7 @@ let translations = {
 		niceGoRest: 'Nice! Remember to take a full day of rest before you start the training.',
 		tryHalfPushups: 'If you feel that it might be too hard, you might train by doing knee push ups. Either way, take a day of rest before next training.',
 		whatsNext: 'Ok, what’s next?',
+		levitationJoke: 'It’s kinda like levitation, isn’t it?',
 
 		// screen: 	home
 		// ------------------------------------------------------------------------
@@ -214,6 +215,7 @@ let translations = {
 		niceGoRest: 'Nieźle! Pamiętaj o dniu odpoczynku po każdej sesji treningowej.',
 		tryHalfPushups: 'Jeśli czujesz, że to za trudne, możesz na początek spróbować ćwiczyć opierając się na kolanach. Tak czy inaczej – pamiętaj o dniu przerwy po każdym treningu.',
 		whatsNext: 'Dobra, co dalej?',
+		levitationJoke: 'To trochę jakby lewitacja, nie?',
 
 		// screen: 	home
 		// ------------------------------------------------------------------------

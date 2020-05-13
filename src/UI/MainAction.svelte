@@ -9,6 +9,7 @@
 
 	// imports
 	// ------------------------------------------------------------------------
+	import { onMount } from 'svelte';
 	import state from '../Data/state.js';
 	import { appear } from '../Helpers/transitions.js';
 	import { createEventDispatcher } from 'svelte';
