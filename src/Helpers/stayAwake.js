@@ -37,13 +37,14 @@ const stayAwakeModule = {
     }
 		this.stayAwakeVideo.setAttribute('muted', true);
 		this.stayAwakeVideo.setAttribute('title', 'StayAwake');
-		this.stayAwakeVideo.setAttribute('playsinline', '');
+		this.stayAwakeVideo.setAttribute('playsinline', 'playsinline');
 		this.addSourceToVideo(this.stayAwakeVideo, 'webm', this.webm);
 		this.addSourceToVideo(this.stayAwakeVideo, 'mp4', this.mp4);
+
 		this.stayAwakeVideo.addEventListener('loadedmetadata', () => {
 			if (this.stayAwakeVideo.duration && this.stayAwakeVideo.duration <= 1) {
 				// webm source
-				this.stayAwakeVideo.setAttribute('loop', '');
+				this.stayAwakeVideo.setAttribute('loop', 'loop');
 			} else {
 				// mp4 source
 				this.stayAwakeVideo.addEventListener('timeupdate', () => {
