@@ -137,6 +137,11 @@ body:before {
 	}
 }
 
+.intro {
+	position: absolute;
+	top: -100vh;
+}
+
 
 
 /* page structure
