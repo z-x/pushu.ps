@@ -28,21 +28,21 @@ let translations = {
 	// shared in the whole app
 	// ------------------------------------------------------------------------
 	pushups: (howMany) => {
-		return intlNumber(howMany, exports.pushupsStrings);
-	},
-
-	pushupsStrings: {
-		'en-US': { many: 'pushups', few: 'pushups', one: 'pushup', other: 'pushups'	},
-		'pl-PL': { many: 'pompek', few: 'pompki', one: 'pompkę', other: 'pompek' }
+		let strings = {
+			'en-US': { many: 'pushups', few: 'pushups', one: 'pushup', other: 'pushups'	},
+			'pl-PL': { many: 'pompek', few: 'pompki', one: 'pompkę', other: 'pompek' }
+		};
+		
+		return intlNumber(howMany, strings[localStorage.language]);
 	},
 
 	seconds: (howMany) => {
-		return intlNumber(howMany, exports.secondsStrings);
-	},
+		let strings = {
+			'en-US': { many: 'seconds', few: 'seconds', one: 'second', other: 'seconds' },
+			'pl-PL': { many: 'sekund', few: 'sekundy', one: 'sekundę', other: 'sekundy' }
+		}
 
-	secondsStrings: {
-		'en-US': { many: 'seconds', few: 'seconds', one: 'second', other: 'seconds' },
-		'pl-PL': { many: 'sekund', few: 'sekundy', one: 'sekundę', other: 'sekundy' }
+		return intlNumber(howMany, strings[localStorage.language]);
 	},
 
 	back: {
@@ -459,13 +459,9 @@ if(!localStorage.language){
 let exportedStrings = {};
 
 for(let key in translations){
-	if(typeof translations[key] === 'object'){
-		exportedStrings[key] = translations[key][localStorage.language];
-	} else {
-		exportedStrings[key] = translations[key];
-	}
+	console.log(key);
 }
 
-let exports = {...exportedStrings, supportedLanguages}
+let exports = {...translations[localStorage.language], supportedLanguages}
 
 export default exports;
