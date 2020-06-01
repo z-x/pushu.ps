@@ -14,7 +14,7 @@
 	import training from '../Data/training.js';
 	import { slide } from '../Helpers/transitions.js';
 	import { fade } from 'svelte/transition';
-	import StayAwake from '../Helpers/stayAwake.js';
+	import NoSleep from '../Helpers/noSleep.js';
 	import Sound from '../Helpers/sound.js';
 	import MainAction from '../UI/MainAction.svelte';
 	import Sidebar from '../UI/Sidebar.svelte';
@@ -22,15 +22,18 @@
 
 	// prevent the screen from dimming
 	// ------------------------------------------------------------------------
+	let noSleep;
+
 	onMount(() => {
-		StayAwake.init();
+		noSleep = new NoSleep();
+
 		document.addEventListener('click', () => {
-			StayAwake.enable();
+			noSleep.enable();
 		}, {once: true});
 	});
 
 	onDestroy(() => {
-		StayAwake.disable();
+		noSleep.disable();
 
 		// remove the resting timeout when navigating away from this page
 		finishResting();
