@@ -12,7 +12,7 @@
           <trackOutput outputID="10000" type="trackID"/>
           <trackInput inputID="1"/>
           <component componentGuid="9be31d78-58a0-4320-ab76-6bc0f920b5ab" componentID="Audition.Fader" id="trackFader" name="volume" powered="true">
-            <parameter index="0" name="volume" parameterValue="3.1622784137725830078125"/>
+            <parameter index="0" name="volume" parameterValue="1"/>
             <parameter index="1" name="static gain" parameterValue="1"/>
           </component>
           <component componentGuid="dc55ca37-0226-48a0-a5f3-1d0217784fea" componentID="Audition.Mute" id="trackMute" name="Mute" powered="true">
@@ -177,7 +177,7 @@
             <parameter index="0" name="volume" parameterValue="1"/>
             <parameter index="1" name="static gain" parameterValue="1"/>
           </component>
-          <component componentGuid="854a969a-6d8e-4a50-a401-3d5fbb38363f" componentID="Audition.Mute" id="clipMute" name="Mute" powered="true">
+          <component componentGuid="83423cab-fb6a-4ac9-836e-5a26b11eb9a0" componentID="Audition.Mute" id="clipMute" name="Mute" powered="true">
             <parameter index="0" parameterValue="0"/>
             <parameter index="1" name="mute" parameterValue="0"/>
           </component>
@@ -621,10 +621,10 @@
             xmlns:xmpDM="http://ns.adobe.com/xmp/1.0/DynamicMedia/">
          <xmp:CreatorTool>Adobe Audition 13.0 (Windows)</xmp:CreatorTool>
          <xmp:CreateDate>2020-04-18T16:49:33+02:00</xmp:CreateDate>
-         <xmp:MetadataDate>2020-06-02T13:09:26+02:00</xmp:MetadataDate>
-         <xmp:ModifyDate>2020-06-02T13:09:26+02:00</xmp:ModifyDate>
-         <xmpMM:InstanceID>xmp.iid:ccb25981-0cf2-4d40-a2aa-b475ec39b9c0</xmpMM:InstanceID>
-         <xmpMM:DocumentID>xmp.did:2ef97692-b806-3d43-99c0-91911c3135c9</xmpMM:DocumentID>
+         <xmp:MetadataDate>2020-06-02T13:07:54+02:00</xmp:MetadataDate>
+         <xmp:ModifyDate>2020-06-02T13:07:54+02:00</xmp:ModifyDate>
+         <xmpMM:InstanceID>xmp.iid:e0a4c4f1-b25e-4e41-8bf5-f1e26e4317a3</xmpMM:InstanceID>
+         <xmpMM:DocumentID>xmp.did:e0a4c4f1-b25e-4e41-8bf5-f1e26e4317a3</xmpMM:DocumentID>
          <xmpMM:OriginalDocumentID>xmp.did:7ab4f457-b538-554d-97f1-b5d9ac712871</xmpMM:OriginalDocumentID>
          <xmpMM:History>
             <rdf:Seq>
@@ -679,23 +679,23 @@
                </rdf:li>
                <rdf:li rdf:parseType="Resource">
                   <stEvt:action>saved</stEvt:action>
-                  <stEvt:instanceID>xmp.iid:cb0e9784-306a-af40-92f8-f0c57816e434</stEvt:instanceID>
-                  <stEvt:when>2020-06-02T13:09:26+02:00</stEvt:when>
+                  <stEvt:instanceID>xmp.iid:14a53366-9bde-e145-bbf5-2a195b206bb8</stEvt:instanceID>
+                  <stEvt:when>2020-06-02T13:07:54+02:00</stEvt:when>
                   <stEvt:softwareAgent>Adobe Audition 13.0 (Windows)</stEvt:softwareAgent>
                   <stEvt:changed>/metadata</stEvt:changed>
                </rdf:li>
                <rdf:li rdf:parseType="Resource">
                   <stEvt:action>saved</stEvt:action>
-                  <stEvt:instanceID>xmp.iid:ccb25981-0cf2-4d40-a2aa-b475ec39b9c0</stEvt:instanceID>
-                  <stEvt:when>2020-06-02T13:09:26+02:00</stEvt:when>
+                  <stEvt:instanceID>xmp.iid:e0a4c4f1-b25e-4e41-8bf5-f1e26e4317a3</stEvt:instanceID>
+                  <stEvt:when>2020-06-02T13:07:54+02:00</stEvt:when>
                   <stEvt:softwareAgent>Adobe Audition 13.0 (Windows)</stEvt:softwareAgent>
                   <stEvt:changed>/</stEvt:changed>
                </rdf:li>
             </rdf:Seq>
          </xmpMM:History>
          <xmpMM:DerivedFrom rdf:parseType="Resource">
-            <stRef:instanceID>xmp.iid:1802a525-d562-7b46-82de-e4eb1643c407</stRef:instanceID>
-            <stRef:documentID>xmp.did:7ab4f457-b538-554d-97f1-b5d9ac712871</stRef:documentID>
+            <stRef:instanceID>xmp.iid:14a53366-9bde-e145-bbf5-2a195b206bb8</stRef:instanceID>
+            <stRef:documentID>xmp.did:2ef97692-b806-3d43-99c0-91911c3135c9</stRef:documentID>
             <stRef:originalDocumentID>xmp.did:7ab4f457-b538-554d-97f1-b5d9ac712871</stRef:originalDocumentID>
          </xmpMM:DerivedFrom>
          <dc:format>application/xml</dc:format>
@@ -820,7 +820,7 @@
   </session>
 
   <files>
-    <file absolutePath="X:\2020, pushups\pushups\design\click.wav" id="0" importerPrivateSettings="Compression:0:0;LargeFileSupport:0:0;SampleType:0:1;" mediaHandler="AmioWav" relativePath="click.wav"/>
+    <file absolutePath="X:\2020, pushups\pushups\design\click.wav" id="0" importerPrivateSettings="Compression:0:0;LargeFileSupport:0:0;SampleType:0:1;" mediaHandler="AmioWav" recoveryID="91889b36-99a4-4464-93bd-633cb218a642" relativePath="../click.wav"/>
   </files>
 
   <audioDevice inputID="00000000-0000-0000-0000-00000000" outputID="7C11B82C-FFA2-41D1-8DAD-660574F94DE0">
