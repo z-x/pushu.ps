@@ -146,6 +146,8 @@
 		font-family: var(--font-condensed);
 		font-size: 2rem;
 		font-weight: 700;
+
+		user-select: none;
 	}
 
 	.menu-next {

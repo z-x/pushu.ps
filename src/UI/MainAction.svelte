@@ -52,6 +52,8 @@
 		line-height: 1.05em;
 		font-size: 2.75rem;
 		font-weight: 600;
+
+		user-select: none;
 	}
 
 	@media (min-height: 551px) and (max-height: 630px) {

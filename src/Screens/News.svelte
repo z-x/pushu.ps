@@ -129,6 +129,8 @@
 		line-height: 1em;
 		font-size: 1.69rem;
 		font-weight: 600;
+
+		user-select: none;
 	}
 
 	.infoPopup-action + .infoPopup-action {
