@@ -189,6 +189,8 @@
 
 		text-transform: uppercase;
 		font-size: .75rem;
+
+		user-select: none;
 	}
 
 </style>

@@ -31,6 +31,8 @@
 		background-position: right var(--size-padding) center;
 		background-repeat: no-repeat;
 		background-size: 1.2rem;
+
+		user-select: none;
 	}
 
 		.menu-item:first-child {

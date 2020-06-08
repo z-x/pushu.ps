@@ -115,10 +115,8 @@
 
 	.menu-navigation {
 		width: 100%;
-		padding-top: .7rem;
 		padding-right: var(--size-padding);
 		padding-left: var(--size-padding);
-		padding-bottom: .7rem;
 
 		border-top: 1px solid var(--color-pureSeparator);
 	}
@@ -140,12 +138,17 @@
 
 	.menu-back,
 	.menu-next {
+		padding-top: .7rem;
+		padding-bottom: .7rem;
+
 		text-align: left;
 		text-transform: uppercase;
 		letter-spacing: -1px;
 		font-family: var(--font-condensed);
 		font-size: 2rem;
 		font-weight: 700;
+
+		user-select: none;
 	}
 
 	.menu-next {

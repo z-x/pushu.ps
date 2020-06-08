@@ -45,13 +45,19 @@
 <style>
 
 	.action-main {
-		margin-top: .8em;
+		padding-top: .8em;
 
 		text-align: left;
 		text-transform: uppercase;
 		line-height: 1.05em;
 		font-size: 2.75rem;
 		font-weight: 600;
+
+		user-select: none;
+	}
+
+	.action-main:only-of-type {
+		padding-top: 18vh;
 	}
 
 	@media (min-height: 551px) and (max-height: 630px) {
@@ -65,8 +71,6 @@
 
 
 
-<div class="action" in:appear="{ {from: 'bottom', delay: parseInt(delay)} }">
-	<button type="button" class="action-main" on:click="{ action }">
-		<slot></slot>
-	</button>
-</div>
+<button in:appear="{ {from: 'bottom', delay: parseInt(delay)} }" type="button" class="action-main" on:click="{ action }">
+	<slot></slot>
+</button>
