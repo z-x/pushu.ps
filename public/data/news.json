@@ -1,17 +1,17 @@
 [
 	{
-		"date": "1588607991179",
+		"date": "1591614939937",
 		"pl-PL": {
-			"title": "Nieźle nam idzie!",
-			"content": "<p>Przez ostatni tydzień zrobiliśmy razem 3668 pompek! Wydaje mi się, że to całkiem nieźle. Gratuluję zwłaszcza wszystkim, którzy pompować dopiero zaczynają (a to aż 70%), bo przecież dobrze wiemy, że zabrać się za coś takiego nie jest łatwo. ;) Trzymam kciuki za wytrwałość!</p>",
+			"title": "Odtwarzanie muzyki i pushu.ps na iOS",
+			"content": "<p>W ostatnim czasie użytkownicy urządzeń Apple mogą zauważyć, że przy uruchomieniu treningu nie da się jednocześnie odtwarzać muzyki. Jest to spowodowane niedawną aktualizacją systemu, która blokuje nam taką możliwość. W tej chwili na urządzenia Apple nie ma niestety możliwości obejścia tego problemu w aplikacjach webowych. Piłeczka jest po ich stronie.</p>",
 			"actionYes": "",
-			"actionClose": "Fajnie!"
+			"actionClose": "Okej"
 		},
 		"en-US": {
-			"title": "We’re doing great!",
-			"content": "<p>During the last week we made 3668 pushups together! I will consider this a pretty neat score. I especially salute those who are new to that kind of training (and it’s 70% of you) as it’s not an easy task to motivate yourself to start. I wish you all a lot of persistence!</p>",
+			"title": "Playing your music during training on iOS",
+			"content": "<p>Since the last iOS update you might have experienced a problem where you can not play your music during training. This is due to some changes Apple did to their system and currently there is no fix for it for web apps. It is all in Apple hands.</p>",
 			"actionYes": "",
-			"actionClose": "Nice!"
+			"actionClose": "Ok :("
 		},
 		"action": "",
 		"url": ""
