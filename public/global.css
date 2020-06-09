@@ -291,7 +291,7 @@ body:before {
 
 @media (max-height: 600px) {
 	.text-title {
-		font-size: 2rem;
+		font-size: 1.7rem;
 	}
 
 	.text-subtitle {

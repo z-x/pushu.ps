@@ -105,7 +105,7 @@ let translations = {
 
 	saveAppApple: {
 		'en-US': 'If you are using an iPhone, you need to add this website to your Home Screen for it to remember the data',
-		'pl-PL': 'Jeśli używasz urządzeń Apple musisz dodać tę apkę do swojego ekranu domowego, inaczej dane o Twoich postępach mogą zostać usunięte. :<'
+		'pl-PL': 'Na urządzeniach Apple musisz dodać tę apkę do swojego ekranu domowego, inaczej dane o Twoich postępach mogą zostać usunięte.'
 	},
 
 	saveAppAndroid: {
@@ -115,7 +115,7 @@ let translations = {
 
 	wantToStart: {
 		'en-US': 'Ok, I want to start',
-		'pl-PL': 'Dobra, zaczynamy'
+		'pl-PL': 'Dobra, zaczynam'
 	},
 
 
