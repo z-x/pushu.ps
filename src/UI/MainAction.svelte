@@ -21,6 +21,8 @@
 	export let changePageTo = null;
 	// the delay after which the button will appear on the page
 	export let delay = 400;
+	// if the area for clicking should forced to small
+	export let forceSmallClickArea = false;
 
 
 	// local variables
@@ -56,7 +58,7 @@
 		user-select: none;
 	}
 
-	.action-main:only-of-type {
+	.action-main:not(.action-main-small):only-of-type {
 		padding-top: 18vh;
 	}
 
@@ -71,6 +73,12 @@
 
 
 
-<button in:appear="{ {from: 'bottom', delay: parseInt(delay)} }" type="button" class="action-main" on:click="{ action }">
+<button
+	in:appear="{ {from: 'bottom', delay: parseInt(delay)} }"
+	type="button"
+	class="action-main"
+	class:action-main-small="{ forceSmallClickArea }"
+	on:click="{ action }"
+>
 	<slot></slot>
 </button>

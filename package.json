@@ -1,6 +1,6 @@
 {
 	"name": "pushu.ps",
-	"version": "4.2.0",
+	"version": "4.3.2",
 	"homepage": "https://pushu.ps",
 	"bugs": "https://github.com/z-x/pushu.ps/issues",
 	"license": "The sources are open only for learning purposes, final app is copyrighted",
@@ -16,7 +16,7 @@
 	"scripts": {
 		"build": "rollup -c",
 		"dev": "rollup -c -w",
-		"start": "sirv public -H 192.168.1.102"
+		"start": "sirv public -H 192.168.1.104"
 	},
 	"devDependencies": {
 		"@rollup/plugin-commonjs": "^11.0.0",
