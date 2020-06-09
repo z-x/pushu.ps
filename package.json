@@ -16,7 +16,7 @@
 	"scripts": {
 		"build": "rollup -c",
 		"dev": "rollup -c -w",
-		"start": "sirv public -H 192.168.1.102"
+		"start": "sirv public -H 192.168.1.104"
 	},
 	"devDependencies": {
 		"@rollup/plugin-commonjs": "^11.0.0",

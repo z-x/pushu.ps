@@ -1,5 +1,6 @@
 /*
 	reset
+	fonts
 	variables
 	general styling
 	page structure
@@ -39,12 +40,58 @@ q:after, q:before { content: ''; }
 
 
 
+/* fonts
+============================================================================ */
+@font-face {
+	font-family: 'neue-haas-grotesk-display';
+	src:	url('https://use.typekit.net/af/28f000/00000000000000003b9b2048/27/l?primer=e6066692ab328d1a92bb155659ed6609b693e1e352f0e8982e4224719b13bdfb&fvd=n5&v=3') format('woff2'),
+			url('https://use.typekit.net/af/28f000/00000000000000003b9b2048/27/d?primer=e6066692ab328d1a92bb155659ed6609b693e1e352f0e8982e4224719b13bdfb&fvd=n5&v=3') format('woff'),
+			url('https://use.typekit.net/af/28f000/00000000000000003b9b2048/27/a?primer=e6066692ab328d1a92bb155659ed6609b693e1e352f0e8982e4224719b13bdfb&fvd=n5&v=3') format('opentype');
+	font-display: auto;
+	font-style: normal;
+	font-weight: 500;
+}
+
+@font-face {
+	font-family: 'neue-haas-grotesk-display';
+	src: 	url('https://use.typekit.net/af/8a200c/00000000000000003b9b204a/27/l?primer=e6066692ab328d1a92bb155659ed6609b693e1e352f0e8982e4224719b13bdfb&fvd=n6&v=3') format('woff2'),
+			url('https://use.typekit.net/af/8a200c/00000000000000003b9b204a/27/d?primer=e6066692ab328d1a92bb155659ed6609b693e1e352f0e8982e4224719b13bdfb&fvd=n6&v=3') format('woff'),
+			url('https://use.typekit.net/af/8a200c/00000000000000003b9b204a/27/a?primer=e6066692ab328d1a92bb155659ed6609b693e1e352f0e8982e4224719b13bdfb&fvd=n6&v=3') format('opentype');
+	font-display: auto;
+	font-style: normal;
+	font-weight: 600;
+}
+
+@media (prefers-color-scheme: no-preference), (prefers-color-scheme: light) {
+	@font-face {
+		font-family: 'urw-din-condensed';
+		src:	url('https://use.typekit.net/af/d3af1d/00000000000000003b9b0ef9/27/l?primer=592708b04bace7901bbf402b49fc07acf6f622abacda535ca47331b6917becfb&fvd=n7&v=3') format('woff2'),
+				url('https://use.typekit.net/af/d3af1d/00000000000000003b9b0ef9/27/d?primer=592708b04bace7901bbf402b49fc07acf6f622abacda535ca47331b6917becfb&fvd=n7&v=3') format('woff'),
+				url('https://use.typekit.net/af/d3af1d/00000000000000003b9b0ef9/27/a?primer=592708b04bace7901bbf402b49fc07acf6f622abacda535ca47331b6917becfb&fvd=n7&v=3') format('opentype');
+		font-display: auto;
+		font-style: normal;
+		font-weight: 700;
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	@font-face {
+		font-family: 'urw-din-condensed';
+		src:	url('https://use.typekit.net/af/bbab84/00000000000000003b9b0ef7/27/l?primer=592708b04bace7901bbf402b49fc07acf6f622abacda535ca47331b6917becfb&fvd=n6&v=3') format('woff2'),
+				url('https://use.typekit.net/af/bbab84/00000000000000003b9b0ef7/27/d?primer=592708b04bace7901bbf402b49fc07acf6f622abacda535ca47331b6917becfb&fvd=n6&v=3') format('woff'),
+				url('https://use.typekit.net/af/bbab84/00000000000000003b9b0ef7/27/a?primer=592708b04bace7901bbf402b49fc07acf6f622abacda535ca47331b6917becfb&fvd=n6&v=3') format('opentype');
+		font-display: auto;
+		font-style: normal;
+		font-weight: 600;
+		}
+}
+
+
+
 /* variables
 ============================================================================ */
 :root {
 	--color-background: #f6bb50;
-	--color-pure: #e7e7df;
-	--color-pureSeparator: #cfcfc8;
 	--color-separator: #dda848;
 	--color-text: #000;
 	--color-placeholder: #f6bb50;
@@ -53,9 +100,13 @@ q:after, q:before { content: ''; }
 	--color-link: #b58020;
 	--color-hover: #503b15;
 	--color-active: var(--color-text);
-	--color-hoverMenu: #56564c;
 	--color-errorBackground: rgba(80, 59, 21, .95);
 	--color-error: var(--color-pure);
+	--color-pure: #e7e7df;
+	--color-pureSeparator: #cfcfc8;
+	--color-pureContent: var(--color-text);
+	--color-pureActive: var(--color-text);
+	--color-hoverMenu: #56564c;
 
 	/* the spacing between elements */
 	--size-spacing: 1.5rem;
@@ -69,6 +120,7 @@ q:after, q:before { content: ''; }
 
 	/* icons */
 	--icon-arrowRight: url('data:image/svg+xml;utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 62 36"%3E%3Cpath d="M61.75 17.31l-16-17a1 1 0 00-1.42 0 1.06 1.06 0 000 1.43L58.69 17H1a1 1 0 000 2h57.69L44.28 34.31a1 1 0 000 1.42 1 1 0 001.42 0l16-17a1.08 1.08 0 000-1.38z"/%3E%3C/svg%3E');
+	--icon-arrowRight-light: url('data:image/svg+xml;utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 62 36"%3E%3Cpath fill="%23d1cbbd" d="M61.75 17.31l-16-17a1 1 0 00-1.42 0 1.06 1.06 0 000 1.43L58.69 17H1a1 1 0 000 2h57.69L44.28 34.31a1 1 0 000 1.42 1 1 0 001.42 0l16-17a1.08 1.08 0 000-1.38z"/%3E%3C/svg%3E');
 
 	/* z-indexes */
 	--z-menu: 20;
@@ -79,6 +131,17 @@ q:after, q:before { content: ''; }
 	/* fonts */
 	--font-normal: 'neue-haas-grotesk-display', 'helvetica', 'arial', sans-serif;
 	--font-condensed: 'urw-din-condensed', 'helvetica', 'arial', sans-serif;
+}
+
+/* dark mode */
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-pure: #1e1e1e;
+		--color-pureContent: #d1cbbd;
+		--color-pureSeparator: #323232;
+		--color-pureActive: var(--color-pureContent);
+		--color-hoverMenu: #f4f1eb;
+	}
 }
 
 @media (max-height: 600px) {
@@ -323,6 +386,7 @@ button {
 	font-family: var(--font-condensed);
 	font-size: 2rem;
 	font-weight: 700;
+	color: inherit;
 }
 
 .menu-question {
@@ -340,7 +404,7 @@ button {
 
 .menu button:active {
 	outline: none;
-	color: var(--color-active);
+	color: var(--color-pureActive);
 }
 
 
@@ -352,6 +416,8 @@ button {
 }
 
 .form-label {
+	margin-bottom: .3em;
+
 	font-family: var(--font-condensed);
 	font-size: 1.6rem;
 }
@@ -360,8 +426,12 @@ button {
 	width: 100%;
 	padding: .5em;
 
-	border-bottom: 4px solid var(--color-text);
+	border: .1px solid var(--color-pureContent);
+	border-bottom: 4px solid var(--color-pureContent);
+	border-radius: 0;
 	background-color: transparent;
+
+	color: var(--color-pureContent);
 }
 
 @media (min-width: 800px){

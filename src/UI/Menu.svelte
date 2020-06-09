@@ -89,6 +89,8 @@
 		z-index: var(--z-menu);
 
 		background-color: var(--color-pure);
+
+		color: var(--color-pureContent);
 	}
 
 	.menu-overlay {
@@ -139,7 +141,7 @@
 	.menu-back,
 	.menu-next {
 		padding-top: .7rem;
-		padding-bottom: .7rem;
+		padding-bottom: .85rem;
 
 		text-align: left;
 		text-transform: uppercase;
@@ -173,6 +175,13 @@
 		content: '';
 
 		transform: rotate(180deg);
+	}
+
+	@media (prefers-color-scheme: dark) {
+		.menu-next,
+		.menu-back:before {
+			background-image: var(--icon-arrowRight-light);
+		}
 	}
 
 </style>

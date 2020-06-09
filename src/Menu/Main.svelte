@@ -39,6 +39,12 @@
 			padding-top: 0;
 		}
 
+		@media (prefers-color-scheme: dark) {
+			.menu-item {
+				background-image: var(--icon-arrowRight-light);
+			}
+		}
+
 	.secondgate {
 		padding-left: 2.3em;
 
@@ -51,6 +57,12 @@
 		font-size: .75rem;
 		color: inherit;
 	}
+
+		@media (prefers-color-scheme: dark) {
+			.secondgate {
+				background-image: url('data:image/svg+xml;utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 15"%3E%3Cpath fill="%23d1cbbd" d="M0 0h3v15H0zM7 15H6v-2H5v2H4V2h3v13zM8 0h3v15H8zM12 0h3v15h-3zM16 0h3v15h-3z"/%3E%3C/svg%3E')
+			}
+		}
 
 </style>
 
