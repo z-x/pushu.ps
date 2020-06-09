@@ -355,6 +355,8 @@ input:focus {
 }
 
 button {
+	color: inherit;
+
 	transition: color .1s linear;
 }
 
@@ -386,7 +388,6 @@ button {
 	font-family: var(--font-condensed);
 	font-size: 2rem;
 	font-weight: 700;
-	color: inherit;
 }
 
 .menu-question {
