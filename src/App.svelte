@@ -81,7 +81,7 @@
 	// ------------------------------------------------------------------------
 	if((Date.now() - $state.lastActive > 86400000)){
 		if($state.page === 'Training') {
-			state.setStep(0)
+			state.setStep(0);
 			state.isResting(0);
 			state.setPage('Home');
 		}

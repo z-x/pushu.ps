@@ -105,8 +105,9 @@
 	let currentRest = defaultRest;
 	// the interval for resting behaviour
 	let restInterval;
-	// the alert sound
+	// the alert sounds
 	let alert = new Sound('/audio/alert.mp3');
+	let final = new Sound('/audio/final.mp3');
 	// the variable holding the resolve method for resting promise
 	let restingPromiseResolve = null;
 
@@ -126,6 +127,7 @@
 
 				// when the resting finishes
 				if(currentRest == 0){
+					final.play();
 					finishResting();
 				}
 			}, 1000);
