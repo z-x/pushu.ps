@@ -161,12 +161,12 @@ let translations = {
 	// ------------------------------------------------------------------------
 	lastDay: {
 		'en-US': 'Last day',
-		'pl-PL': 'Poprzednio'
+		'pl-PL': 'Poprzedni'
 	},
 
 	comingUp: {
 		'en-US': 'Coming up',
-		'pl-PL': 'Kolejny'
+		'pl-PL': 'Następny'
 	},
 
 	currentLevel: {
@@ -176,7 +176,7 @@ let translations = {
 
 	startNextTraining: {
 		'en-US': 'Start next training',
-		'pl-PL': 'Zaczynamy trening'
+		'pl-PL': 'Następny trening'
 	},
 
 
