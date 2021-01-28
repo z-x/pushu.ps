@@ -5,7 +5,7 @@
 
 
 
-let training = {
+const training = {
 	1: {
 		1: {
 			rest: 60,
@@ -231,7 +231,24 @@ let training = {
 };
 
 
+// training data for test and developement
+const dev = {
+	1: {
+		1: {
+			rest: 2,
+			pushups: [1, 2]
+		},
+		2: {
+			rest: 2,
+			pushups: [1, 2]
+		}
+	}
+};
+
 
 // exports
 // ------------------------------------------------------------------------
-export default training;
+const final = (process.env.environment === 'production') ? training : dev;
+
+
+export default final;
