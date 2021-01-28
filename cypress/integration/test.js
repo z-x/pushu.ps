@@ -1,23 +1,32 @@
 const { intros } = require("svelte/internal")
 
-describe('Pass the first test', () => {
-	it('Loads the app', () => {
+describe('Initialize the app', () => {
+	it('Load the app', () => {
+		cy.visit('/');
+
+		cy.contains('Hello there');
+	});
+
+	it('Choose the training level based on input', () => {
+		cy.contains('Ok, I want to start').click();
+		cy.get('input[type="number"]').type('2');
+		cy.contains('Ok, what’s next?').click();
+		cy.get('.sidebar-info li:nth-child(2)').contains('2');
+
+		cy.clearLocalStorage();
 		cy.visit('/');
 
 		cy.contains('Ok, I want to start').click();
-
-		cy.get('input[type="number"]').type('2');
-
+		cy.get('input[type="number"]').type('6');
 		cy.contains('Ok, what’s next?').click();
+		cy.get('.sidebar-info li:nth-child(2)').contains('4');
 
-		cy.contains('Start next training').click();
+		cy.clearLocalStorage();
+		cy.visit('/');
 
-		cy.contains('Perform 1 pushup');
-
-		cy.contains('I made it').click();
-
-		cy.wait(60000);
-
-		cy.contains('I made it').click();
+		cy.contains('Ok, I want to start').click();
+		cy.get('input[type="number"]').type('11');
+		cy.contains('Ok, what’s next?').click();
+		cy.get('.sidebar-info li:nth-child(2)').contains('6');
 	});
 });

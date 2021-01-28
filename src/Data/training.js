@@ -236,11 +236,31 @@ const dev = {
 	1: {
 		1: {
 			rest: 2,
-			pushups: [1, 2]
+			pushups: [1, 1]
 		},
 		2: {
 			rest: 2,
-			pushups: [1, 2]
+			pushups: [11, 11]
+		}
+	},
+	2: {
+		1: {
+			rest: 2,
+			pushups: [2, 2]
+		},
+		2: {
+			rest: 2,
+			pushups: [22, 22]
+		}
+	},
+	3: {
+		1: {
+			rest: 2,
+			pushups: [3, 3]
+		},
+		2: {
+			rest: 2,
+			pushups: [33, 33]
 		}
 	}
 };
