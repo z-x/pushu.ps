@@ -1,6 +1,5 @@
-const { intros } = require("svelte/internal")
-
 describe('Initialize the app', () => {
+
 	it('Load the app', () => {
 		cy.visit('/');
 
@@ -29,4 +28,132 @@ describe('Initialize the app', () => {
 		cy.contains('Ok, what’s next?').click();
 		cy.get('.sidebar-info li:nth-child(2)').contains('6');
 	});
+
+});
+
+
+describe('Do the workout', () => {
+
+	it('Pass the workout', () => {
+		localStorage.page = 'Home';
+		localStorage.level = 1;
+		
+		cy.visit('/');
+		cy.contains('Start next training').click();
+		cy.contains('Perform 1 pushup');
+		cy.contains('I made it').click();
+		cy.get('.training-number').contains('2');
+		cy.contains('I made it').click();
+		cy.contains('Nice');
+		cy.contains('It was ok').click();
+		cy.get('.sidebar-info li:nth-child(1)').contains('2');
+		cy.get('.sidebar-info li:nth-child(2)').contains('22');
+		cy.get('.sidebar-info li:nth-child(3)').contains('2');
+	});
+
+	it('Repeat workout', () => {
+		cy.contains('Start next training').click();
+		cy.wait(300).contains('I made it').click();
+		cy.wait(300).contains('I made it').click();
+		cy.contains('It was hard').click();
+		cy.get('.sidebar-info li:nth-child(1)').contains('2');
+		cy.get('.sidebar-info li:nth-child(2)').contains('22');
+		cy.get('.sidebar-info li:nth-child(3)').contains('2');		
+	});
+
+	it('Cancel workout', () => {
+		cy.contains('Start next training').click();
+		cy.contains('I made it')
+		cy.get('.menu-toggle').last().click();
+		cy.contains('Cancel this training').click();
+		cy.contains('Yes').click();
+		cy.get('.sidebar-info li:nth-child(1)').contains('2');
+		cy.get('.sidebar-info li:nth-child(2)').contains('22');
+		cy.get('.sidebar-info li:nth-child(3)').contains('2');
+	});
+
+});
+
+
+describe('Menu', () => {
+
+	it('Opens menu', () => {
+		cy.get('.menu-toggle').last().click();
+		cy.contains('App created behind the Second Gate');
+	});
+
+	it('Closes menu', () => {
+		cy.get('.menu-overlay').click();
+	});
+
+	it('Manual training level setting', () => {
+		cy.clearLocalStorage();
+		cy.visit('/');
+
+		cy.get('.menu-toggle').click();
+		cy.contains('Manually set your training level').click();
+		cy.contains('Set your skill to:').next().select('Advanced');
+		cy.contains('Set your level to:').next().select('2');
+		cy.contains('Accept').click();
+		cy.get('.sidebar-info li:nth-child(2)').contains('66');
+		cy.get('.sidebar-info li:nth-child(3)').contains('2');
+	});
+
+	it('Instructions', () => {
+		cy.clearLocalStorage();
+		cy.visit('/');
+
+		cy.get('.menu-toggle').click();
+		cy.contains('Instructions').click();
+		cy.contains('How to start');
+		cy.contains('Back').click();
+	});
+
+	it('Change language', () => {
+		cy.contains('Set app language').click({force: true});
+		cy.contains('Set your language to:').next().select('Polski');
+		cy.contains('Accept').click();
+		cy.contains('Cześć, ta apka pomoże Ci ćwiczyć pompki');
+	});
+
+	it('Reset the app', () => {
+		localStorage.page = 'Home';
+		localStorage.level = 1;
+		localStorage.set = 1;
+
+		cy.visit('/');
+		cy.get('.menu-toggle').click();
+		cy.contains('Reset the app').click();
+		cy.contains('I am sure').click();
+
+		cy.contains('Hello there');
+	});
+
+});
+
+
+describe('News', () => {
+
+	it('Does not show the news for new user', () => {
+		localStorage.lastActive = 5555;
+		localStorage.page = 'Home';
+
+		cy.visit('/');
+		cy.get('.infoPopup-content').should('not.exist');
+	});
+
+	it('Shows the news for active user', () => {
+		localStorage.lastActive = 5555;
+		localStorage.page = 'Home';
+		localStorage.pushupsTotal = 5;
+
+		cy.visit('/');
+		cy.get('.infoPopup-content').should('be.visible');
+	});
+
+	it('Closes the news popup', () => {
+		cy.get('.infoPopup-action').click();
+		cy.get('.infoPopup-content').should('not.exist');
+	});
+
 });
