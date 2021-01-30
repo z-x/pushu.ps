@@ -63,13 +63,35 @@ describe('Do the workout', () => {
 
 	it('Cancel workout', () => {
 		cy.contains('Start next training').click();
-		cy.contains('I made it')
+		cy.contains('I made it');
 		cy.get('.menu-toggle').last().click();
 		cy.contains('Cancel this training').click();
 		cy.contains('Yes').click();
 		cy.get('.sidebar-info li:nth-child(1)').contains('2');
 		cy.get('.sidebar-info li:nth-child(2)').contains('22');
 		cy.get('.sidebar-info li:nth-child(3)').contains('2');
+	});
+
+	it('Skip the rest', () => {
+		cy.contains('Start next training').click();
+		cy.contains('I made it').click();
+		cy.contains('Skip the wait').click();
+		cy.contains('I made it');
+	});
+
+	it('Repeats the last training', () => {
+		localStorage.page = 'Training';
+		localStorage.level = 1;
+		localStorage.set = 2;
+		localStorage.currentStep = 1;
+
+		cy.visit('/');
+
+		cy.contains('I made it').click();
+		cy.contains('It was ok').click();
+		cy.get('.sidebar-info li:nth-child(3)').contains('2');
+		cy.contains('Start next training').click();
+		cy.contains('I made it');
 	});
 
 });
@@ -154,6 +176,23 @@ describe('News', () => {
 	it('Closes the news popup', () => {
 		cy.get('.infoPopup-action').click();
 		cy.get('.infoPopup-content').should('not.exist');
+	});
+
+});
+
+
+describe('User interface', () => {
+
+	it('Shows the training idicator', () => {
+		localStorage.page = 'Training';
+		localStorage.level = 1;
+		localStorage.set = 1;
+
+		cy.visit('/');
+		cy.get('.sidebar-info-indicator').should('have.css', 'transform', 'matrix(1, 0, 0, 1, 0, 61)');
+		cy.contains('I made it').click();
+		cy.wait(300);
+		cy.get('.sidebar-info-indicator').should('have.css', 'transform', 'matrix(1, 0, 0, 1, 0, 122)');
 	});
 
 });
