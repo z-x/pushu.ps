@@ -40,6 +40,6 @@ jobs:
           --data '{
             "context": "E2E_Tests",
             "state": "${{ steps.cypress.outcome }}",
-            "description": "Tests passed",
+            "description": "Tests finished: "${{ steps.cypress.outcome }}",
             "target_url": "https://github.com/${{ github.repository }}/actions/runs/${{ github._id }}"
           }'
