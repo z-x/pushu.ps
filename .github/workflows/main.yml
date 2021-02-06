@@ -28,9 +28,6 @@ jobs:
         uses: cypress-io/github-action@v2
         env:
           CYPRESS_BASE_URL: ${{ github.event.deployment_status.target_url }}
-  
-      - name: Print var
-        run: echo "${{ steps.cypress.outcome }}"
 
       # https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#job-status-check-functions
       - name: Set commit status
@@ -42,7 +39,7 @@ jobs:
           --header 'content-type: application/json' \
           --data '{
             "context": "E2E_Tests",
-            "state": ${{ steps.cypress.outcome }},
+            "state": "${{ steps.cypress.outcome }}",
             "description": "Cypress tests passed",
             "target_url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           }'
