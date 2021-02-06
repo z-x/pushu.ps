@@ -1,15 +1,15 @@
-name: ci
+name: Tests
 # https://docs.github.com/en/actions/reference/events-that-trigger-workflows
 on: [deployment_status]
 jobs:
   e2e:
-    # only runs this job on successful vercel deploy
-    if: github.event.deployment_status.state == 'success'
+    # only runs this job on successful deploy
+    if: github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success'
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout 🛎
+      - name: Checkout
         uses: actions/checkout@v1
-      - name: Run Cypress 🌲
+      - name: Run Cypress
         uses: cypress-io/github-action@v2
         env:
           CYPRESS_BASE_URL: ${{ github.event.deployment_status.target_url }}
