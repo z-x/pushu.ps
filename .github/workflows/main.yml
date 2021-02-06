@@ -30,7 +30,7 @@ jobs:
           CYPRESS_BASE_URL: ${{ github.event.deployment_status.target_url }}
   
       - name: Print var
-        run: echo "${{ steps.cypress }}"
+        run: echo "${{ steps.cypress.outcome }}"
 
       # https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#job-status-check-functions
       - name: Set commit status
