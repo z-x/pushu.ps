@@ -2,7 +2,7 @@ name: Tests
 # https://docs.github.com/en/actions/reference/events-that-trigger-workflows
 on: [deployment_status]
 jobs:
-  'E2E Tests':
+  E2E_Tests:
     # only runs this job on successful deploy
     if: github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success'
     runs-on: ubuntu-latest
@@ -28,7 +28,7 @@ jobs:
           --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
           --header 'content-type: application/json' \
           --data '{
-            "context": "E2E Tests",
+            "context": "E2E_Tests",
             "state": "success",
             "description": "Cypress tests passed",
             "target_url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
@@ -42,7 +42,7 @@ jobs:
           --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
           --header 'content-type: application/json' \
           --data '{
-            "context": "E2E Tests",
+            "context": "E2E_Tests",
             "state": "failure",
             "description": "Cypress tests failed",
             "target_url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
