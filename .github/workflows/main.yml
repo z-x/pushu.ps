@@ -8,13 +8,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+      - uses: ouzi-dev/commit-status-updater@v1.1.0
+        with:
+          status: "pending"
+          description: "Runing the tests…"
+          name: "Runing the tests"
+
       - name: Checkout
         uses: actions/checkout@v1
 
       - name: Run Cypress
         uses: cypress-io/github-action@v2
-        with:
-          record: false
         env:
           CYPRESS_BASE_URL: ${{ github.event.deployment_status.target_url }}
   
