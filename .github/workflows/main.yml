@@ -2,7 +2,7 @@ name: Tests
 # https://docs.github.com/en/actions/reference/events-that-trigger-workflows
 on: [deployment_status]
 jobs:
-  e2e:
+  E2E Tests:
     # only runs this job on successful deploy
     if: github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success'
     runs-on: ubuntu-latest
@@ -11,10 +11,12 @@ jobs:
         uses: actions/checkout@v1
       - name: Run Cypress
         uses: cypress-io/github-action@v2
+        with:
+          record: false
         env:
           CYPRESS_BASE_URL: ${{ github.event.deployment_status.target_url }}
       # https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#job-status-check-functions
-      - name: Cypress tests ✅
+      - name: Tests ✅
         if: ${{ success() }}
         # set the merge commit status check using GitHub REST API see https://docs.github.com/en/rest/reference/repos#create-a-commit-status
         run: |
@@ -23,13 +25,13 @@ jobs:
           --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
           --header 'content-type: application/json' \
           --data '{
-            "context": "e2e",
+            "context": "E2E Tests",
             "state": "success",
             "description": "Cypress tests passed",
             "target_url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           }'
 
-      - name: Cypress tests 🚨
+      - name: Tests 🚨
         if: ${{ failure() }}
         run: |
           curl --request POST \
@@ -37,7 +39,7 @@ jobs:
           --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
           --header 'content-type: application/json' \
           --data '{
-            "context": "e2e",
+            "context": "E2E Tests",
             "state": "failure",
             "description": "Cypress tests failed",
             "target_url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
