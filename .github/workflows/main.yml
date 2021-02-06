@@ -24,13 +24,13 @@ jobs:
         uses: actions/checkout@v1
 
       - name: Run Cypress
+        id: cypress
         uses: cypress-io/github-action@v2
         env:
           CYPRESS_BASE_URL: ${{ github.event.deployment_status.target_url }}
   
       # https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#job-status-check-functions
-      - name: ✅ Tests passed
-        if: ${{ success() }}
+      - name: Set commit status
         # set the merge commit status check using GitHub REST API see https://docs.github.com/en/rest/reference/repos#create-a-commit-status
         run: |
           curl --request POST \
@@ -39,21 +39,7 @@ jobs:
           --header 'content-type: application/json' \
           --data '{
             "context": "E2E_Tests",
-            "state": "success",
+            "state": ${{ steps.cypress.outcome}},
             "description": "Cypress tests passed",
-            "target_url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-          }'
-
-      - name: ⛔ Tests failed
-        if: ${{ failure() }}
-        run: |
-          curl --request POST \
-          --url https://api.github.com/repos/${{ github.repository }}/statuses/${{ github.sha }} \
-          --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
-          --header 'content-type: application/json' \
-          --data '{
-            "context": "E2E_Tests",
-            "state": "failure",
-            "description": "Cypress tests failed",
             "target_url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           }'
