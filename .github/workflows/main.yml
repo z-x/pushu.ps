@@ -31,7 +31,7 @@ jobs:
             "target_url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           }'
 
-      - name: Tests 🚨
+      - name: Tests ⛔
         if: ${{ failure() }}
         run: |
           curl --request POST \
