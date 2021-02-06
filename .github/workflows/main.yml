@@ -4,7 +4,7 @@ on: [deployment_status]
 jobs:
   E2E_Tests:
     # only runs this job on successful deploy
-    if: github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success'
+    if: ${{ github.event.deployment_status.state == 'success' }}
     runs-on: ubuntu-latest
     steps:
 
@@ -29,6 +29,9 @@ jobs:
         env:
           CYPRESS_BASE_URL: ${{ github.event.deployment_status.target_url }}
   
+      - name: Print var
+        run: echo "${{ steps.cypress }}"
+
       # https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#job-status-check-functions
       - name: Set commit status
         # set the merge commit status check using GitHub REST API see https://docs.github.com/en/rest/reference/repos#create-a-commit-status
@@ -39,7 +42,7 @@ jobs:
           --header 'content-type: application/json' \
           --data '{
             "context": "E2E_Tests",
-            "state": ${{ steps.cypress.outcome}},
+            "state": ${{ steps.cypress.outcome }},
             "description": "Cypress tests passed",
             "target_url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           }'
