@@ -8,7 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - if: endsWith(github.ref, '/master')
+      - name: Check if a production branch
+        if: github.ref == 'refs/heads/master'
         run: |
           echo "ENV=production" >> $GITHUB_ENV
 
