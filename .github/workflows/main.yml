@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - run: echo ${{ github.ref }}
+      - run: echo ${{ github }}
 
       - name: Check if a production branch
         if: github.ref == 'ref/head/master'
