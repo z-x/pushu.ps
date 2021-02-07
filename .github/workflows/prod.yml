@@ -1,10 +1,7 @@
 name: Check production data
-on:
-  deployment_status:
-    branches:
-      - master
+on: deployment_status
 jobs:
-  E2E_Tests:
+  ProdData:
     # only runs this job on successful deploy and only for master
     if: ${{ github.event.deployment_status.state == 'success' }} && github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest

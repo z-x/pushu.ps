@@ -1,8 +1,5 @@
 name: Tests
-on:
-  deployment_status:
-    branches-ignore:
-      - master
+on: deployment_status
 jobs:
   E2E_Tests:
     # only runs this job on successful deploy and for branches other than master
