@@ -1,12 +1,9 @@
 name: Check production data
-on:
-  deployment_status:
-    branches:
-      - master
+on: deployment_status
 jobs:
-  E2E_Tests:
-    # only runs this job on successful deploy
-    if: ${{ github.event.deployment_status.state == 'success' }}
+  CheckProdData:
+    # only runs this job on successful deploy and only for master
+    if: ${{ github.event.deployment_status.state == 'success' && github.event.deployment_status.environment == 'Production' }}
     runs-on: ubuntu-latest
     steps:
 
@@ -17,7 +14,7 @@ jobs:
           --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
           --header 'content-type: application/json' \
           --data '{
-            "context": "E2E_Tests",
+            "context": "CheckProdData",
             "state": "pending",
             "description": "Testing in progress…",
             "target_url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
@@ -44,7 +41,7 @@ jobs:
           --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
           --header 'content-type: application/json' \
           --data '{
-            "context": "E2E_Tests",
+            "context": "CheckProdData",
             "state": "${{ steps.cypress.outcome }}",
             "description": "Tests finished: ${{ steps.cypress.outcome }}",
             "target_url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
