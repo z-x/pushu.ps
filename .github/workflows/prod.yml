@@ -1,0 +1,51 @@
+name: Check production data
+on:
+  deployment_status:
+    branches:
+      - master
+jobs:
+  E2E_Tests:
+    # only runs this job on successful deploy
+    if: ${{ github.event.deployment_status.state == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Set commit in progress status
+        run: |
+          curl --request POST \
+          --url https://api.github.com/repos/${{ github.repository }}/statuses/${{ github.sha }} \
+          --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+          --header 'content-type: application/json' \
+          --data '{
+            "context": "E2E_Tests",
+            "state": "pending",
+            "description": "Testing in progress…",
+            "target_url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          }'
+
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Run Cypress
+        id: cypress
+        uses: cypress-io/github-action@v2
+        with:
+            spec: cypress/integration/prod.js
+        env:
+          CYPRESS_BASE_URL: ${{ github.event.deployment_status.target_url }}
+
+      # https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#job-status-check-functions
+      - name: Set commit final status
+        if: always()
+        # set the merge commit status check using GitHub REST API see https://docs.github.com/en/rest/reference/repos#create-a-commit-status
+        run: |
+          curl --request POST \
+          --url https://api.github.com/repos/${{ github.repository }}/statuses/${{ github.sha }} \
+          --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+          --header 'content-type: application/json' \
+          --data '{
+            "context": "E2E_Tests",
+            "state": "${{ steps.cypress.outcome }}",
+            "description": "Tests finished: ${{ steps.cypress.outcome }}",
+            "target_url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          }'
