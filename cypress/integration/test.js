@@ -4,9 +4,6 @@ describe('Initialize the app', () => {
 		cy.visit('/');
 
 		cy.contains('Hello there');
-		if(Cypress.env('ENV') == 'production'){
-			cy.contains('No ciekawe');
-		}
 	});
 
 	it('Choose the training level based on input', () => {
