@@ -32,12 +32,14 @@ jobs:
         uses: cypress-io/github-action@v2
         env:
           CYPRESS_BASE_URL: ${{ github.event.deployment_status.target_url }}
-          CYPRESS_ENV: ${{ env.GITHUB_ENV }}
+          CYPRESS_ENV: ${{ env.ENV }}
 
-      - run: echo ${{ env.GITHUB_ENV }}
+      - if: always()
+        run: echo ${{ env.ENV }}
 
       # https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#job-status-check-functions
       - name: Set commit status
+        if: always()
         # set the merge commit status check using GitHub REST API see https://docs.github.com/en/rest/reference/repos#create-a-commit-status
         run: |
           curl --request POST \
