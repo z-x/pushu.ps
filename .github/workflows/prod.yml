@@ -3,7 +3,7 @@ on: deployment_status
 jobs:
   CheckProdData:
     # only runs this job on successful deploy and only for master
-    if: ${{ github.event.deployment_status.state == 'success' && github.ref == 'refs/heads/master' }}
+    if: ${{ github.event.deployment_status.state == 'success' && github.event.environment == 'Production' }}
     runs-on: ubuntu-latest
     steps:
 
