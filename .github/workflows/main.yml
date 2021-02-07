@@ -8,6 +8,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+      - if: endsWith(github.ref, '/master')
+        run: |
+          echo "ENVIRONMENT=production" >> $GITHUB_ENV
+
       - run: |
           curl --request POST \
           --url https://api.github.com/repos/${{ github.repository }}/statuses/${{ github.sha }} \
@@ -28,6 +32,7 @@ jobs:
         uses: cypress-io/github-action@v2
         env:
           CYPRESS_BASE_URL: ${{ github.event.deployment_status.target_url }}
+          CYPRESS_ENV: ${{ env.GITHUB_ENVIRONMENT }}
 
       # https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#job-status-check-functions
       - name: Set commit status

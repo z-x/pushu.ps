@@ -270,5 +270,6 @@ const dev = {
 // ------------------------------------------------------------------------
 const final = (process.env.environment === 'production') ? training : dev;
 
+console.log(process.env.environment);
 
 export default final;
