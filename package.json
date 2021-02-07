@@ -17,7 +17,7 @@
 		"build": "rollup -c",
 		"dev": "cross-env NODE_ENV=development rollup -c -w",
 		"start": "cross-env NODE_ENV=production sirv public",
-		"test": "cross-env NODE_ENV=test npx cypress open"
+		"test": "npx cypress open"
 	},
 	"devDependencies": {
 		"@rollup/plugin-commonjs": "^11.0.0",
