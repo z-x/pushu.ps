@@ -44,9 +44,7 @@ q:after, q:before { content: ''; }
 ============================================================================ */
 @font-face {
 	font-family: 'neue-haas-grotesk-display';
-	src:	url('https://use.typekit.net/af/28f000/00000000000000003b9b2048/27/l?primer=e6066692ab328d1a92bb155659ed6609b693e1e352f0e8982e4224719b13bdfb&fvd=n5&v=3') format('woff2'),
-			url('https://use.typekit.net/af/28f000/00000000000000003b9b2048/27/d?primer=e6066692ab328d1a92bb155659ed6609b693e1e352f0e8982e4224719b13bdfb&fvd=n5&v=3') format('woff'),
-			url('https://use.typekit.net/af/28f000/00000000000000003b9b2048/27/a?primer=e6066692ab328d1a92bb155659ed6609b693e1e352f0e8982e4224719b13bdfb&fvd=n5&v=3') format('opentype');
+	src: url('https://use.typekit.net/af/28f000/00000000000000003b9b2048/27/l?primer=e6066692ab328d1a92bb155659ed6609b693e1e352f0e8982e4224719b13bdfb&fvd=n5&v=3') format('woff2');
 	font-display: auto;
 	font-style: normal;
 	font-weight: 500;
@@ -54,9 +52,7 @@ q:after, q:before { content: ''; }
 
 @font-face {
 	font-family: 'neue-haas-grotesk-display';
-	src: 	url('https://use.typekit.net/af/8a200c/00000000000000003b9b204a/27/l?primer=e6066692ab328d1a92bb155659ed6609b693e1e352f0e8982e4224719b13bdfb&fvd=n6&v=3') format('woff2'),
-			url('https://use.typekit.net/af/8a200c/00000000000000003b9b204a/27/d?primer=e6066692ab328d1a92bb155659ed6609b693e1e352f0e8982e4224719b13bdfb&fvd=n6&v=3') format('woff'),
-			url('https://use.typekit.net/af/8a200c/00000000000000003b9b204a/27/a?primer=e6066692ab328d1a92bb155659ed6609b693e1e352f0e8982e4224719b13bdfb&fvd=n6&v=3') format('opentype');
+	src: url('https://use.typekit.net/af/8a200c/00000000000000003b9b204a/27/l?primer=e6066692ab328d1a92bb155659ed6609b693e1e352f0e8982e4224719b13bdfb&fvd=n6&v=3') format('woff2');
 	font-display: auto;
 	font-style: normal;
 	font-weight: 600;
@@ -65,10 +61,7 @@ q:after, q:before { content: ''; }
 @media (prefers-color-scheme: no-preference), (prefers-color-scheme: light) {
 	@font-face {
 		font-family: 'urw-din-condensed';
-		src:	url('https://use.typekit.net/af/d3af1d/00000000000000003b9b0ef9/27/l?primer=592708b04bace7901bbf402b49fc07acf6f622abacda535ca47331b6917becfb&fvd=n7&v=3') format('woff2'),
-				url('https://use.typekit.net/af/d3af1d/00000000000000003b9b0ef9/27/d?primer=592708b04bace7901bbf402b49fc07acf6f622abacda535ca47331b6917becfb&fvd=n7&v=3') format('woff'),
-				url('https://use.typekit.net/af/d3af1d/00000000000000003b9b0ef9/27/a?primer=592708b04bace7901bbf402b49fc07acf6f622abacda535ca47331b6917becfb&fvd=n7&v=3') format('opentype');
-		font-display: auto;
+		src: url('https://use.typekit.net/af/d3af1d/00000000000000003b9b0ef9/27/l?primer=592708b04bace7901bbf402b49fc07acf6f622abacda535ca47331b6917becfb&fvd=n7&v=3') format('woff2');		font-display: auto;
 		font-style: normal;
 		font-weight: 700;
 	}
@@ -77,9 +70,7 @@ q:after, q:before { content: ''; }
 @media (prefers-color-scheme: dark) {
 	@font-face {
 		font-family: 'urw-din-condensed';
-		src:	url('https://use.typekit.net/af/bbab84/00000000000000003b9b0ef7/27/l?primer=592708b04bace7901bbf402b49fc07acf6f622abacda535ca47331b6917becfb&fvd=n6&v=3') format('woff2'),
-				url('https://use.typekit.net/af/bbab84/00000000000000003b9b0ef7/27/d?primer=592708b04bace7901bbf402b49fc07acf6f622abacda535ca47331b6917becfb&fvd=n6&v=3') format('woff'),
-				url('https://use.typekit.net/af/bbab84/00000000000000003b9b0ef7/27/a?primer=592708b04bace7901bbf402b49fc07acf6f622abacda535ca47331b6917becfb&fvd=n6&v=3') format('opentype');
+		src: url('https://use.typekit.net/af/bbab84/00000000000000003b9b0ef7/27/l?primer=592708b04bace7901bbf402b49fc07acf6f622abacda535ca47331b6917becfb&fvd=n6&v=3') format('woff2');
 		font-display: auto;
 		font-style: normal;
 		font-weight: 600;
