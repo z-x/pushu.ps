@@ -40,6 +40,11 @@
 	// ------------------------------------------------------------------------
 	onMount(() => {
 		setMenuHeight($state.menu);
+		window.addEventListener('keyup', (event) => {
+			if(event.key === "Escape"){
+				closeMenu();
+			}
+		}, { once: true });
 	});
 
 

@@ -37,23 +37,13 @@
 		text-indent: 100%;
 	}
 
-	.menu-toggle:focus {
-		outline: none;
-		background-color: var(--color-link);
-		border-radius: 4px;
-	}
-
-	.menu-toggle:active {
-		background-color: none;
-	}
-
 </style>
 
 
 
 
 <button
-	on:click="{ (event) => { state.setMenu('Main'); event.srcElement.blur(); } }"
+	on:click="{ (event) => { state.setMenu('Main'); } }"
 	class="menu-toggle"
 	title="{string.showMenu}"
 >
