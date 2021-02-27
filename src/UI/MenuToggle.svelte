@@ -6,8 +6,17 @@
 
 	// imports
 	// ------------------------------------------------------------------------
+	import { onMount } from 'svelte';
 	import state from '../Data/state.js';
 	import string from '../Data/translations.js';
+
+
+	// if menu is closed bring the focus back to menu toggle
+	
+	$: if(!$state.menu){
+		document.querySelector('.menu-toggle')?.focus();	
+	}
+
 
 </script>
 

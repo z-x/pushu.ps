@@ -202,16 +202,10 @@ a:focus {
 	outline: none;
 }
 
-.app button:focus-visible,
-.app a:focus-visible {
+button:focus-visible,
+a:focus-visible {
 	border-radius: 4px;
-	box-shadow: 0 0 0 3px var(--color-background), 0 0 0 6px var(--color-focus);
-}
-
-.menu button:focus-visible,
-.menu a:focus-visible {
-	border-radius: 4px;
-	box-shadow: 0 0 0 3px var(--color-pure), 0 0 0 6px var(--color-focus);
+	box-shadow: 0 0 0 3px var(--color-focus);
 }
 
 
@@ -358,7 +352,7 @@ select:focus {
 .menu input:focus-visible,
 .menu select:focus-visible {
 	box-shadow: 0 0 0 3px var(--color-pure), 0 0 0 6px var(--color-focus);
-}
+}		
 
 
 
