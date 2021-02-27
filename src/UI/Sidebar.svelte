@@ -48,6 +48,7 @@
 		background-color: var(--color-background);
 
 		transition: filter .5s ease-in-out;
+		transform: translateZ(0);
 	}
 
 	.sidebar-info {

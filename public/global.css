@@ -227,9 +227,12 @@ a:focus {
 	z-index: 50;
 	
 	background-color: var(--color-background);
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
 
 	transition-property: transform, border-radius, box-shadow;
 	transition-duration: .4s, .2s, .2s;
+	transition-delay: 0s, .3s, .4s;
 	transition-timing-function: ease-in-out, ease-in-out, ease-in-out;
 }
 
@@ -237,6 +240,7 @@ a:focus {
 	border-bottom-left-radius: 14px;
 	border-bottom-right-radius: 14px;
 	box-shadow: 0 3px 3px rgba(0, 0, 0, .4);
+	
 	transition-delay: 0s;
 }
 
@@ -263,6 +267,7 @@ a:focus {
 	justify-content: space-between;
 
 	transition: filter .5s linear;
+	transform: translateZ(0);
 }
 
 
