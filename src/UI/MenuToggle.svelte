@@ -12,7 +12,6 @@
 
 
 	// if menu is closed bring the focus back to menu toggle
-	
 	$: if(!$state.menu){
 		document.querySelector('.menu-toggle')?.focus();	
 	}
