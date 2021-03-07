@@ -73,7 +73,6 @@
 			// trigger the event for the analytics data
 			window.dispatchEvent(new CustomEvent('installPromptShown'));
 		}
-
 	});
 
 
@@ -89,6 +88,7 @@
 			state.setPage('Hello');
 		}
 	}
+
 
 </script>
 

@@ -8,9 +8,15 @@
 
 	// imports
 	// ------------------------------------------------------------------------
+	import { onMount } from 'svelte';
 	import state from '../Data/state.js';
 	import string from '../Data/translations.js';
 	import Menu from '../UI/Menu.svelte';
+
+
+	onMount(() => {
+		document.querySelector('.menu-items li:first-child button').focus();
+	});
 
 </script>
 

@@ -8,7 +8,7 @@
 
 	// imports
 	// ------------------------------------------------------------------------
-	import { onMount } from 'svelte';
+	import { onMount, onDestroy } from 'svelte';
 	import string from '../Data/translations.js';
 	import state from '../Data/state.js';
 	import { slide } from '../Helpers/transitions.js';
@@ -40,6 +40,13 @@
 	// ------------------------------------------------------------------------
 	onMount(() => {
 		setMenuHeight($state.menu);
+		window.addEventListener('keyup', closeMenuOnEsc);
+	});
+
+	// destroy
+	// ------------------------------------------------------------------------
+	onDestroy(() => {
+		window.removeEventListener('keyup', closeMenuOnEsc);
 	});
 
 
@@ -73,6 +80,15 @@
 		setMenuHeight('', 0);
 
 		return state.setMenu(false);
+	};
+
+
+	// purpose:		closes the menu when ESC was pressed
+	// ------------------------------------------------------------------------
+	function closeMenuOnEsc(event){
+		if(event.key === "Escape"){
+			closeMenu();
+		}
 	};
 
 </script>
@@ -182,7 +198,7 @@
 		.menu-back:before {
 			background-image: var(--icon-arrowRight-light);
 		}
-	}
+	}		
 
 </style>
 

@@ -61,7 +61,8 @@ q:after, q:before { content: ''; }
 @media (prefers-color-scheme: no-preference), (prefers-color-scheme: light) {
 	@font-face {
 		font-family: 'urw-din-condensed';
-		src: url('https://use.typekit.net/af/d3af1d/00000000000000003b9b0ef9/27/l?primer=592708b04bace7901bbf402b49fc07acf6f622abacda535ca47331b6917becfb&fvd=n7&v=3') format('woff2');		font-display: auto;
+		src: url('https://use.typekit.net/af/d3af1d/00000000000000003b9b0ef9/27/l?primer=592708b04bace7901bbf402b49fc07acf6f622abacda535ca47331b6917becfb&fvd=n7&v=3') format('woff2');	
+		font-display: auto;
 		font-style: normal;
 		font-weight: 700;
 	}
@@ -87,7 +88,7 @@ q:after, q:before { content: ''; }
 	--color-text: #000;
 	--color-placeholder: #f6bb50;
 	--color-input: #dda848;
-	--color-focus: #000;
+	--color-focus: #588A99;
 	--color-link: #b58020;
 	--color-hover: #503b15;
 	--color-active: var(--color-text);
@@ -196,6 +197,17 @@ body:before {
 	top: -100vh;
 }
 
+button:focus,
+a:focus {
+	outline: none;
+}
+
+button:focus-visible,
+a:focus-visible {
+	border-radius: 4px;
+	box-shadow: 0 0 0 3px var(--color-focus);
+}
+
 
 
 /* page structure
@@ -209,9 +221,12 @@ body:before {
 	z-index: 50;
 	
 	background-color: var(--color-background);
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
 
 	transition-property: transform, border-radius, box-shadow;
 	transition-duration: .4s, .2s, .2s;
+	transition-delay: 0s, .3s, .4s;
 	transition-timing-function: ease-in-out, ease-in-out, ease-in-out;
 }
 
@@ -219,6 +234,7 @@ body:before {
 	border-bottom-left-radius: 14px;
 	border-bottom-right-radius: 14px;
 	box-shadow: 0 3px 3px rgba(0, 0, 0, .4);
+	
 	transition-delay: 0s;
 }
 
@@ -245,6 +261,7 @@ body:before {
 	justify-content: space-between;
 
 	transition: filter .5s linear;
+	transform: translateZ(0);
 }
 
 
@@ -323,10 +340,19 @@ input[type="number"]::placeholder {
 	color: var(--color-placeholder);
 }
 
-input:focus {
-	outline: none;
-	color: var(--color-focus);
+input:focus,
+select:focus {
+	outline: none;	
 }
+
+.app input:focus-visible {
+	box-shadow: 0 0 0 3px var(--color-background), 0 0 0 6px var(--color-focus);
+}
+
+.menu input:focus-visible,
+.menu select:focus-visible {
+	box-shadow: 0 0 0 3px var(--color-pure), 0 0 0 6px var(--color-focus);
+}		
 
 
 
@@ -357,9 +383,8 @@ button {
 	}
 }
 
-.app button:focus {
-	outline: none;
-	color: var(--color-hover);
+.app button:focus-visible {
+	box-shadow: 0 0 0 3px var(--color-background), 0 0 0 6px var(--color-focus);
 }
 
 .app button:active {
@@ -389,9 +414,8 @@ button {
 	color: var(--color-hoverMenu);
 }
 
-.menu button:focus {
-	outline: none;
-	color: var(--color-hoverMenu);
+.menu button:focus-visible {
+	box-shadow: 0 0 0 3px var(--color-pure), 0 0 0 6px var(--color-focus);
 }
 
 .menu button:active {
