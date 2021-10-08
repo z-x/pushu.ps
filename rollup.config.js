@@ -43,11 +43,7 @@ export default {
 	},
 	plugins: [
 		replace({
-			process: JSON.stringify({
-				env: {
-					environment: environment
-				}
-			})
+			'process.env.NODE_ENV': JSON.stringify(environment)
 		}),
 
 		svelte({
