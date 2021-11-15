@@ -268,7 +268,6 @@ const dev = {
 
 // exports
 // ------------------------------------------------------------------------
-console.log(process.env.NODE_ENV);
 const final = (process.env.NODE_ENV === 'development') ? dev : training;
 
 export default final;

@@ -34,4 +34,5 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           config: baseUrl=${{ needs.setup.outputs.preview_url }}
+          spec: cypress/integration/test.js
           install: false
