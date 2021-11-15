@@ -15,7 +15,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           max_timeout: 60
-  E2E_Tests:
+  test:
     name: Run Cypress
     needs: setup
     runs-on: ubuntu-latest
