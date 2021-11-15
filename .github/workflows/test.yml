@@ -7,11 +7,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
-
       - name: Set commit in progress status
         run: |
           curl --request POST \
@@ -26,7 +21,7 @@ jobs:
           }'
 
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
 
       - name: Run Cypress
         id: cypress
