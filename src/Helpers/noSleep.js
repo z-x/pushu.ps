@@ -43,6 +43,16 @@ class NoSleep {
       this._addSourceToVideo(this.noSleepVideo, "webm", webm);
       this._addSourceToVideo(this.noSleepVideo, "mp4", mp4);
 
+      // on iOS15 the video element needs to be appended to DOM to trigger 'timeupdate' event
+      const hideCss = {
+        position: 'absolute',
+        left: '-100%',
+        top: '-100%'
+      }
+      Object.assign(this.noSleepVideo.style, hideCss);
+
+      document.querySelector('body').append(this.noSleepVideo);
+
       this.noSleepVideo.addEventListener("loadedmetadata", () => {
         if (this.noSleepVideo.duration <= 1) {
           // webm source
