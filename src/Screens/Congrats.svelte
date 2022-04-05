@@ -53,7 +53,7 @@
 
 	.counter {
 		animation-name: counter;
-		animation-duration: 5s;
+		animation-duration: 4s;
 		animation-timing-function: ease-in-out;
 		animation-fill-mode: forwards;
 		counter-reset: num var(--num);

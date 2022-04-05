@@ -13,7 +13,6 @@
 	import state from '../Data/state.js';
 	import training from '../Data/training.js';
 	import { slide } from '../Helpers/transitions.js';
-	import { fade } from 'svelte/transition';
 	import NoSleep from '../Helpers/noSleep.js';
 	import Sound from '../Helpers/sound.js';
 	import MainAction from '../UI/MainAction.svelte';
