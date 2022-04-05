@@ -79,11 +79,12 @@ describe('Do the workout', () => {
 		cy.contains('I made it');
 	});
 
-	it('Repeats the last training', () => {
+	it('Repeats the last training available', () => {
 		localStorage.page = 'Training';
 		localStorage.level = 1;
 		localStorage.set = 2;
 		localStorage.currentStep = 1;
+		localStorage.congratsShown = true;
 
 		cy.visit('/');
 
@@ -92,6 +93,36 @@ describe('Do the workout', () => {
 		cy.get('.sidebar-info li:nth-child(3)').contains('2');
 		cy.contains('Start next training').click();
 		cy.contains('I made it');
+	});
+
+	it('Doesn’t show congratulations after 100 pushups when it was too hard', () => {
+		localStorage.page = 'Training';
+		localStorage.level = 1;
+		localStorage.set = 2;
+		localStorage.currentStep = 1;
+		localStorage.removeItem('congratsShown');
+
+		cy.visit('/');
+
+		cy.contains('I made it').click();
+		cy.contains('It was hard').click();
+		cy.get('.sidebar-info li:nth-child(3)').contains('2');
+	});
+
+	it('Shows congratulations after 100 pushups', () => {
+		localStorage.page = 'Training';
+		localStorage.level = 1;
+		localStorage.set = 2;
+		localStorage.currentStep = 1;
+		localStorage.removeItem('congratsShown');
+
+		cy.visit('/');
+
+		cy.contains('I made it').click();
+		cy.contains('It was ok').click();
+		cy.contains('Hey there, you’ve just passed');
+		cy.contains('Thanks!').click();
+		cy.get('.sidebar-info li:nth-child(3)').contains('2');
 	});
 
 });

@@ -34,6 +34,7 @@ function createStore(){
 		state.pushupsLast = (localStorage.pushupsLast) ? parseInt(localStorage.pushupsLast) : 0;
 		state.pushupsTotal = (localStorage.pushupsTotal) ? parseInt(localStorage.pushupsTotal) : 0;
 		state.lastActive = (localStorage.lastActive) ? parseInt(localStorage.lastActive) : Date.now();
+		state.congratsShown = localStorage.congratsShown;
 		state.popupShown = false;
 		state.menuShown = false;
 		state.menu = false;
@@ -155,6 +156,19 @@ function createStore(){
 	};
 
 
+	// purpose:		sets the information about the congratulations screen
+	// arguments: 	if congratulations were shown (true) or not (false)
+	// ------------------------------------------------------------------------
+	let setCongrats = (were) => {
+		update((state) => {
+			state.congratsShown = were;
+			localStorage.congratsShown = were;
+
+			return state;
+		});
+	};
+
+
 	// purpose:		sets the information about currently active menu
 	// arguments: 	menu id (string)
 	// returns:		currently active menu id (string)
@@ -198,6 +212,7 @@ function createStore(){
 		totalUpdate,
 		isResting,
 		popupShown,
+		setCongrats,
 		setMenu,
 		setError
 	};

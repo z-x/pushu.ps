@@ -34,13 +34,18 @@
 	};
 
 	// purpose:		if user says the set was easy, let's move him to next one
-	// return:		triggers an 'finished', sets next training and redirects to home screen
+	// return:		triggers an 'finished', sets next training and redirects to home screen or congrats page if passed 100 pushups
 	// ------------------------------------------------------------------------
 	function easy(){
 		if(Object.keys(training[$state.level]).length !== $state.set){
 			state.nextSet();
 		}
-		state.setPage('Home');
+
+		if($state.pushupsLast >= 100 && !$state.congratsShown){
+			state.setPage('Congrats');
+		} else {
+			state.setPage('Home');
+		}
 
 		window.dispatchEvent(new CustomEvent('finished', {detail: {howWasIt: 'hard', 'level': $state.level, 'set': $state.set}}));
 	};

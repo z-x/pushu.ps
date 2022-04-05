@@ -236,6 +236,34 @@ let translations = {
 	},
 
 
+	// screen: 	congrats
+	// ------------------------------------------------------------------------
+	youvePassed: {
+		'en-US': 'Hey there, you’ve just passed',
+		'pl-PL': 'Nieźle, właśnie przekraczasz'
+	},
+
+	inSinglePractice: {
+		'en-US': 'in a single practice',
+		'pl-PL': 'w jednym treningu'
+	},
+
+	movingOn: {
+		'en-US': 'and you’re moving on',
+		'pl-PL': 'i chyba masz ochotę na więcej'
+	},
+
+	respects: {
+		'en-US': 'I have a great respect for this accomplishment, congratulations!',
+		'pl-PL': 'Przesyłam wyrazy uznania i gratuluję!'
+	},
+
+	thanks: {
+		'en-US': 'Thanks!',
+		'pl-PL': 'Dzięki!'
+	},
+
+
 	// screen: 	menu, main
 	// ------------------------------------------------------------------------
 	appCreatedSecondGate: {
