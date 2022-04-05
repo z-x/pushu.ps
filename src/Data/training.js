@@ -240,7 +240,7 @@ const dev = {
 		},
 		2: {
 			rest: 2,
-			pushups: [101, 101]
+			pushups: [111, 111]
 		}
 	},
 	2: {
@@ -250,7 +250,7 @@ const dev = {
 		},
 		2: {
 			rest: 2,
-			pushups: [22, 22]
+			pushups: [222, 222]
 		}
 	},
 	3: {
@@ -260,7 +260,7 @@ const dev = {
 		},
 		2: {
 			rest: 2,
-			pushups: [33, 33]
+			pushups: [333, 333]
 		}
 	}
 };
