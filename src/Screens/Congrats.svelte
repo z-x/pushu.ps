@@ -8,11 +8,9 @@
 
 	// imports
 	// ------------------------------------------------------------------------
-	import { onDestroy } from 'svelte';
 	import state from '../Data/state.js';
 	import string from '../Data/translations.js';
-	import training from '../Data/training.js';
-	import { slide } from '../Helpers/transitions.js';
+	import { appear, slide } from '../Helpers/transitions.js';
 	import MainAction from '../UI/MainAction.svelte';
 	import Sidebar from '../UI/Sidebar.svelte';
 
@@ -67,8 +65,8 @@
 
 	.sr {
 		position: absolute;
-		top: -100%;
-		left: -100%;
+		top: -200%;
+		left: -200%;
 	}
 </style>
 
@@ -79,12 +77,12 @@
 
 <section class="main" in:slide out:slide="{ {direction: 'out'} }">
 	<div class="content content-readable">
-		<p class="text-title">{string.youvePassed}</p>
-		<p class="counter text-wow"><span class="sr">100</span></p>
-		<p class="text-title">{string.pushups(100)}</p>
-		<p class="text-note">{string.inSinglePractice}<br>{string.movingOn}</p>
-		<p class="text-subtitle">{string.respects}</p>
+		<p in:appear="{ {delay: 400, duration: 600} }" class="text-title">{string.youvePassed}</p>
+		<p in:appear="{ {delay: 500, duration: 300} }" class="counter text-wow"><span class="sr">100</span></p>
+		<p in:appear="{ {delay: 600, duration: 300} }" class="text-title">{string.pushups(100)}</p>
+		<p in:appear="{ {delay: 800, duration: 600} }" class="text-note">{string.inSinglePractice}<br>{string.movingOn}</p>
+		<p in:appear="{ {delay: 1000, duration: 600} }" class="text-subtitle">{string.respects}</p>
 	</div>
 
-	<MainAction delay="400" on:mainAction="{ accept }">{string.thanks}</MainAction>
+	<MainAction delay="1300" on:mainAction="{ accept }">{string.thanks}</MainAction>
 </section>
