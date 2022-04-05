@@ -13,6 +13,7 @@
 	import Home from './Screens/Home.svelte';
 	import Training from './Screens/Training.svelte';
 	import Finish from './Screens/Finish.svelte';
+	import Congrats from './Screens/Congrats.svelte';
 	import News from './Screens/News.svelte';
 
 	// menus
@@ -33,7 +34,7 @@
 
 	// app possible states
 	// ------------------------------------------------------------------------
-	let pages = {Hello, Test, Home, Training, Finish};
+	let pages = {Hello, Test, Home, Training, Finish, Congrats};
 	let menus = {Main, ResetApp, ManualTrainingLevel, Instructions, PrivacyPolicy, CancelTraining, ManualLanguage};
 
 
