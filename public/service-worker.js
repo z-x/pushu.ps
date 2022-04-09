@@ -24,6 +24,8 @@ const cacheFiles = [
 
 
 
+// what will happen after the service worker installs
+// ------------------------------------------------------------------------
 self.addEventListener('install', (event) => {
 
 	// load requested files into cache
@@ -32,4 +34,24 @@ self.addEventListener('install', (event) => {
 		await cache.addAll(cacheFiles);
 	})());
 
+});
+
+
+// return the content of the specific file from cache if no network available
+// ------------------------------------------------------------------------
+self.addEventListener('fetch', (event) => {
+	event.respondWith((async () => {
+
+		// check if the file is in cache and return it if so
+		const request = await caches.match(event.request);
+		if(request){ return request; }
+
+		// if not, get it from the server
+		const response = await fetch(event.request);
+		// and cache it
+		const cache = await caches.open(cacheName);
+		cache.put(event.request, response.clone());
+
+		return response;
+	})());
 });
