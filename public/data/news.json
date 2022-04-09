@@ -1,15 +1,15 @@
 [
 	{
-		"date": "1603122453491",
+		"date": "1649529439074",
 		"pl-PL": {
-			"title": "Trenujesz też brzuszki?",
-			"content": "<p>To tylko mała informacja, że całkiem niedługo powstanie podobna aplikacja, która pomoże trenować brzuszki. Dam znać wkrótce!</p>",
+			"title": "Pushu.ps działa też offline",
+			"content": "<p>Jeśli wszystko poszło dobrze, od teraz apka działa również bez dostępu do sieci. Możesz trenować w najdzikszej głuszy. ;-)</p>",
 			"actionYes": "",
 			"actionClose": "Okej"
 		},
 		"en-US": {
-			"title": "Doing some sit-ups?",
-			"content": "<p>Just a quick info that I am planning to release a similar app to help you train sit-ups. It will be available soon, stay tuned!</p>",
+			"title": "Pushu.ps works offline",
+			"content": "<p>If everything went OK you can run the app without network connection from now on. You can train even in the wilderness. ;-)</p>",
 			"actionYes": "",
 			"actionClose": "Ok"
 		},
