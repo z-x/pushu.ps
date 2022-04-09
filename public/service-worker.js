@@ -76,10 +76,8 @@ self.addEventListener('fetch', (event) => {
 
 		// if the files are not cached, get the from the server
 		return fetch(event.request)
-			.then((response) => {
-				caches.open(cacheName).then(cache => {
-					cache.put(event.request, response.clone());
-				});
+			.then(response => {
+				return response;
 			})
 			.catch(() => { return new Response('', { "status": 500, "statusText": 'Offline' }); });
 
