@@ -1,3 +1,8 @@
+Cypress.on('window:before:load', window => {
+  delete window.navigator.__proto__.ServiceWorker;
+})
+
+
 describe('Initialize the app', () => {
 
 	it('Load the app', () => {
