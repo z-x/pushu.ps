@@ -20,13 +20,13 @@
 		"test": "npx cypress open"
 	},
 	"devDependencies": {
-		"@rollup/plugin-commonjs": "^21.1.0",
-		"@rollup/plugin-node-resolve": "^13.3.0",
-		"@rollup/plugin-replace": "^4.0.0",
+		"@rollup/plugin-commonjs": "^23.0.2",
+		"@rollup/plugin-node-resolve": "^15.0.1",
+		"@rollup/plugin-replace": "^5.0.1",
 		"cross-env": "^7.0.3",
 		"cypress": "^9.7.0",
-		"rollup": "^2.79.1",
-		"rollup-plugin-css-only": "^3.1.0",
+		"rollup": "^3.2.3",
+		"rollup-plugin-css-only": "^4.1.1",
 		"rollup-plugin-livereload": "^2.0.5",
 		"rollup-plugin-svelte": "^7.1.0",
 		"rollup-plugin-terser": "^7.0.2",
