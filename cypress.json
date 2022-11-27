@@ -1,7 +1,0 @@
-{
-	"baseUrl": "http://localhost:8080",
-	"blockHosts": [
-		"*googletagmanager.com"
-	],
-	"chromeWebSecurity": false
-}
