@@ -25,9 +25,9 @@ jobs:
 
       - name: Run Cypress
         id: cypress
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-action@v4
         with:
-            spec: cypress/integration/prod.js
+            spec: cypress/e2e/prod.cy.js
         env:
           CYPRESS_BASE_URL: ${{ github.event.deployment_status.target_url }}
 
