@@ -20,9 +20,9 @@ jobs:
     needs: setup
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Cache node_modules and Cypress
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             ~/.cache/Cypress
@@ -31,8 +31,8 @@ jobs:
       - name: Install Cypress
         run: npm i cypress
       - name: Run Cypress
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-action@v4
         with:
           config: baseUrl=${{ needs.setup.outputs.preview_url }}
-          spec: cypress/integration/test.js
+          spec: cypress/e2e/test.cy.js
           install: false
