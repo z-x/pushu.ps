@@ -55,7 +55,7 @@
 
 
 <div
-	in:fade="{ {duration: 200} }"
+	in:fade|global="{ {duration: 200} }"
 	class="sidebar-info-indicator"
 	style="transform: translateY({ position })"
 ></div>

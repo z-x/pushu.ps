@@ -89,7 +89,7 @@
 	<ul class="sidebar-info">
 		{#each data as item, i}
 			<li
-				in:appear={ {delay: 200 * i, duration: 500} }
+				in:appear|global={ {delay: 200 * i, duration: 500} }
 				class="sidebar-info-value" 
 				class:sidebar-info-value-active="{ !$state.isResting && markActive && $state.currentStep === i }"
 				on:introend="{ () => { if($state.currentStep === i){ showSidebarIndicator = true; dispatch('activeLoaded'); } }  }"

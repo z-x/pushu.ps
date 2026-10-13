@@ -74,7 +74,7 @@
 
 
 <button
-	in:appear="{ {from: 'bottom', delay: parseInt(delay)} }"
+	in:appear|global="{ {from: 'bottom', delay: parseInt(delay)} }"
 	type="button"
 	class="action-main"
 	class:action-main-small="{ forceSmallClickArea }"

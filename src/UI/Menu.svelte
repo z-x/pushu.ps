@@ -209,7 +209,7 @@
 
 <div id="{menuId}-overlay" class="menu-overlay" on:click="{ closeMenu }"></div>
 
-<section id="{menuId}" class="menu" in:slide|local="{ transitionInModifier }" out:slide|local="{ transitionOutModifier }">
+<section id="{menuId}" class="menu" in:slide="{ transitionInModifier }" out:slide="{ transitionOutModifier }">
 	<div class="menu-content {contentClass}">
 		<div class:menu-contentWrapper="{ longContent }">
 			<slot>{string.menuEmpty}</slot>

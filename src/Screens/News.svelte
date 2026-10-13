@@ -181,7 +181,7 @@
 
 {#if news}
 	<section class="infoPopup" on:click="{ () => action() }">
-		<div on:click|stopPropagation in:fromTop="{ {duration: 700, delay: 500} }" out:fromTop="{ {duration: 700} }" class="infoPopup-content">
+		<div on:click|stopPropagation in:fromTop|global="{ {duration: 700, delay: 500} }" out:fromTop|global="{ {duration: 700} }" class="infoPopup-content">
 			<h1 class="infoPopup-heading">{@html news[localStorage.language].title}</h1>
 			{@html news[localStorage.language].content}
 

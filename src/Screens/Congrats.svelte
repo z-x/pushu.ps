@@ -78,13 +78,13 @@
 
 <Sidebar />
 
-<section class="main" in:slide out:slide="{ {direction: 'out'} }">
+<section class="main" in:slide|global out:slide|global="{ {direction: 'out'} }">
 	<div class="content content-readable">
-		<p in:appear="{ {delay: 400, duration: 600} }" class="text-title">{string.youvePassed}</p>
-		<p in:appear="{ {delay: 500, duration: 300} }" class="counter text-wow"><span class="sr">100</span></p>
-		<p in:appear="{ {delay: 600, duration: 300} }" class="text-title">{string.pushups(100)}</p>
-		<p in:appear="{ {delay: 800, duration: 600} }" class="text-note">{string.inSinglePractice}<br>{string.movingOn}</p>
-		<p in:appear="{ {delay: 1000, duration: 600} }" class="text-subtitle">{string.respects}</p>
+		<p in:appear|global="{ {delay: 400, duration: 600} }" class="text-title">{string.youvePassed}</p>
+		<p in:appear|global="{ {delay: 500, duration: 300} }" class="counter text-wow"><span class="sr">100</span></p>
+		<p in:appear|global="{ {delay: 600, duration: 300} }" class="text-title">{string.pushups(100)}</p>
+		<p in:appear|global="{ {delay: 800, duration: 600} }" class="text-note">{string.inSinglePractice}<br>{string.movingOn}</p>
+		<p in:appear|global="{ {delay: 1000, duration: 600} }" class="text-subtitle">{string.respects}</p>
 	</div>
 
 	<MainAction delay="1300" on:mainAction="{ accept }">{string.thanks}</MainAction>
