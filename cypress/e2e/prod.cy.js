@@ -3,6 +3,11 @@ Cypress.on('window:before:load', window => {
   delete window.navigator.__proto__.ServiceWorker;
 });
 
+// with testIsolation disabled, Cypress no longer clears localStorage between tests
+beforeEach(() => {
+  cy.clearLocalStorage();
+});
+
 
 describe('Check if production data available', () => {
 
