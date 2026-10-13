@@ -1,38 +1,50 @@
 name: Tests
 
-on: pull_request
+on:
+  push:
+    # production deployments are covered by prod.yml
+    branches-ignore:
+      - master
 
 jobs:
   setup:
     name: Setup tests
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      checks: read
+      contents: read
+      deployments: read
     outputs:
       preview_url: ${{ steps.waitForVercelPreviewDeployment.outputs.url }}
     steps:
       - name: Wait for Vercel preview deployment to be ready
-        uses: patrickedqvist/wait-for-vercel-preview@v1.2.0
+        uses: patrickedqvist/wait-for-vercel-preview@v1.3.3
         id: waitForVercelPreviewDeployment
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          max_timeout: 60
+          max_timeout: 600
+          check_interval: 10
   test:
     name: Run Cypress
     needs: setup
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Cache node_modules and Cypress
-        uses: actions/cache@v3
+      - uses: actions/checkout@v7
+      - name: Install Node.js
+        uses: actions/setup-node@v7
         with:
-          path: |
-            ~/.cache/Cypress
-            node_modules
-          key: pushups-cache-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
-      - name: Install Cypress
-        run: npm i cypress
+          node-version: 24
+          cache: npm
       - name: Run Cypress
-        uses: cypress-io/github-action@v4
+        uses: cypress-io/github-action@v7
         with:
+          package-manager-cache: false
           config: baseUrl=${{ needs.setup.outputs.preview_url }}
           spec: cypress/e2e/test.cy.js
-          install: false
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v7
+        if: failure()
+        with:
+            name: cypress-screenshots
+            path: cypress/screenshots
