@@ -15,7 +15,7 @@
 	},
 	"scripts": {
 		"build": "rollup -c",
-		"dev": "cross-env NODE_ENV=development rollup -c -w --host",
+		"dev": "cross-env NODE_ENV=development rollup -c -w",
 		"start": "cross-env NODE_ENV=production sirv public --no-clear",
 		"test": "npx cypress open"
 	},
@@ -26,7 +26,7 @@
 		"@rollup/plugin-terser": "^1.0.0",
 		"cross-env": "^10.1.0",
 		"cypress": "^11.2.0",
-		"rollup": "^2.80.0",
+		"rollup": "^4.64.6",
 		"rollup-plugin-css-only": "^4.5.5",
 		"rollup-plugin-livereload": "^2.0.5",
 		"rollup-plugin-svelte": "^7.2.3",
