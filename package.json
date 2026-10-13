@@ -23,7 +23,7 @@
 		"@rollup/plugin-commonjs": "^21.1.0",
 		"@rollup/plugin-node-resolve": "^13.3.0",
 		"@rollup/plugin-replace": "^4.0.0",
-		"cross-env": "^7.0.3",
+		"cross-env": "^10.1.0",
 		"cypress": "^11.2.0",
 		"rollup": "^2.80.0",
 		"rollup-plugin-css-only": "^3.1.0",
@@ -33,6 +33,6 @@
 		"svelte": "^3.59.2"
 	},
 	"dependencies": {
-		"sirv-cli": "^2.0.2"
+		"sirv-cli": "^3.0.1"
 	}
 }
