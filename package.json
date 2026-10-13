@@ -30,7 +30,7 @@
 		"rollup-plugin-css-only": "^4.5.5",
 		"rollup-plugin-livereload": "^2.0.5",
 		"rollup-plugin-svelte": "^7.2.3",
-		"svelte": "^3.59.2"
+		"svelte": "^4.2.20"
 	},
 	"dependencies": {
 		"sirv-cli": "^3.0.1"

@@ -201,12 +201,12 @@
 
 <Sidebar data="{ currentPushups }" markActive="{ true }" on:activeLoaded="{ positionCounter }" />
 
-<section class="main" in:slide out:slide="{ {direction: 'out'} }">
+<section class="main" in:slide|global out:slide|global="{ {direction: 'out'} }">
 
 	<div class="content">
 		<div class="content-training" style="transform: translateY({ counterPosition })">
 		{#if counterPosition}
-			<div in:slide>
+			<div in:slide|global>
 				{#if !$state.isResting}
 					{string.perform}
 					<strong class="training-number">{ currentPushups[$state.currentStep] }</strong>

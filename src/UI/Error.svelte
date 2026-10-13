@@ -64,7 +64,7 @@
 
 
 {#if $state.error}
-	<div class="error" in:appear="{ {from: 'bottom', duration: 200} }" out:appear="{ {from: 'bottom', duration: 200} }">
+	<div class="error" in:appear|global="{ {from: 'bottom', duration: 200} }" out:appear|global="{ {from: 'bottom', duration: 200} }">
 		<p>{$state.error}</p>
 
 		<button
