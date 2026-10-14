@@ -21,15 +21,34 @@
 		data = [],
 		// do you want to mark the active item (bool)
 		markActive = false,
-		// the function to call when the active item is shown (function)
-		onActiveLoaded
+		// the position of the active item once it is shown ({top, height}, bindable)
+		activePosition = $bindable(null)
 	} = $props();
 
 
 	// local variables
 	// ------------------------------------------------------------------------
-	// the active mark switch
-	let showSidebarIndicator = $state(false);
+	// the sidebar item elements
+	let items = $state([]);
+	// if the active item has finished appearing
+	let activeShown = $state(false);
+
+
+	// purpose:		measures the active item so the indicator and other
+	//				elements could be aligned with it
+	// ------------------------------------------------------------------------
+	function measureActive(){
+		let item = items[appState.currentStep];
+
+		if(activeShown && item){
+			activePosition = {top: item.offsetTop, height: item.offsetHeight};
+		}
+	};
+
+	// measure again each time the user moves to the next pushups
+	$effect(() => {
+		measureActive();
+	});
 
 </script>
 
@@ -87,19 +106,22 @@
 
 
 
+<svelte:window onresize={measureActive} />
+
 <aside class="sidebar" class:sidebar-long="{ data.length > 5 }">
 	<ul class="sidebar-info">
 		{#each data as item, i}
 			<li
+				bind:this={items[i]}
 				in:appear|global={ {delay: 200 * i, duration: 500} }
 				class="sidebar-info-value" 
 				class:sidebar-info-value-active="{ !appState.isResting && markActive && appState.currentStep === i }"
-				onintroend={() => { if(appState.currentStep === i){ showSidebarIndicator = true; onActiveLoaded?.(); } }}
+				onintroend={() => { if(markActive && appState.currentStep === i){ activeShown = true; } }}
 			>
 				{item}
 			</li>
 		{/each}
 	</ul>
-	{#if markActive && showSidebarIndicator} <SidebarIndicator /> {/if}
+	{#if markActive && activePosition} <SidebarIndicator position={activePosition} /> {/if}
 	<MenuToggle />
 </aside>
