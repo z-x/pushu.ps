@@ -25,7 +25,6 @@ class AppState {
 	lastActive = $state((localStorage.lastActive) ? parseInt(localStorage.lastActive) : Date.now());
 	congratsShown = $state(localStorage.congratsShown);
 	popupShown = $state(false);
-	menuShown = $state(false);
 	menu = $state(false);
 	error = $state(false);
 

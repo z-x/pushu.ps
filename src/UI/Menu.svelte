@@ -8,7 +8,7 @@
 
 	// imports
 	// ------------------------------------------------------------------------
-	import { onMount, onDestroy } from 'svelte';
+	import { onMount } from 'svelte';
 	import string from '../Data/translations.js';
 	import appState from '../Data/state.svelte.js';
 	import { slide } from '../Helpers/transitions.js';
@@ -44,13 +44,6 @@
 	// ------------------------------------------------------------------------
 	onMount(() => {
 		setMenuHeight(appState.menu);
-		window.addEventListener('keyup', closeMenuOnEsc);
-	});
-
-	// destroy
-	// ------------------------------------------------------------------------
-	onDestroy(() => {
-		window.removeEventListener('keyup', closeMenuOnEsc);
 	});
 
 
@@ -209,7 +202,7 @@
 
 
 
-<svelte:window onresize={() => setMenuHeight(menuId)} />
+<svelte:window onresize={() => setMenuHeight(menuId)} onkeyup={closeMenuOnEsc} />
 
 <div id="{menuId}-overlay" class="menu-overlay" onclick={closeMenu}></div>
 

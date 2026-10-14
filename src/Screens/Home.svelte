@@ -18,7 +18,6 @@
 
 	// get the training data
 	// ------------------------------------------------------------------------
-	let lastDay = (appState.set !== 1) ? training[appState.level][appState.set]['pushups'].reduce((a, b) => a + b, 0) : 0;
 	let commingUp = $derived(training[appState.level][appState.set]['pushups'].reduce((a, b) => a + b, 0));
 	let sidebarData = $derived([appState.pushupsLast, commingUp, appState.set]);
 
@@ -38,5 +37,5 @@
 		</ul>
 	</div>
 
-	<MainAction delay="400" changePageTo="Training">{string.startNextTraining}</MainAction>
+	<MainAction delay={400} changePageTo="Training">{string.startNextTraining}</MainAction>
 </section>

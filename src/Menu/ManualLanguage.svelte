@@ -35,7 +35,7 @@
 	contentClass="menu-form"
 	buttonBackLabel={string.cancel}
 	buttonNextLabel={string.accept}
-	buttonNextAction={() => setLanguage()}
+	buttonNextAction={setLanguage}
 >
 	<div class="form-row">
 		<h2 class="form-label">{string.setYourLanguageTo}</h2>

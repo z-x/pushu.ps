@@ -34,7 +34,7 @@
 	contentClass="menu-question menu-article"
 	buttonBackLabel={string.no}
 	buttonNextLabel={string.yes}
-	buttonNextAction={() => cancelTraining()}
+	buttonNextAction={cancelTraining}
 >
 
 	<h2>{string.sureToCancel}</h2>

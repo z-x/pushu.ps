@@ -60,5 +60,5 @@
 		{/if}
 	</div>
 
-	<MainAction delay="1800" changePageTo="Test" forceSmallClickArea="true">{string.wantToStart}</MainAction>
+	<MainAction delay={1800} changePageTo="Test" forceSmallClickArea>{string.wantToStart}</MainAction>
 </section>

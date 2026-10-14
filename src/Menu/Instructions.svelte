@@ -19,7 +19,7 @@
 <Menu
 	menuId="Instructions"
 	contentClass="menu-article"
-	longContent={true}
+	longContent
 >
 
 	{@html string.instructionsContent}

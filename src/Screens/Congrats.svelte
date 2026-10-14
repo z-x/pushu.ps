@@ -87,5 +87,5 @@
 		<p in:appear|global="{ {delay: 1000, duration: 600} }" class="text-subtitle">{string.respects}</p>
 	</div>
 
-	<MainAction delay="1300" onMainAction={accept}>{string.thanks}</MainAction>
+	<MainAction delay={1300} onMainAction={accept}>{string.thanks}</MainAction>
 </section>

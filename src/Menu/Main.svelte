@@ -8,15 +8,17 @@
 
 	// imports
 	// ------------------------------------------------------------------------
-	import { onMount } from 'svelte';
 	import appState from '../Data/state.svelte.js';
 	import string from '../Data/translations.js';
 	import Menu from '../UI/Menu.svelte';
 
 
-	onMount(() => {
-		document.querySelector('.menu-items li:first-child button').focus();
-	});
+	// purpose:		focuses the first menu item for keyboard users
+	// arguments:	the menu items list element
+	// ------------------------------------------------------------------------
+	function focusFirstItem(menuItems){
+		menuItems.querySelector('button').focus();
+	};
 
 </script>
 
@@ -80,7 +82,7 @@
 	transitionInModifier={{direction: 'out'}}
 	transitionOutModifier={{direction: 'out'}}
 >
-	<ul class="menu-items">
+	<ul class="menu-items" {@attach focusFirstItem}>
 
 		{#if appState.page === 'Home'}
 			<li class="menu-item">
