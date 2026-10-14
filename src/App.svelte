@@ -3,7 +3,7 @@
 	import { onMount } from 'svelte';
 	import string from './Data/translations.js';
 	import Analytics from './Helpers/Analytics.svelte';
-	import Error from './UI/Error.svelte';
+	import ErrorMessage from './UI/Error.svelte';
 	import handleError from './Helpers/handleError.js';
 
 	// pages
@@ -29,7 +29,6 @@
 	// state and data
 	// ------------------------------------------------------------------------
 	import appState from './Data/state.svelte.js';
-	import translations from './Data/translations.js';
 
 
 	// app possible states
@@ -113,4 +112,4 @@
 	<MenuScreen />
 {/if}
 
-<Error />
+<ErrorMessage />

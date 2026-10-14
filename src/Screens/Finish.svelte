@@ -47,7 +47,7 @@
 			appState.setPage('Home');
 		}
 
-		window.dispatchEvent(new CustomEvent('finished', {detail: {howWasIt: 'hard', 'level': appState.level, 'set': appState.set}}));
+		window.dispatchEvent(new CustomEvent('finished', {detail: {howWasIt: 'easy', 'level': appState.level, 'set': appState.set}}));
 	};
 
 </script>
@@ -82,6 +82,6 @@
 		<p>{string.wasItHard}</p>
 	</div>
 
-	<MainAction delay="600" onMainAction={hard}>{string.itWasHard}</MainAction>
-	<MainAction delay="400" onMainAction={easy}>{string.itWasOk}</MainAction>
+	<MainAction delay={600} onMainAction={hard}>{string.itWasHard}</MainAction>
+	<MainAction delay={400} onMainAction={easy}>{string.itWasOk}</MainAction>
 </section>

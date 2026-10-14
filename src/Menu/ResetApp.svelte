@@ -36,7 +36,7 @@
 	contentClass="menu-article menu-question"
 	buttonBackLabel={string.cancel}
 	buttonNextLabel={string.iAmSure}
-	buttonNextAction={() => resetApp()}
+	buttonNextAction={resetApp}
 >
 	<h2>{string.resetQuestion}</h2>
 	<p>{@html string.resetNote}</p>

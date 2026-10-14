@@ -18,6 +18,8 @@
 	// ------------------------------------------------------------------------
 	// the message for the poup
 	let news = $state(null);
+	// the message in the user language
+	let message = $derived(news?.[localStorage.language]);
 
 
 	// get the news
@@ -28,6 +30,7 @@
 		}).then((data) => {
 			if(data[0].date > appState.lastActive && appState.pushupsTotal > 0){
 				news = data[0];
+				appState.setPopupShown(true);
 			}
 		}).catch((error) => {
 			new handleError('News could not be fetched', false);
@@ -49,11 +52,6 @@
 			action();
 		}
 	};
-
-	// set the state as with popup when needed
-	$effect(() => {
-		if(news){ appState.setPopupShown(true); } else { appState.setPopupShown(false); }
-	});
 
 
 	// purpose:		iOS PWA takes the status bar color from the background color
@@ -186,22 +184,22 @@
 {#if news}
 	<section class="infoPopup" onclick={() => action()}>
 		<div onclick={(event) => event.stopPropagation()} in:fromTop|global="{ {duration: 700, delay: 500} }" out:fromTop|global="{ {duration: 700} }" class="infoPopup-content">
-			<h1 class="infoPopup-heading">{@html news[localStorage.language].title}</h1>
-			{@html news[localStorage.language].content}
+			<h1 class="infoPopup-heading">{@html message.title}</h1>
+			{@html message.content}
 
-			{#if news[localStorage.language].actionClose}
+			{#if message.actionClose}
 				<button
 					onclick={() => action()}
-					class:infoButton-choices="{ news[localStorage.language].actionClose && news[localStorage.language].actionYes }"
+					class:infoButton-choices="{ message.actionClose && message.actionYes }"
 					class="infoPopup-action"
-				>{@html news[localStorage.language].actionClose}</button>
+				>{@html message.actionClose}</button>
 			{/if}
-			{#if news[localStorage.language].actionYes}
+			{#if message.actionYes}
 				<button
 					onclick={() => action(news.action)}
-					class:infoButton-choices="{ news[localStorage.language].actionClose && news[localStorage.language].actionYes }"
+					class:infoButton-choices="{ message.actionClose && message.actionYes }"
 					class="infoPopup-action"
-				>{@html news[localStorage.language].actionYes}</button>
+				>{@html message.actionYes}</button>
 			{/if}
 		</div>
 	</section>

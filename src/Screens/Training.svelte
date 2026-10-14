@@ -8,7 +8,7 @@
 
 	// imports
 	// ------------------------------------------------------------------------
-	import { onMount, onDestroy } from 'svelte';
+	import { onDestroy } from 'svelte';
 	import string from '../Data/translations.js';
 	import appState from '../Data/state.svelte.js';
 	import training from '../Data/training.js';
@@ -21,19 +21,20 @@
 
 	// prevent the screen from dimming
 	// ------------------------------------------------------------------------
-	let noSleep;
+	// enabled on the first click as browsers require a user gesture for it
+	$effect(() => {
+		let noSleep = new NoSleep();
+		let enableNoSleep = () => noSleep.enable();
 
-	onMount(() => {
-		noSleep = new NoSleep();
+		document.addEventListener('click', enableNoSleep, {once: true});
 
-		document.addEventListener('click', () => {
-			noSleep.enable();
-		}, {once: true});
+		return () => {
+			document.removeEventListener('click', enableNoSleep);
+			noSleep.disable();
+		};
 	});
 
 	onDestroy(() => {
-		noSleep.disable();
-
 		// remove the resting timeout when navigating away from this page
 		finishResting();
 	});
@@ -201,7 +202,7 @@
 
 
 
-<Sidebar data={currentPushups} markActive={true} onActiveLoaded={positionCounter} />
+<Sidebar data={currentPushups} markActive onActiveLoaded={positionCounter} />
 
 <section class="main" in:slide|global out:slide|global="{ {direction: 'out'} }">
 
@@ -225,7 +226,7 @@
 	</div>
 
 	{#if !appState.isResting}
-		<MainAction delay="400" onMainAction={nextStep}>{string.madeIt}</MainAction>
+		<MainAction delay={400} onMainAction={nextStep}>{string.madeIt}</MainAction>
 	{/if}
 
 </section>

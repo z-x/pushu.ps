@@ -8,7 +8,6 @@
 
 	// imports
 	// ------------------------------------------------------------------------
-	import { onDestroy } from 'svelte';
 	import string from '../Data/translations.js';
 	import appState from '../Data/state.svelte.js';
 	import { appear, slide } from '../Helpers/transitions.js';
@@ -31,22 +30,21 @@
 	}
 
 
-	// when there is an on-screen keyboard on mobile and we hide the title
-	// the screen needs to be smoothly scrolled to the top to give a better
-	// feel for the user
-	$effect(() => {
-		if(pushups !== null && pushups !== ''){
-			if(window.scrollY > 0){
-				let interval = setInterval(() => {
-					window.scrollTo({
-						top: --window.scrollY
-					});
-					
-					if(window.scrollY <= 0){ clearInterval(interval); }
-				}, 2);
-			}
+	// purpose:		when there is an on-screen keyboard on mobile and we hide the title
+	//				the screen needs to be smoothly scrolled to the top to give a better
+	//				feel for the user
+	// ------------------------------------------------------------------------
+	function scrollToTop(event){
+		if(event.currentTarget.value !== '' && window.scrollY > 0){
+			let interval = setInterval(() => {
+				window.scrollTo({
+					top: --window.scrollY
+				});
+
+				if(window.scrollY <= 0){ clearInterval(interval); }
+			}, 2);
 		}
-	});
+	}
 
 
 	// purpose:		function executed after user fills the training data
@@ -101,7 +99,7 @@
 	<div class="content content-readable">
 		<h1 class="text-title moveable" class:visible="{ typeof pushups === 'undefined' }">{string.firstTestYourself}</h1>
 		<p class="text-subtitle moveable" class:visible="{ typeof pushups === 'undefined' }">{string.doAsManyPushups}</p>
-		<p class="text-title action-secondary">{string.iDid} <input type="number" placeholder="12" min="0" step="1" bind:value="{ pushups }" onchange={filled}> {string.pushups(pushups)}</p>
+		<p class="text-title action-secondary">{string.iDid} <input type="number" placeholder="12" min="0" step="1" bind:value="{ pushups }" oninput={scrollToTop} onchange={filled}> {string.pushups(pushups)}</p>
 		{#if pushups > 2}
 			<p in:appear|global="{{ delay: 500 }}" out:appear|global class="text-subtitle">{string.niceGoRest}</p>
 		{:else if pushups <= 2 && pushups >= 0 && typeof pushups !== 'undefined'}
@@ -112,6 +110,6 @@
 	</div>
 			
 	{#if typeof pushups !== 'undefined'}
-		<MainAction delay="900" onMainAction={setLevel} changePageTo="Home">{string.whatsNext}</MainAction>
+		<MainAction delay={900} onMainAction={setLevel} changePageTo="Home">{string.whatsNext}</MainAction>
 	{/if}
 </section>

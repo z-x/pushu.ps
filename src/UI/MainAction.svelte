@@ -9,7 +9,6 @@
 
 	// imports
 	// ------------------------------------------------------------------------
-	import { onMount } from 'svelte';
 	import appState from '../Data/state.svelte.js';
 	import { appear } from '../Helpers/transitions.js';
 
@@ -74,7 +73,7 @@
 
 
 <button
-	in:appear|global="{ {from: 'bottom', delay: parseInt(delay)} }"
+	in:appear|global="{ {from: 'bottom', delay} }"
 	type="button"
 	class="action-main"
 	class:action-main-small="{ forceSmallClickArea }"

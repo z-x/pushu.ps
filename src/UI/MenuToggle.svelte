@@ -6,17 +6,18 @@
 
 	// imports
 	// ------------------------------------------------------------------------
-	import { onMount } from 'svelte';
 	import appState from '../Data/state.svelte.js';
 	import string from '../Data/translations.js';
 
 
-	// if menu is closed bring the focus back to menu toggle
-	$effect(() => {
+	// purpose:		if menu is closed bring the focus back to menu toggle
+	// arguments:	the toggle button element
+	// ------------------------------------------------------------------------
+	function focusWhenMenuClosed(toggle){
 		if(!appState.menu){
-			document.querySelector('.menu-toggle')?.focus();	
+			toggle.focus();
 		}
-	});
+	};
 
 
 </script>
@@ -53,7 +54,8 @@
 
 
 <button
-	onclick={(event) => { appState.setMenu('Main'); }}
+	{@attach focusWhenMenuClosed}
+	onclick={() => appState.setMenu('Main')}
 	class="menu-toggle"
 	title="{string.showMenu}"
 >
