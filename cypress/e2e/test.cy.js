@@ -274,3 +274,43 @@ describe('User interface', () => {
 	});
 
 });
+
+
+describe('Install', () => {
+
+	it('Hides the install buttons when the browser does not offer installing', () => {
+		cy.visit('/');
+		cy.contains('Ok, I want to start');
+		cy.get('.hello-install').should('not.exist');
+
+		cy.get('.menu-toggle').last().click();
+		cy.contains('Instructions');
+		cy.contains('Install the app').should('not.exist');
+		cy.get('.menu-overlay').click();
+	});
+
+	it('Shows the install buttons when the browser offers installing', () => {
+		cy.visit('/');
+		cy.contains('Ok, I want to start');
+
+		// browsers that support installing send this event
+		cy.window().then((win) => {
+			let event = new win.Event('beforeinstallprompt', {cancelable: true});
+			event.prompt = cy.stub().as('prompt');
+			event.userChoice = Promise.resolve({outcome: 'accepted'});
+			win.dispatchEvent(event);
+			expect(event.defaultPrevented, 'browser banner prevented').to.be.true;
+		});
+
+		cy.get('.hello-install').should('be.visible');
+
+		cy.get('.menu-toggle').last().click();
+		cy.get('.menu-items').contains('Install the app').click();
+		cy.get('@prompt').should('have.been.calledOnce');
+
+		// the install prompt can be used only once
+		cy.contains('Install the app').should('not.exist');
+		cy.get('.hello-install').should('not.exist');
+	});
+
+});

@@ -85,6 +85,11 @@ let translations = {
 		'pl-PL': 'Zamknij menu'
 	},
 
+	installApp: {
+		'en-US': 'Install the app',
+		'pl-PL': 'Zainstaluj apkę'
+	},
+
 	errorDismiss: {
 		'en-US': 'Dismiss this message',
 		'pl-PL': 'Schowaj tę informację'

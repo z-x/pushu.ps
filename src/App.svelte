@@ -52,10 +52,10 @@
 	}
 
 
-	// enable 'add to home screen' on chrome mobile
-	// ------------------------------------------------------------------------
-	// register the (empty) service worker
+	// register the service worker for the offline mode and installing the app
+	// (the install buttons are handled in Helpers/install.svelte.js)
 	// doing this in onMount so the <Analytics /> code would be already available
+	// ------------------------------------------------------------------------
 	onMount(() => {
 		if('serviceWorker' in navigator){
 			navigator.serviceWorker.register('/service-worker.js')
@@ -63,24 +63,6 @@
 					new handleError(string.errorServiceWorker);
 				});
 		};
-
-		// cache the install prompt
-		let deferredInstallPrompt;
-
-		window.addEventListener('beforeinstallprompt', (event) => {
-			// prevent the infobar from appearing on mobile
-			event.preventDefault();
-			// save the event to trigger it later
-			deferredInstallPrompt = event;
-		});
-
-		if(appState.page === 'Home' && localStorage.installPromptShown === 'false' && deferredInstallPrompt){
-			deferredInstallPrompt.prompt();
-			localStorage.installPromptShown = true;
-
-			// trigger the event for the analytics data
-			window.dispatchEvent(new CustomEvent('installPromptShown'));
-		}
 	});
 
 

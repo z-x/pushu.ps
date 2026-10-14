@@ -32,6 +32,15 @@
 		});
 	});
 
+	// purpose:		when user answers the install dialog ('accepted' or 'dismissed')
+	// ------------------------------------------------------------------------
+	window.addEventListener('installPromptAnswered', (event) => {
+		gtag('event', 'app', {
+			'event_label': 'installPrompt_' + event.detail.outcome,
+			'value': 1
+		});
+	});
+
 	// purpose:		when user tells us how many pushups he made on test
 	// ------------------------------------------------------------------------
 	window.addEventListener('testDataFilled', (event) => {
