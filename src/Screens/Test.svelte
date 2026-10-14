@@ -10,7 +10,7 @@
 	// ------------------------------------------------------------------------
 	import { onDestroy } from 'svelte';
 	import string from '../Data/translations.js';
-	import appState from '../Data/state.js';
+	import appState from '../Data/state.svelte.js';
 	import { appear, slide } from '../Helpers/transitions.js';
 	import MainAction from '../UI/MainAction.svelte';
 	import Sidebar from '../UI/Sidebar.svelte';

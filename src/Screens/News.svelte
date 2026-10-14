@@ -10,7 +10,7 @@
 	// ------------------------------------------------------------------------
 	import handleError from '../Helpers/handleError.js';
 	import { onMount } from 'svelte';
-	import appState from '../Data/state.js';
+	import appState from '../Data/state.svelte.js';
 	import { fromTop } from '../Helpers/transitions.js';
 
 
@@ -26,7 +26,7 @@
 		fetch('/data/news.json').then((response) => {
 			return response.json();
 		}).then((data) => {
-			if(data[0].date > $appState.lastActive && $appState.pushupsTotal > 0){
+			if(data[0].date > appState.lastActive && appState.pushupsTotal > 0){
 				news = data[0];
 			}
 		}).catch((error) => {
@@ -42,7 +42,7 @@
 	function action(toDo){
 		if(!toDo){
 			news = null;
-			appState.popupShown(false);
+			appState.setPopupShown(false);
 		}
 		else if (toDo === 'url'){
 			window.open(news.url, '_blank');
@@ -52,7 +52,7 @@
 
 	// set the state as with popup when needed
 	$effect(() => {
-		if(news){ appState.popupShown(true); } else { appState.popupShown(false); }
+		if(news){ appState.setPopupShown(true); } else { appState.setPopupShown(false); }
 	});
 
 
@@ -69,7 +69,7 @@
 	let transitionTimeout = '';
 
 	function transitionBackground(){
-		if($appState.popupShown){
+		if(appState.popupShown){
 			clearTimeout(transitionTimeout);
 			document.body.classList = 'app-popupShown';
 		} else {

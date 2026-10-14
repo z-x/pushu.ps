@@ -1,6 +1,6 @@
 <!--  
 	Custom error message in small popup
-	Appears when $appState.error is not empty
+	Appears when appState.error is not empty
 -->
 
 
@@ -9,12 +9,12 @@
 
 	// imports
 	// ------------------------------------------------------------------------
-	import appState from '../Data/state.js';
+	import appState from '../Data/state.svelte.js';
 	import string from '../Data/translations.js';
 	import { appear } from '../Helpers/transitions.js';
 
 
-	// purpose:		hides the error message by clearing the $appState.error
+	// purpose:		hides the error message by clearing the appState.error
 	// returns:		the state of the error, that is false as it was cleared (bool)
 	// ------------------------------------------------------------------------
 	function hideError(){
@@ -63,9 +63,9 @@
 
 
 
-{#if $appState.error}
+{#if appState.error}
 	<div class="error" in:appear|global="{ {from: 'bottom', duration: 200} }" out:appear|global="{ {from: 'bottom', duration: 200} }">
-		<p>{$appState.error}</p>
+		<p>{appState.error}</p>
 
 		<button
 			onclick={hideError}

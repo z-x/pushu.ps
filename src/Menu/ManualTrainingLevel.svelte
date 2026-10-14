@@ -8,15 +8,15 @@
 
 	// imports
 	// ------------------------------------------------------------------------
-	import appState from '../Data/state.js';
+	import appState from '../Data/state.svelte.js';
 	import string from '../Data/translations.js';
 	import Menu from '../UI/Menu.svelte';
 
 
 	// local properties
 	// ------------------------------------------------------------------------
-	let userSkill = $state($appState.level.toString());
-	let userSet = $state($appState.set.toString());
+	let userSkill = $state(appState.level.toString());
+	let userSet = $state(appState.set.toString());
 
 
 	// purpose:		sets the user info according to user input

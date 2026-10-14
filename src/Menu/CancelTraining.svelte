@@ -8,7 +8,7 @@
 
 	// imports
 	// ------------------------------------------------------------------------
-	import appState from '../Data/state.js';
+	import appState from '../Data/state.svelte.js';
 	import string from '../Data/translations.js';
 	import Menu from '../UI/Menu.svelte';
 
@@ -17,9 +17,9 @@
 	// returns:		triggers 'trainingCanceled' event and redirect to Home page
 	// ------------------------------------------------------------------------
 	function cancelTraining(){
-		window.dispatchEvent(new CustomEvent('trainingCanceled', { detail: {level: $appState.level, set: $appState.set} }));
+		window.dispatchEvent(new CustomEvent('trainingCanceled', { detail: {level: appState.level, set: appState.set} }));
 
-		appState.isResting(false);
+		appState.setResting(false);
 		appState.setStep(0);
 		appState.setPage('Home');
 	};

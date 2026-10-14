@@ -10,7 +10,7 @@
 	// ------------------------------------------------------------------------
 	import { onMount, onDestroy } from 'svelte';
 	import string from '../Data/translations.js';
-	import appState from '../Data/state.js';
+	import appState from '../Data/state.svelte.js';
 	import training from '../Data/training.js';
 	import { slide } from '../Helpers/transitions.js';
 	import NoSleep from '../Helpers/noSleep.js';
@@ -42,7 +42,7 @@
 	// get the training data
 	// ------------------------------------------------------------------------
 	// current set
-	let currentSet = training[$appState.level][$appState.set];
+	let currentSet = training[appState.level][appState.set];
 	// the current pushups set
 	let currentPushups = currentSet['pushups'];
 
@@ -56,11 +56,11 @@
 		// the function runs before the dom is updates so we need to check
 		if(document.querySelector('.sidebar-info-value')){
 			// the offset position of the current pushups value in sidebar
-			let sidebarValuePosition = document.querySelector(`.sidebar-info-value:nth-child(${ parseInt($appState.currentStep) + 1 })`).offsetTop + 'px';
+			let sidebarValuePosition = document.querySelector(`.sidebar-info-value:nth-child(${ parseInt(appState.currentStep) + 1 })`).offsetTop + 'px';
 			// the margin added for the counter when resting is active
 			let restingMargin = 0;
 
-			if($appState.isResting){
+			if(appState.isResting){
 				restingMargin = getComputedStyle(document.documentElement).getPropertyValue('--size-spacing');
 				counterPosition =  'calc(' + sidebarValuePosition + ' + ' + restingMargin + ' * 1.5)';
 			} else {
@@ -72,7 +72,7 @@
 	// repositions the counter each time the resting phase is activated
 	// or when the pushups to be made is changed
 	$effect(() => {
-		$appState.isResting, $appState.currentStep, positionCounter();
+		appState.isResting, appState.currentStep, positionCounter();
 	});
 
 
@@ -80,7 +80,7 @@
 	// ------------------------------------------------------------------------
 	function nextStep(){
 		// if it was the last pushups to make
-		if($appState.currentStep === currentPushups.length-1){
+		if(appState.currentStep === currentPushups.length-1){
 			// update the user info about the amount of pushups he just did
 			appState.lastSet(currentPushups.reduce((a, b) => a + b, 0));
 			// and add those to the total he made
@@ -92,7 +92,7 @@
 		// if there are more to do
 		else {
 			rest().then(() => {
-				appState.setStep($appState.currentStep + 1);
+				appState.setStep(appState.currentStep + 1);
 			});
 		}
 	};
@@ -116,7 +116,7 @@
 		return new Promise((resolve, reject) => {
 			restingPromiseResolve = resolve;
 
-			appState.isResting(1);
+			appState.setResting(1);
 
 			restInterval = setInterval(() => {
 				currentRest--;
@@ -139,7 +139,7 @@
 	// ------------------------------------------------------------------------
 	function finishResting(){
 		clearInterval(restInterval);
-		appState.isResting(0);
+		appState.setResting(0);
 		currentRest = defaultRest;
 		if(restingPromiseResolve){
 			restingPromiseResolve();
@@ -147,7 +147,7 @@
 	};
 
 	// when user closed the app before finishing the rest, let's resume the rest
-	if($appState.isResting){ nextStep(); }
+	if(appState.isResting){ nextStep(); }
 
 	// every time the currentRest variable is changing updates the counter in html
 	let secondsFormated = $derived(string.seconds(currentRest));
@@ -209,10 +209,10 @@
 		<div class="content-training" style="transform: translateY({ counterPosition })">
 		{#if counterPosition}
 			<div in:slide|global>
-				{#if !$appState.isResting}
+				{#if !appState.isResting}
 					{string.perform}
-					<strong class="training-number">{ currentPushups[$appState.currentStep] }</strong>
-					{string.pushups(currentPushups[$appState.currentStep])}
+					<strong class="training-number">{ currentPushups[appState.currentStep] }</strong>
+					{string.pushups(currentPushups[appState.currentStep])}
 				{:else}
 					{string.letsJust} <br>{string.restFor}
 					<strong class="training-number">{ currentRest }</strong>
@@ -224,7 +224,7 @@
 		</div>
 	</div>
 
-	{#if !$appState.isResting}
+	{#if !appState.isResting}
 		<MainAction delay="400" onMainAction={nextStep}>{string.madeIt}</MainAction>
 	{/if}
 

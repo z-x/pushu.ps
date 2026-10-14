@@ -2,7 +2,7 @@
 
 	// imports
 	// ------------------------------------------------------------------------
-	import appState from '../Data/state.js';
+	import appState from '../Data/state.svelte.js';
 
 
 	// purpose:		on errors
@@ -43,22 +43,18 @@
 
 	// purpose:		when user goes through the next step of training
 	// ------------------------------------------------------------------------
-	let currentStep = $derived($appState.currentStep);
-
 	$effect(() => {
 		gtag('event', 'training', {
 			'event_label': 'step',
-			'value': currentStep
+			'value': appState.currentStep
 		});
 	});
 
 	// purpose:		when a screen is viewed
 	// ------------------------------------------------------------------------
-	let page = $derived($appState.page);
-
 	$effect(() => {
 		gtag('event', 'page', {
-			'event_label': page,
+			'event_label': appState.page,
 			'value': 1
 		});
 	});
@@ -66,12 +62,10 @@
 
 	// purpose:		when user sets a level after training (or manually)
 	// ------------------------------------------------------------------------
-	let level = $derived($appState.level);
-
 	$effect(() => {
 		gtag('event', 'test', {
 			'event_label': 'leveled',
-			'value': level
+			'value': appState.level
 		});
 	});
 
@@ -112,11 +106,9 @@
 
 	// purpose:		when user visits the menu
 	// ------------------------------------------------------------------------
-	let menu = $derived($appState.menu);
-
 	$effect(() => {
 		gtag('event', 'menu', {
-			'event_label': menu
+			'event_label': appState.menu
 		});
 	});
 

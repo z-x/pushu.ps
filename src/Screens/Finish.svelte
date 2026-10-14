@@ -9,7 +9,7 @@
 	// imports
 	// ------------------------------------------------------------------------
 	import { onDestroy } from 'svelte';
-	import appState from '../Data/state.js';
+	import appState from '../Data/state.svelte.js';
 	import string from '../Data/translations.js';
 	import training from '../Data/training.js';
 	import { slide } from '../Helpers/transitions.js';
@@ -20,7 +20,7 @@
 	// reset current state when user finishes the training
 	onDestroy(() => {
 		appState.setStep(0);
-		appState.isResting(0);
+		appState.setResting(0);
 	});
 
 
@@ -30,24 +30,24 @@
 	function hard(){
 		appState.setPage('Home');
 
-		window.dispatchEvent(new CustomEvent('finished', {detail: {howWasIt: 'hard', 'level': $appState.level, 'set': $appState.set}}));
+		window.dispatchEvent(new CustomEvent('finished', {detail: {howWasIt: 'hard', 'level': appState.level, 'set': appState.set}}));
 	};
 
 	// purpose:		if user says the set was easy, let's move him to next one
 	// return:		triggers an 'finished', sets next training and redirects to home screen or congrats page if passed 100 pushups
 	// ------------------------------------------------------------------------
 	function easy(){
-		if(Object.keys(training[$appState.level]).length !== $appState.set){
+		if(Object.keys(training[appState.level]).length !== appState.set){
 			appState.nextSet();
 		}
 
-		if($appState.pushupsLast >= 100 && !$appState.congratsShown){
+		if(appState.pushupsLast >= 100 && !appState.congratsShown){
 			appState.setPage('Congrats');
 		} else {
 			appState.setPage('Home');
 		}
 
-		window.dispatchEvent(new CustomEvent('finished', {detail: {howWasIt: 'hard', 'level': $appState.level, 'set': $appState.set}}));
+		window.dispatchEvent(new CustomEvent('finished', {detail: {howWasIt: 'hard', 'level': appState.level, 'set': appState.set}}));
 	};
 
 </script>

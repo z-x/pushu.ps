@@ -26,9 +26,9 @@
 	import CancelTraining from './Menu/CancelTraining.svelte';
 	import ManualLanguage from './Menu/ManualLanguage.svelte';
 
-	// stores
+	// state and data
 	// ------------------------------------------------------------------------
-	import appState from './Data/state.js';
+	import appState from './Data/state.svelte.js';
 	import translations from './Data/translations.js';
 
 
@@ -38,8 +38,8 @@
 	let menus = {Main, ResetApp, ManualTrainingLevel, Instructions, PrivacyPolicy, CancelTraining, ManualLanguage};
 
 	// currently shown page and menu components
-	let Page = $derived(pages[$appState.page]);
-	let MenuScreen = $derived(menus[$appState.menu]);
+	let Page = $derived(pages[appState.page]);
+	let MenuScreen = $derived(menus[appState.menu]);
 
 
 	// if iOS app in fullscreen mode add class
@@ -71,7 +71,7 @@
 			deferredInstallPrompt = event;
 		});
 
-		if($appState.page === 'Home' && localStorage.installPromptShown === 'false' && deferredInstallPrompt){
+		if(appState.page === 'Home' && localStorage.installPromptShown === 'false' && deferredInstallPrompt){
 			deferredInstallPrompt.prompt();
 			localStorage.installPromptShown = true;
 
@@ -83,13 +83,13 @@
 
 	// if user came here after a day, reset his training or test
 	// ------------------------------------------------------------------------
-	if((Date.now() - $appState.lastActive > 86400000)){
-		if($appState.page === 'Training') {
+	if((Date.now() - appState.lastActive > 86400000)){
+		if(appState.page === 'Training') {
 			appState.setStep(0);
-			appState.isResting(0);
+			appState.setResting(0);
 			appState.setPage('Home');
 		}
-		else if($appState.page === 'Test'){
+		else if(appState.page === 'Test'){
 			appState.setPage('Hello');
 		}
 	}
@@ -103,13 +103,13 @@
 
 <main
 	class="app"
-	class:app-unfocused="{ $appState.popupShown || $appState.menu }"
-	class:app-menuShown="{ $appState.menu }"
+	class:app-unfocused="{ appState.popupShown || appState.menu }"
+	class:app-menuShown="{ appState.menu }"
 >
 	<Page />
 </main>
 
-{#if $appState.menu}
+{#if appState.menu}
 	<MenuScreen />
 {/if}
 

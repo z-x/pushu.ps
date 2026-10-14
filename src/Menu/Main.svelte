@@ -9,7 +9,7 @@
 	// imports
 	// ------------------------------------------------------------------------
 	import { onMount } from 'svelte';
-	import appState from '../Data/state.js';
+	import appState from '../Data/state.svelte.js';
 	import string from '../Data/translations.js';
 	import Menu from '../UI/Menu.svelte';
 
@@ -82,7 +82,7 @@
 >
 	<ul class="menu-items">
 
-		{#if $appState.page === 'Home'}
+		{#if appState.page === 'Home'}
 			<li class="menu-item">
 				<button onclick={() => appState.setMenu('ResetApp')}>
 					{string.resetApp}
@@ -90,7 +90,7 @@
 			</li>
 		{/if}
 
-		{#if $appState.page === 'Home' || $appState.page === 'Hello' || $appState.page === 'Test'}
+		{#if appState.page === 'Home' || appState.page === 'Hello' || appState.page === 'Test'}
 			<li class="menu-item">
 				<button onclick={() => appState.setMenu('ManualTrainingLevel')}>
 					{string.manuallySetTrainingLevel}
@@ -98,7 +98,7 @@
 			</li>
 		{/if}
 
-		{#if $appState.page === 'Training' || $appState.page === 'Finish'}
+		{#if appState.page === 'Training' || appState.page === 'Finish'}
 			<li class="menu-item">
 				<button onclick={() => appState.setMenu('CancelTraining')}>
 					{string.cancelTraining}
@@ -112,7 +112,7 @@
 			</button>
 		</li>
 
-		{#if $appState.page === 'Hello' || $appState.page === 'Home'}
+		{#if appState.page === 'Hello' || appState.page === 'Home'}
 			<li class="menu-item">
 				<button onclick={() => appState.setMenu('ManualLanguage')}>
 					{string.setLanguage}
@@ -120,7 +120,7 @@
 			</li>
 		{/if}
 	
-		{#if $appState.page !== 'Training'}
+		{#if appState.page !== 'Training'}
 			<li class="menu-item">
 				<button onclick={() => appState.setMenu('PrivacyPolicy')}>
 					{string.privacyPolicy}

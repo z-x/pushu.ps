@@ -10,7 +10,7 @@
 	// ------------------------------------------------------------------------
 	import { onMount, onDestroy } from 'svelte';
 	import string from '../Data/translations.js';
-	import appState from '../Data/state.js';
+	import appState from '../Data/state.svelte.js';
 	import { slide } from '../Helpers/transitions.js';
 
 
@@ -43,7 +43,7 @@
 	// initialization
 	// ------------------------------------------------------------------------
 	onMount(() => {
-		setMenuHeight($appState.menu);
+		setMenuHeight(appState.menu);
 		window.addEventListener('keyup', closeMenuOnEsc);
 	});
 

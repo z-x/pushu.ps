@@ -10,7 +10,7 @@
 	// imports
 	// ------------------------------------------------------------------------
 	import { onMount } from 'svelte';
-	import appState from '../Data/state.js';
+	import appState from '../Data/state.svelte.js';
 	import { appear } from '../Helpers/transitions.js';
 
 

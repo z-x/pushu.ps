@@ -8,7 +8,7 @@
 
 // imports
 // ------------------------------------------------------------------------
-import state from '../Data/state.js';
+import appState from '../Data/state.svelte.js';
 
 
 
@@ -32,7 +32,7 @@ class handleError extends Error {
 
 		if(userFriendlyError){
 			if(showMessage){
-				state.setError(userFriendlyError);
+				appState.setError(userFriendlyError);
 			}
 			console.log(userFriendlyError);
 		}

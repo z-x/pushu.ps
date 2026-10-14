@@ -9,7 +9,7 @@
 	// imports
 	// ------------------------------------------------------------------------
 	import string from '../Data/translations.js';
-	import appState from '../Data/state.js';
+	import appState from '../Data/state.svelte.js';
 	import training from '../Data/training.js';
 	import { appear, slide } from '../Helpers/transitions.js';
 	import MainAction from '../UI/MainAction.svelte';
@@ -18,9 +18,9 @@
 
 	// get the training data
 	// ------------------------------------------------------------------------
-	let lastDay = ($appState.set !== 1) ? training[$appState.level][$appState.set]['pushups'].reduce((a, b) => a + b, 0) : 0;
-	let commingUp = $derived(training[$appState.level][$appState.set]['pushups'].reduce((a, b) => a + b, 0));
-	let sidebarData = $derived([$appState.pushupsLast, commingUp, $appState.set]);
+	let lastDay = (appState.set !== 1) ? training[appState.level][appState.set]['pushups'].reduce((a, b) => a + b, 0) : 0;
+	let commingUp = $derived(training[appState.level][appState.set]['pushups'].reduce((a, b) => a + b, 0));
+	let sidebarData = $derived([appState.pushupsLast, commingUp, appState.set]);
 
 </script>
 

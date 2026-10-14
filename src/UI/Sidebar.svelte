@@ -8,7 +8,7 @@
 
 	// imports
 	// ------------------------------------------------------------------------
-	import appState from '../Data/state.js';
+	import appState from '../Data/state.svelte.js';
 	import MenuToggle from '../UI/MenuToggle.svelte';
 	import { appear } from '../Helpers/transitions.js';
 	import SidebarIndicator from '../UI/SidebarIndicator.svelte';
@@ -93,8 +93,8 @@
 			<li
 				in:appear|global={ {delay: 200 * i, duration: 500} }
 				class="sidebar-info-value" 
-				class:sidebar-info-value-active="{ !$appState.isResting && markActive && $appState.currentStep === i }"
-				onintroend={() => { if($appState.currentStep === i){ showSidebarIndicator = true; onActiveLoaded?.(); } }}
+				class:sidebar-info-value-active="{ !appState.isResting && markActive && appState.currentStep === i }"
+				onintroend={() => { if(appState.currentStep === i){ showSidebarIndicator = true; onActiveLoaded?.(); } }}
 			>
 				{item}
 			</li>
