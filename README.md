@@ -56,6 +56,15 @@ The app runs in developement mode with `npm run dev` or when it is built with th
 The main difference is that in `production` mode it uses a real training data while on developement mode it just uses simplified version of training.
 
 
+Checking the components
+----
+To check all the Svelte components for errors and warnings run
+
+	npm run check
+
+It uses [svelte-check](https://www.npmjs.com/package/svelte-check) and runs on every pushed branch in GitHub Actions too.
+
+
 Testing
 ----
 For end to end testing I am using [Cypress](https://cypress.io). The tests are located in `cypress/integration/test.js`. To run the tests you just need to run

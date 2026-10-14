@@ -17,12 +17,14 @@
 		"dev": "vite",
 		"build": "vite build",
 		"start": "vite preview",
+		"check": "svelte-check --fail-on-warnings",
 		"test": "npx cypress open"
 	},
 	"devDependencies": {
 		"@sveltejs/vite-plugin-svelte": "^7.3.1",
 		"cypress": "^16.1.1",
 		"svelte": "^5.57.2",
+		"svelte-check": "^4.7.6",
 		"vite": "^8.3.4"
 	}
 }

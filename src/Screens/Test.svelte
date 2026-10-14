@@ -79,13 +79,15 @@
 	}
 
 	input[type="number"] {
-		-moz-appearance:textfield;		
+		-moz-appearance: textfield;
+		appearance: textfield;
 	}
 
 	input[type="number"]::-webkit-outer-spin-button,
 	input[type="number"]::-webkit-inner-spin-button {
 		margin: 0;
 		-webkit-appearance: none;
+		appearance: none;
 	}
 
 </style>

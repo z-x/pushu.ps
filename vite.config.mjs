@@ -4,12 +4,8 @@ import { svelte } from '@sveltejs/vite-plugin-svelte';
 
 export default defineConfig({
 	plugins: [
-		svelte({
-			compilerOptions: {
-				// all components use the Svelte 5 runes syntax
-				runes: true
-			}
-		})
+		// the Svelte options are in svelte.config.mjs
+		svelte()
 	],
 
 	// the same port for dev and preview, Cypress expects the app there
