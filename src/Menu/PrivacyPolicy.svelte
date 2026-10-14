@@ -17,7 +17,6 @@
 
 
 <Menu
-	menuId="PrivacyPolicy"
 	contentClass="menu-article"
 	longContent
 >

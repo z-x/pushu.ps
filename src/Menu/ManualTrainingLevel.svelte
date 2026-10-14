@@ -39,7 +39,6 @@
 
 
 <Menu
-	menuId="ManualTrainingLevel"
 	contentClass="menu-form"
 	buttonBackLabel={string.cancel}
 	buttonNextLabel={string.accept}

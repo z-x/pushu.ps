@@ -17,7 +17,6 @@
 
 
 <Menu
-	menuId="Instructions"
 	contentClass="menu-article"
 	longContent
 >
