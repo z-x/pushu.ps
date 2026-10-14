@@ -9,13 +9,13 @@ Created by [Łukasz Krysiewicz](http://secondgate.pl)
 
 Development
 ===
-To install the app locally you would need Node.js, npm  and possibly git. Then you need to clone the repository:
+To install the app locally you would need Node.js (version 22.12 or newer from the 22 line, or 24 which is used on GitHub Actions), npm and possibly git. Then you need to clone the repository:
 
 	git clone https://github.com/z-x/pushu.ps.git
 
 Next, navigate to the local repository that you've just downloaded
 
-    cd x:/pushu.ps
+	cd pushu.ps
 
 And finally install the whole thing to get all the dependencies:
 
@@ -67,19 +67,24 @@ It uses [svelte-check](https://www.npmjs.com/package/svelte-check) and runs on e
 
 Testing
 ----
-For end to end testing I am using [Cypress](https://cypress.io). The tests are located in `cypress/integration/test.js`. To run the tests you just need to run
+For end to end testing I am using [Cypress](https://cypress.io). The tests are located in `cypress/e2e/test.cy.js` and `cypress/e2e/prod.cy.js`. The tests expect the app at http://localhost:8080, so first start the dev server
+
+	npm run dev
+
+and then, in another terminal, run
 
 	npm run test
 
-Cypress client will open and will let you run tests. Keep in mind that the `test.js` file is written to **test the developement version of the training**. It is based on shorter breaks between sets and overall simplified version of the actual training. This is made so the test would finish faster. The `prod.js` tests just if the production data was loaded and nothing more.
+Cypress client will open and will let you run tests. Keep in mind that the `test.cy.js` file is written to **test the developement version of the training**. It is based on shorter breaks between sets and overall simplified version of the actual training. This is made so the test would finish faster. The `prod.cy.js` tests just if the production data was loaded and nothing more, to run it locally use the production build (`npm run build` and `npm run start`) instead of the dev server.
 
-This project uses GitHub Actions to automatically test each new pull request. The tests are runing on [Vercel](https://vercel.com) preview deployments.
+This project uses GitHub Actions to automatically test every branch pushed to GitHub, except `master`. The tests are runing on [Vercel](https://vercel.com) preview deployments. After each production deployment the `prod.cy.js` tests check the live site.
 
 
 Tech stack
 ----
 - [Svelte](https://svelte.dev) as a front-end framework
 - [Vite](https://vite.dev) for the dev server and builds
+- [svelte-check](https://www.npmjs.com/package/svelte-check) for checking the components
 - [Cypress](https://cypress.io) for end to end testing
 - [Vercel](https://vercel.com) for deployments
 - [GitHub Actions](https://github.com/features/actions) for CI/CD
