@@ -1,17 +1,17 @@
 [
 	{
-		"date": "1649529439074",
+		"date": "1791982231361",
 		"pl-PL": {
-			"title": "Pushu.ps działa też offline",
-			"content": "<p>Jeśli wszystko poszło dobrze, od teraz apka działa również bez dostępu do sieci. Możesz trenować w najdzikszej głuszy. ;-)</p>",
+			"title": "Ciągle żyjemy! ;)",
+			"content": "<p>To tylko mały komunikat, że apka ostatnio dostała kilka aktualizacji i wcale o niej nie zapomniałem. Działa i będzie działać.</p>",
 			"actionYes": "",
-			"actionClose": "Okej"
+			"actionClose": "Fajnie"
 		},
 		"en-US": {
-			"title": "Pushu.ps works offline",
-			"content": "<p>If everything went OK you can run the app without network connection from now on. You can train even in the wilderness. ;-)</p>",
+			"title": "Still alive! ;)",
+			"content": "<p>This is just a small message to let you know that the app has received a few updates and I haven't forgotten about it. It works and will continue to work.</p>",
 			"actionYes": "",
-			"actionClose": "Ok"
+			"actionClose": "Nice"
 		},
 		"action": "",
 		"url": ""
