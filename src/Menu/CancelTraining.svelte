@@ -30,7 +30,6 @@
 
 
 <Menu
-	menuId="CancelTraining"
 	contentClass="menu-question menu-article"
 	buttonBackLabel={string.no}
 	buttonNextLabel={string.yes}

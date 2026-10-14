@@ -32,7 +32,6 @@
 
 
 <Menu
-	menuId="ResetApp"
 	contentClass="menu-article menu-question"
 	buttonBackLabel={string.cancel}
 	buttonNextLabel={string.iAmSure}

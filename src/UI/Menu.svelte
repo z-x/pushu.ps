@@ -8,7 +8,6 @@
 
 	// imports
 	// ------------------------------------------------------------------------
-	import { onMount } from 'svelte';
 	import string from '../Data/translations.js';
 	import appState from '../Data/state.svelte.js';
 	import { slide } from '../Helpers/transitions.js';
@@ -17,8 +16,6 @@
 	// properties
 	// ------------------------------------------------------------------------
 	let {
-		// the id of the menu that is being shown (string)
-		menuId = 'Main',
 		// the class name added to the content of the menu (string)
 		contentClass = '',
 		// if you want to show the back button (bool)
@@ -40,42 +37,10 @@
 	} = $props();
 
 
-	// initialization
-	// ------------------------------------------------------------------------
-	onMount(() => {
-		setMenuHeight(appState.menu);
-	});
-
-
-	// purpose:		calculate the height for the given menu page
-	// arguments:	the ID of the page without # (string)
-	// returns:		height of the menu page (int)
-	// ------------------------------------------------------------------------
-	function getMenuHeight(menuId){
-		return (menuId) ? document.querySelector(`#${menuId}`).offsetHeight : 0;
-	};
-
-
-	// purpose:		moves the main app screen up depending on the menu size
-	// arguments:	the menu page id that you want to set the menu height for (string)
-	//				delay after wchich the animation will happen (int)
-	// ------------------------------------------------------------------------
-	function setMenuHeight(menuId, delay = 200){
-		setTimeout(() => {
-			let menuHeight = getMenuHeight(menuId);
-
-			document.querySelector('.app').style.transform = `translateY(-${menuHeight}px)`;
-			if(menuId) document.querySelector(`#${menuId}-overlay`).style.bottom = menuHeight + 'px';
-		}, delay);
-	};
-
-
 	// purpose:		closes the menu completely
 	// returns:		the state of the menu that is false (bool)
 	// ------------------------------------------------------------------------
 	function closeMenu(){
-		setMenuHeight('', 0);
-
 		return appState.setMenu(false);
 	};
 
@@ -202,18 +167,19 @@
 
 
 
-<svelte:window onresize={() => setMenuHeight(menuId)} onkeyup={closeMenuOnEsc} />
+<svelte:window onkeyup={closeMenuOnEsc} />
 
 <!-- keyboard users close the menu with Esc or the back button, so the overlay is left out of the tab order -->
 <button
-	id="{menuId}-overlay"
 	class="menu-overlay"
+	style:bottom="{ appState.menuHeight }px"
 	onclick={closeMenu}
 	aria-label={string.closeMenu}
 	tabindex="-1"
 ></button>
 
-<section id="{menuId}" class="menu" in:slide="{ transitionInModifier }" out:slide="{ transitionOutModifier }">
+<!-- the app screen is moved up by the menu height, see App.svelte -->
+<section class="menu" bind:offsetHeight={appState.menuHeight} in:slide="{ transitionInModifier }" out:slide="{ transitionOutModifier }">
 	<div class="menu-content {contentClass}">
 		<div class:menu-contentWrapper="{ longContent }">
 			{#if children}{@render children()}{:else}{string.menuEmpty}{/if}

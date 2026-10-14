@@ -41,6 +41,8 @@
 	// currently shown page and menu components
 	let Page = $derived(pages[appState.page]);
 	let MenuScreen = $derived(menus[appState.menu]);
+	// the app screen moves up to make space for the shown menu
+	let menuOffset = $derived(appState.menu ? appState.menuHeight : 0);
 
 
 	// if iOS app in fullscreen mode add class
@@ -115,6 +117,7 @@
 	class="app"
 	class:app-unfocused="{ appState.popupShown || appState.menu }"
 	class:app-menuShown="{ appState.menu }"
+	style:transform={menuOffset ? `translateY(-${menuOffset}px)` : null}
 >
 	<svelte:boundary onerror={screenError}>
 		<Page />

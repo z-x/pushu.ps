@@ -31,7 +31,6 @@
 
 
 <Menu
-	menuId="ManualLanguage"
 	contentClass="menu-form"
 	buttonBackLabel={string.cancel}
 	buttonNextLabel={string.accept}

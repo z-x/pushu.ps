@@ -77,7 +77,6 @@
 
 
 <Menu
-	menuId="Main"
 	allowButtonBack={false}
 	transitionInModifier={{direction: 'out'}}
 	transitionOutModifier={{direction: 'out'}}

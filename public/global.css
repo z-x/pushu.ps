@@ -235,7 +235,8 @@ a:focus-visible {
 	border-bottom-right-radius: 14px;
 	box-shadow: 0 3px 3px rgba(0, 0, 0, .4);
 	
-	transition-delay: 0s;
+	/* the app moves up a moment after the menu appears */
+	transition-delay: .1s, 0s, 0s;
 }
 
 .app-unfocused .main,

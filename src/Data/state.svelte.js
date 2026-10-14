@@ -26,6 +26,8 @@ class AppState {
 	congratsShown = $state(localStorage.congratsShown);
 	popupShown = $state(false);
 	menu = $state(false);
+	// the height of the shown menu, kept up to date by the menu itself
+	menuHeight = $state(0);
 	error = $state(false);
 
 
