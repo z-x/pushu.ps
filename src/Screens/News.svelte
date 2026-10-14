@@ -222,15 +222,13 @@
 			{#if message.actionClose}
 				<button
 					onclick={() => action()}
-					class:infoButton-choices="{ message.actionClose && message.actionYes }"
-					class="infoPopup-action"
+					class={['infoPopup-action', message.actionClose && message.actionYes && 'infoButton-choices']}
 				>{@html message.actionClose}</button>
 			{/if}
 			{#if message.actionYes}
 				<button
 					onclick={() => action(news.action)}
-					class:infoButton-choices="{ message.actionClose && message.actionYes }"
-					class="infoPopup-action"
+					class={['infoPopup-action', message.actionClose && message.actionYes && 'infoButton-choices']}
 				>{@html message.actionYes}</button>
 			{/if}
 		</div>

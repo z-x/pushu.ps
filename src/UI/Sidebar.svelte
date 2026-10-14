@@ -108,14 +108,13 @@
 
 <svelte:window onresize={measureActive} />
 
-<aside class="sidebar" class:sidebar-long="{ data.length > 5 }">
+<aside class={['sidebar', data.length > 5 && 'sidebar-long']}>
 	<ul class="sidebar-info">
 		{#each data as item, i}
 			<li
 				bind:this={items[i]}
 				in:appear|global={ {delay: 200 * i, duration: 500} }
-				class="sidebar-info-value" 
-				class:sidebar-info-value-active="{ !appState.isResting && markActive && appState.currentStep === i }"
+				class={['sidebar-info-value', !appState.isResting && markActive && appState.currentStep === i && 'sidebar-info-value-active']}
 				onintroend={() => { if(markActive && appState.currentStep === i){ activeShown = true; } }}
 			>
 				{item}

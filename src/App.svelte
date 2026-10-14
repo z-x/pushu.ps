@@ -96,9 +96,7 @@
 <News />
 
 <main
-	class="app"
-	class:app-unfocused="{ appState.popupShown || appState.menu }"
-	class:app-menuShown="{ appState.menu }"
+	class={['app', (appState.popupShown || appState.menu) && 'app-unfocused', appState.menu && 'app-menuShown']}
 	style:transform={menuOffset ? `translateY(-${menuOffset}px)` : null}
 >
 	<svelte:boundary onerror={screenError}>

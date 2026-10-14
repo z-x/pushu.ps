@@ -99,8 +99,8 @@
 
 <section class="main" in:slide|global="{{ direction: 'in' }}" out:appear|global="{ {duration: 100} }">
 	<div class="content content-readable">
-		<h1 class="text-title moveable" class:visible="{ typeof pushups === 'undefined' }">{string.firstTestYourself}</h1>
-		<p class="text-subtitle moveable" class:visible="{ typeof pushups === 'undefined' }">{string.doAsManyPushups}</p>
+		<h1 class={['text-title', 'moveable', typeof pushups === 'undefined' && 'visible']}>{string.firstTestYourself}</h1>
+		<p class={['text-subtitle', 'moveable', typeof pushups === 'undefined' && 'visible']}>{string.doAsManyPushups}</p>
 		<p class="text-title action-secondary">{string.iDid} <input type="number" placeholder="12" min="0" step="1" bind:value="{ pushups }" oninput={scrollToTop} onchange={filled}> {string.pushups(pushups)}</p>
 		{#if pushups > 2}
 			<p in:appear|global="{{ delay: 500 }}" out:appear|global class="text-subtitle">{string.niceGoRest}</p>
