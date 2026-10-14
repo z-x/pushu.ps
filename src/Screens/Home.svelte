@@ -9,7 +9,7 @@
 	// imports
 	// ------------------------------------------------------------------------
 	import string from '../Data/translations.js';
-	import state from '../Data/state.js';
+	import appState from '../Data/state.svelte.js';
 	import training from '../Data/training.js';
 	import { appear, slide } from '../Helpers/transitions.js';
 	import MainAction from '../UI/MainAction.svelte';
@@ -18,16 +18,16 @@
 
 	// get the training data
 	// ------------------------------------------------------------------------
-	let lastDay = ($state.set !== 1) ? training[$state.level][$state.set]['pushups'].reduce((a, b) => a + b, 0) : 0;
-	$: commingUp = training[$state.level][$state.set]['pushups'].reduce((a, b) => a + b, 0);
-	$: sidebarData = [$state.pushupsLast, commingUp, $state.set];
+	let lastDay = (appState.set !== 1) ? training[appState.level][appState.set]['pushups'].reduce((a, b) => a + b, 0) : 0;
+	let commingUp = $derived(training[appState.level][appState.set]['pushups'].reduce((a, b) => a + b, 0));
+	let sidebarData = $derived([appState.pushupsLast, commingUp, appState.set]);
 
 </script>
 
 
 
 
-<Sidebar data="{ sidebarData }" />
+<Sidebar data={sidebarData} />
 
 <section class="main" out:slide|global="{ {direction: 'out'} }">
 	<div class="content">

@@ -8,20 +8,20 @@
 
 	// imports
 	// ------------------------------------------------------------------------
-	import state from '../Data/state.js';
+	import appState from '../Data/state.svelte.js';
 	import { fade } from 'svelte/transition';
 
 
 	// purpose:	positions the pointer relative to active element
 	// ------------------------------------------------------------------------
-	let position = 0;
+	let position = $state(0);
 
 	function reposition(){
 		if(document.querySelector(`.sidebar-info-value`)){
-			let element = document.querySelector('.sidebar-info-value:nth-child(' + parseInt($state.currentStep + 1) + ')');
+			let element = document.querySelector('.sidebar-info-value:nth-child(' + parseInt(appState.currentStep + 1) + ')');
 			let restingSpace = getComputedStyle(document.documentElement).getPropertyValue('--size-spacing');
 
-			if($state.isResting){
+			if(appState.isResting){
 				position = `calc(${(element.offsetTop + element.offsetHeight)}px + ${restingSpace} / 2)`;
 			} else {
 				position = (element.offsetTop + element.offsetHeight) + 'px';
@@ -30,7 +30,9 @@
 	};
 
 	// repositions the pointer each time the user finishes a set
-	$: $state.currentStep, reposition();
+	$effect(() => {
+		appState.currentStep, reposition();
+	});
 
 </script>
 

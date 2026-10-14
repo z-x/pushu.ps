@@ -10,14 +10,14 @@
 	// ------------------------------------------------------------------------
 	import handleError from '../Helpers/handleError.js';
 	import { onMount } from 'svelte';
-	import state from '../Data/state.js';
+	import appState from '../Data/state.svelte.js';
 	import { fromTop } from '../Helpers/transitions.js';
 
 
 	// component variables
 	// ------------------------------------------------------------------------
 	// the message for the poup
-	let news = null;
+	let news = $state(null);
 
 
 	// get the news
@@ -26,7 +26,7 @@
 		fetch('/data/news.json').then((response) => {
 			return response.json();
 		}).then((data) => {
-			if(data[0].date > $state.lastActive && $state.pushupsTotal > 0){
+			if(data[0].date > appState.lastActive && appState.pushupsTotal > 0){
 				news = data[0];
 			}
 		}).catch((error) => {
@@ -42,7 +42,7 @@
 	function action(toDo){
 		if(!toDo){
 			news = null;
-			state.popupShown(false);
+			appState.setPopupShown(false);
 		}
 		else if (toDo === 'url'){
 			window.open(news.url, '_blank');
@@ -51,7 +51,9 @@
 	};
 
 	// set the state as with popup when needed
-	$: if(news){ state.popupShown(true); } else { state.popupShown(false); }
+	$effect(() => {
+		if(news){ appState.setPopupShown(true); } else { appState.setPopupShown(false); }
+	});
 
 
 	// purpose:		iOS PWA takes the status bar color from the background color
@@ -60,12 +62,14 @@
 	//				css transitions won't work, the status bar will transition
 	//				from white at page load :<
 	// ------------------------------------------------------------------------
-	$: $state.popupShown, transitionBackground();
+	$effect(() => {
+		transitionBackground();
+	});
 
 	let transitionTimeout = '';
 
 	function transitionBackground(){
-		if($state.popupShown){
+		if(appState.popupShown){
 			clearTimeout(transitionTimeout);
 			document.body.classList = 'app-popupShown';
 		} else {
@@ -180,21 +184,21 @@
 
 
 {#if news}
-	<section class="infoPopup" on:click="{ () => action() }">
-		<div on:click|stopPropagation in:fromTop|global="{ {duration: 700, delay: 500} }" out:fromTop|global="{ {duration: 700} }" class="infoPopup-content">
+	<section class="infoPopup" onclick={() => action()}>
+		<div onclick={(event) => event.stopPropagation()} in:fromTop|global="{ {duration: 700, delay: 500} }" out:fromTop|global="{ {duration: 700} }" class="infoPopup-content">
 			<h1 class="infoPopup-heading">{@html news[localStorage.language].title}</h1>
 			{@html news[localStorage.language].content}
 
 			{#if news[localStorage.language].actionClose}
 				<button
-					on:click="{ () => action() }"
+					onclick={() => action()}
 					class:infoButton-choices="{ news[localStorage.language].actionClose && news[localStorage.language].actionYes }"
 					class="infoPopup-action"
 				>{@html news[localStorage.language].actionClose}</button>
 			{/if}
 			{#if news[localStorage.language].actionYes}
 				<button
-					on:click="{ () => action(news.action) }"
+					onclick={() => action(news.action)}
 					class:infoButton-choices="{ news[localStorage.language].actionClose && news[localStorage.language].actionYes }"
 					class="infoPopup-action"
 				>{@html news[localStorage.language].actionYes}</button>

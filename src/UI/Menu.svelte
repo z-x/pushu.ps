@@ -10,36 +10,40 @@
 	// ------------------------------------------------------------------------
 	import { onMount, onDestroy } from 'svelte';
 	import string from '../Data/translations.js';
-	import state from '../Data/state.js';
+	import appState from '../Data/state.svelte.js';
 	import { slide } from '../Helpers/transitions.js';
 
 
 	// properties
 	// ------------------------------------------------------------------------
-	// the id of the menu that is being shown (string)
-	export let menuId = 'Main';
-	// the class name added to the content of the menu (string)
-	export let contentClass = '';
-	// if you want to show the back button (bool)
-	export let allowButtonBack = true;
-	// the back button label (string)
-	export let buttonBackLabel = string.back;
-	// if you want to show the next action set a function that will do something (function)
-	export let buttonNextAction = null;
-	// the next button label (string)
-	export let buttonNextLabel = string.accept;
-	// the modifiers for in transition (object)
-	export let transitionInModifier = {};
-	// the modifiers for the out transition (object)
-	export let transitionOutModifier = {};
-	// if you want the content to have maximum width (bool)
-	export let longContent = false;
+	let {
+		// the id of the menu that is being shown (string)
+		menuId = 'Main',
+		// the class name added to the content of the menu (string)
+		contentClass = '',
+		// if you want to show the back button (bool)
+		allowButtonBack = true,
+		// the back button label (string)
+		buttonBackLabel = string.back,
+		// if you want to show the next action set a function that will do something (function)
+		buttonNextAction = null,
+		// the next button label (string)
+		buttonNextLabel = string.accept,
+		// the modifiers for in transition (object)
+		transitionInModifier = {},
+		// the modifiers for the out transition (object)
+		transitionOutModifier = {},
+		// if you want the content to have maximum width (bool)
+		longContent = false,
+		// the content of the menu
+		children
+	} = $props();
 
 
 	// initialization
 	// ------------------------------------------------------------------------
 	onMount(() => {
-		setMenuHeight($state.menu);
+		setMenuHeight(appState.menu);
 		window.addEventListener('keyup', closeMenuOnEsc);
 	});
 
@@ -79,7 +83,7 @@
 	function closeMenu(){
 		setMenuHeight('', 0);
 
-		return state.setMenu(false);
+		return appState.setMenu(false);
 	};
 
 
@@ -205,14 +209,14 @@
 
 
 
-<svelte:window on:resize="{ () => setMenuHeight(menuId) }" />
+<svelte:window onresize={() => setMenuHeight(menuId)} />
 
-<div id="{menuId}-overlay" class="menu-overlay" on:click="{ closeMenu }"></div>
+<div id="{menuId}-overlay" class="menu-overlay" onclick={closeMenu}></div>
 
 <section id="{menuId}" class="menu" in:slide="{ transitionInModifier }" out:slide="{ transitionOutModifier }">
 	<div class="menu-content {contentClass}">
 		<div class:menu-contentWrapper="{ longContent }">
-			<slot>{string.menuEmpty}</slot>
+			{#if children}{@render children()}{:else}{string.menuEmpty}{/if}
 		</div>
 	</div>
 	{#if allowButtonBack || buttonNextAction}
@@ -221,7 +225,7 @@
 				{#if allowButtonBack}
 					<button
 						class="menu-back"
-						on:click="{ () => state.setMenu('Main') }"
+						onclick={() => appState.setMenu('Main')}
 					>
 						{ buttonBackLabel }
 					</button>
@@ -229,7 +233,7 @@
 				{#if buttonNextAction}
 					<button
 						class="menu-next"
-						on:click="{ () => { buttonNextAction(); closeMenu(); } }"
+						onclick={() => { buttonNextAction(); closeMenu(); }}
 					>
 						{ buttonNextLabel }
 					</button>

@@ -7,14 +7,16 @@
 	// imports
 	// ------------------------------------------------------------------------
 	import { onMount } from 'svelte';
-	import state from '../Data/state.js';
+	import appState from '../Data/state.svelte.js';
 	import string from '../Data/translations.js';
 
 
 	// if menu is closed bring the focus back to menu toggle
-	$: if(!$state.menu){
-		document.querySelector('.menu-toggle')?.focus();	
-	}
+	$effect(() => {
+		if(!appState.menu){
+			document.querySelector('.menu-toggle')?.focus();	
+		}
+	});
 
 
 </script>
@@ -51,7 +53,7 @@
 
 
 <button
-	on:click="{ (event) => { state.setMenu('Main'); } }"
+	onclick={(event) => { appState.setMenu('Main'); }}
 	class="menu-toggle"
 	title="{string.showMenu}"
 >

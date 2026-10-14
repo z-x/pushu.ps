@@ -8,8 +8,7 @@
 
 	// imports
 	// ------------------------------------------------------------------------
-	import { createEventDispatcher } from 'svelte';
-	import state from '../Data/state.js';
+	import appState from '../Data/state.svelte.js';
 	import MenuToggle from '../UI/MenuToggle.svelte';
 	import { appear } from '../Helpers/transitions.js';
 	import SidebarIndicator from '../UI/SidebarIndicator.svelte';
@@ -17,17 +16,20 @@
 
 	// properties
 	// ------------------------------------------------------------------------
-	// the data that will be applied to sidebar (string or array)
-	export let data = [];
-	// do you want to mark the active item (bool)
-	export let markActive = false;
+	let {
+		// the data that will be applied to sidebar (string or array)
+		data = [],
+		// do you want to mark the active item (bool)
+		markActive = false,
+		// the function to call when the active item is shown (function)
+		onActiveLoaded
+	} = $props();
 
 
 	// local variables
 	// ------------------------------------------------------------------------
-	let dispatch = new createEventDispatcher();
 	// the active mark switch
-	let showSidebarIndicator = false;
+	let showSidebarIndicator = $state(false);
 
 </script>
 
@@ -91,13 +93,13 @@
 			<li
 				in:appear|global={ {delay: 200 * i, duration: 500} }
 				class="sidebar-info-value" 
-				class:sidebar-info-value-active="{ !$state.isResting && markActive && $state.currentStep === i }"
-				on:introend="{ () => { if($state.currentStep === i){ showSidebarIndicator = true; dispatch('activeLoaded'); } }  }"
+				class:sidebar-info-value-active="{ !appState.isResting && markActive && appState.currentStep === i }"
+				onintroend={() => { if(appState.currentStep === i){ showSidebarIndicator = true; onActiveLoaded?.(); } }}
 			>
 				{item}
 			</li>
 		{/each}
 	</ul>
-	{#if markActive && showSidebarIndicator } <SidebarIndicator /> {/if}
+	{#if markActive && showSidebarIndicator} <SidebarIndicator /> {/if}
 	<MenuToggle />
 </aside>
