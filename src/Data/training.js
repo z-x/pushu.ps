@@ -268,6 +268,6 @@ const dev = {
 
 // exports
 // ------------------------------------------------------------------------
-const final = (process.env.NODE_ENV === 'development') ? dev : training;
+const final = (import.meta.env.DEV) ? dev : training;
 
 export default final;
