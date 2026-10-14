@@ -54,6 +54,31 @@
 	};
 
 
+	// purpose:		shows the popup as a modal dialog, so it takes the focus,
+	//				blocks the page under it and can be closed with Esc
+	// arguments:	the dialog element
+	// ------------------------------------------------------------------------
+	function showModal(dialog){
+		dialog.showModal();
+	};
+
+	// purpose:		closes the popup when clicked outside of its content
+	// ------------------------------------------------------------------------
+	function closeOnBackdrop(event){
+		if(event.target === event.currentTarget){
+			action();
+		}
+	};
+
+	// purpose:		closes the popup on Esc with the animation, instead of
+	//				the instant closing done by the browser
+	// ------------------------------------------------------------------------
+	function closeOnEsc(event){
+		event.preventDefault();
+		action();
+	};
+
+
 	// purpose:		iOS PWA takes the status bar color from the background color
 	//				this means we need to change it when popup appears
 	//				compensating for animation times
@@ -84,14 +109,21 @@
 <style>
 
 	.infoPopup {
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		z-index: 100;
+		width: 100%;
+		height: 100%;
+		max-width: none;
+		max-height: none;
+		margin: 0;
+		padding: 0;
+		overflow: visible;
 
+		border: 0;
+		background: none;
 		color: var(--color-pureContent);
+	}
+
+	.infoPopup::backdrop {
+		background: none;
 	}
 
 	.infoPopup-content {
@@ -182,8 +214,8 @@
 
 
 {#if news}
-	<section class="infoPopup" onclick={() => action()}>
-		<div onclick={(event) => event.stopPropagation()} in:fromTop|global="{ {duration: 700, delay: 500} }" out:fromTop|global="{ {duration: 700} }" class="infoPopup-content">
+	<dialog class="infoPopup" {@attach showModal} onclick={closeOnBackdrop} oncancel={closeOnEsc}>
+		<div in:fromTop|global="{ {duration: 700, delay: 500} }" out:fromTop|global="{ {duration: 700} }" class="infoPopup-content">
 			<h1 class="infoPopup-heading">{@html message.title}</h1>
 			{@html message.content}
 
@@ -202,5 +234,5 @@
 				>{@html message.actionYes}</button>
 			{/if}
 		</div>
-	</section>
+	</dialog>
 {/if}
