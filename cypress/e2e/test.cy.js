@@ -182,8 +182,12 @@ describe('Menu', () => {
 
 	it('Reset the app', () => {
 		localStorage.page = 'Home';
-		localStorage.level = 1;
-		localStorage.set = 1;
+		localStorage.level = 2;
+		localStorage.set = 2;
+		localStorage.pushupsLast = 40;
+		localStorage.pushupsTotal = 120;
+		localStorage.congratsShown = true;
+		localStorage.language = 'en-US';
 
 		cy.visit('/');
 		cy.get('.menu-toggle').click();
@@ -191,6 +195,23 @@ describe('Menu', () => {
 		cy.contains('I am sure').click();
 
 		cy.contains('Hello there');
+
+		// the progress is cleared but the settings are kept
+		cy.window().its('localStorage').should((storage) => {
+			expect(storage.language).to.equal('en-US');
+			expect(storage.level).to.be.undefined;
+			expect(storage.set).to.be.undefined;
+			expect(storage.pushupsLast).to.be.undefined;
+			expect(storage.pushupsTotal).to.be.undefined;
+			expect(storage.congratsShown).to.be.undefined;
+		});
+
+		// and the cleared progress is not shown after starting again
+		cy.contains('Ok, I want to start').click();
+		cy.get('input[type="number"]').type('2');
+		cy.contains('Ok, what’s next?').click();
+		cy.get('.sidebar-info li:nth-child(1)').contains('0');
+		cy.get('.sidebar-info li:nth-child(3)').contains('1');
 	});
 
 });

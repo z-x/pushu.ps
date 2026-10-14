@@ -8,6 +8,12 @@
 
 
 
+// the local storage keys with the user progress, removed when the app is reset
+// the settings (like the chosen language) are not listed here, so they are kept
+const progressKeys = ['page', 'level', 'set', 'currentStep', 'isResting', 'pushupsLast', 'pushupsTotal', 'congratsShown'];
+
+
+
 // purpose:		holds the reactive app state
 // ************************************************************************
 class AppState {
@@ -115,6 +121,25 @@ class AppState {
 	setCongrats(were){
 		this.congratsShown = were;
 		localStorage.congratsShown = were;
+	};
+
+
+	// purpose:		clears the user progress and starts the app from the beginning
+	//				while keeping the user settings
+	// ------------------------------------------------------------------------
+	reset(){
+		for(let key of progressKeys){
+			localStorage.removeItem(key);
+		}
+
+		this.page = 'Hello';
+		this.level = 1;
+		this.set = 1;
+		this.currentStep = 0;
+		this.isResting = 0;
+		this.pushupsLast = 0;
+		this.pushupsTotal = 0;
+		this.congratsShown = undefined;
 	};
 
 
