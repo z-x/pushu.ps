@@ -1,6 +1,8 @@
 // the cache name that will invalidate the cached files when changed (string)
+// the version placeholder is replaced on every build with a hash of the built files
+// (see vite.config.mjs), so returning users get the files of a new deploy
 // ------------------------------------------------------------------------
-const cacheName = 'pushups-v4.7';
+const cacheName = 'pushups-__BUILD_VERSION__';
 
 
 // basic list of files that require caching (array)
@@ -52,10 +54,34 @@ function endsWithAny(suffixes, string) {
 // ------------------------------------------------------------------------
 self.addEventListener('install', (event) => {
 
-	// load requested files into cache
+	// load requested files into cache, skipping the browser cache
+	// so the new cache would not get the files of the previous version
 	event.waitUntil((async() => {
 		const cache = await caches.open(cacheName);
-		await cache.addAll(cacheFiles);
+		await cache.addAll(cacheFiles.map((file) => new Request(file, { cache: 'reload' })));
+	})());
+
+	// use the new version right away instead of waiting for all the app
+	// windows to be closed, the new files are used on the next app launch
+	self.skipWaiting();
+
+});
+
+
+// what will happen when the new version of the service worker takes over
+// ------------------------------------------------------------------------
+self.addEventListener('activate', (event) => {
+
+	// remove the files cached by the previous versions
+	event.waitUntil((async() => {
+		const cacheNames = await caches.keys();
+
+		await Promise.all(cacheNames
+			.filter((name) => name !== cacheName)
+			.map((name) => caches.delete(name))
+		);
+
+		await self.clients.claim();
 	})());
 
 });
