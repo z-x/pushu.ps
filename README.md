@@ -28,12 +28,13 @@ To run the dev server you just need to run
 
 	npm run dev
 
-It should run the server at http://localhost:5000 by default so you can just type this into your browser navigation bar and you should see the app.
+It should run the server at http://localhost:8080 by default so you can just type this into your browser navigation bar and you should see the app.
 
 When runing the server this way you are also loading the developement version of the training. This means that it will be a short training with quick breaks between sets. This allows you to test faster.
 
-You can also run the server with the production version of training with
+You can also build the app and serve the production version of training with
 
+	npm run build
 	npm run start
 
 The code includes comments for easier understanding if you are looking for any particular solution. I am aware it could be better in places, but please keep in mind that this is just a side project done after hours.
@@ -45,12 +46,12 @@ To build the optimized and pure JavaScript package you need to run
 
 	npm run build
 	
-The output will be placed in `public` directory.
+The output will be placed in `dist` directory.
 
 
 Production vs Developement
 ----
-The app knows it should run in production mode when it finds the environment variable `NODE_ENV` set to `production`. It runs in developement mode otherwise.
+The app runs in developement mode with `npm run dev` or when it is built with the environment variable `NODE_ENV` set to `development` (as on Vercel preview deployments). It runs in production mode otherwise.
 
 The main difference is that in `production` mode it uses a real training data while on developement mode it just uses simplified version of training.
 
@@ -69,7 +70,7 @@ This project uses GitHub Actions to automatically test each new pull request. Th
 Tech stack
 ----
 - [Svelte](https://svelte.dev) as a front-end framework
-- [Rollup.js](https://rollupjs.org/guide/en/) as a module bundler
+- [Vite](https://vite.dev) for the dev server and builds
 - [Cypress](https://cypress.io) for end to end testing
 - [Vercel](https://vercel.com) for deployments
 - [GitHub Actions](https://github.com/features/actions) for CI/CD

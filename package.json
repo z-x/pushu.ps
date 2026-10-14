@@ -14,25 +14,15 @@
 		"url": "https://github.com/z-x/pushu.ps.git"
 	},
 	"scripts": {
-		"build": "rollup -c",
-		"dev": "cross-env NODE_ENV=development rollup -c -w",
-		"start": "cross-env NODE_ENV=production sirv public --no-clear",
+		"dev": "vite",
+		"build": "vite build",
+		"start": "vite preview",
 		"test": "npx cypress open"
 	},
 	"devDependencies": {
-		"@rollup/plugin-commonjs": "^29.0.3",
-		"@rollup/plugin-node-resolve": "^16.0.3",
-		"@rollup/plugin-replace": "^6.0.3",
-		"@rollup/plugin-terser": "^1.0.0",
-		"cross-env": "^10.1.0",
+		"@sveltejs/vite-plugin-svelte": "^7.3.1",
 		"cypress": "^16.1.1",
-		"rollup": "^4.64.6",
-		"rollup-plugin-css-only": "^4.5.5",
-		"rollup-plugin-livereload": "^2.0.5",
-		"rollup-plugin-svelte": "^7.2.3",
-		"svelte": "^5.57.2"
-	},
-	"dependencies": {
-		"sirv-cli": "^3.0.1"
+		"svelte": "^5.57.2",
+		"vite": "^8.3.4"
 	}
 }
