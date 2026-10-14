@@ -4,3 +4,4 @@
 /cypress/videos/
 
 .DS_Store
+.env
