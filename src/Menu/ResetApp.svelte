@@ -13,17 +13,13 @@
 	import Menu from '../UI/Menu.svelte';
 
 
-	// purpose:		resets all the app data
+	// purpose:		resets the user progress, the settings are kept
 	// returns:		dispatches a 'appReset' event and redirects to Hello page
 	// ------------------------------------------------------------------------
 	function resetApp(){
 		window.dispatchEvent(new CustomEvent('appReset'));
 
-		localStorage.clear();
-		appState.setLevel(1);
-		appState.setSet(1);
-		appState.setStep(0);
-		appState.setPage('Hello');
+		appState.reset();
 	};
 
 </script>
