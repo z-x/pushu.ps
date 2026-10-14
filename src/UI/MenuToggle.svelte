@@ -10,12 +10,28 @@
 	import string from '../Data/translations.js';
 
 
-	// purpose:		if menu is closed bring the focus back to menu toggle
+	// variables
+	// ------------------------------------------------------------------------
+	// if the menu was open the last time we checked (bool)
+	let wasOpen = false;
+	// if the last user interaction was with the keyboard (bool)
+	let usingKeyboard = false;
+
+
+	// purpose:		when the menu closes bring the focus back to menu toggle,
+	//				but only for keyboard users that were inside the menu,
+	//				so it doesn't show the focus ring on app start or after a tap
 	// arguments:	the toggle button element
 	// ------------------------------------------------------------------------
 	function focusWhenMenuClosed(toggle){
-		if(!appState.menu){
-			toggle.focus();
+		if(appState.menu){
+			wasOpen = true;
+		} else if(wasOpen){
+			wasOpen = false;
+
+			if(usingKeyboard && document.activeElement?.closest('.menu')){
+				toggle.focus();
+			}
 		}
 	};
 
@@ -52,6 +68,11 @@
 
 
 
+
+<svelte:window
+	onkeydown={() => usingKeyboard = true}
+	onpointerdown={() => usingKeyboard = false}
+/>
 
 <button
 	{@attach focusWhenMenuClosed}

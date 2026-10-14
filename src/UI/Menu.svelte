@@ -180,8 +180,8 @@
 
 <!-- the app screen is moved up by the menu height, see App.svelte -->
 <section class="menu" bind:offsetHeight={appState.menuHeight} in:slide="{ transitionInModifier }" out:slide="{ transitionOutModifier }">
-	<div class="menu-content {contentClass}">
-		<div class:menu-contentWrapper="{ longContent }">
+	<div class={['menu-content', contentClass]}>
+		<div class={[longContent && 'menu-contentWrapper']}>
 			{#if children}{@render children()}{:else}{string.menuEmpty}{/if}
 		</div>
 	</div>
