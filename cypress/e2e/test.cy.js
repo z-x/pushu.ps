@@ -237,4 +237,19 @@ describe('User interface', () => {
 		cy.get('.sidebar-info-indicator').should('have.css', 'transform', 'matrix(1, 0, 0, 1, 0, 122)');
 	});
 
+	it('Starts the next training from the first step after cancelling during the rest', () => {
+		localStorage.page = 'Training';
+		localStorage.level = 1;
+		localStorage.set = 1;
+
+		cy.visit('/');
+		cy.contains('I made it').click();
+		cy.contains('Skip the wait');
+		cy.get('.menu-toggle').last().click();
+		cy.contains('Cancel this training').click();
+		cy.contains('Yes').click();
+		cy.contains('Start next training').click();
+		cy.get('.sidebar-info li:nth-child(1)').should('have.class', 'sidebar-info-value-active');
+	});
+
 });

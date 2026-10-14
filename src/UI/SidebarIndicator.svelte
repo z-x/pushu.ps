@@ -12,27 +12,21 @@
 	import { fade } from 'svelte/transition';
 
 
-	// purpose:	positions the pointer relative to active element
+	// properties
 	// ------------------------------------------------------------------------
-	let position = $state(0);
+	let {
+		// the position of the active sidebar item ({top, height})
+		position
+	} = $props();
 
-	function reposition(){
-		if(document.querySelector(`.sidebar-info-value`)){
-			let element = document.querySelector('.sidebar-info-value:nth-child(' + parseInt(appState.currentStep + 1) + ')');
-			let restingSpace = getComputedStyle(document.documentElement).getPropertyValue('--size-spacing');
 
-			if(appState.isResting){
-				position = `calc(${(element.offsetTop + element.offsetHeight)}px + ${restingSpace} / 2)`;
-			} else {
-				position = (element.offsetTop + element.offsetHeight) + 'px';
-			}
-		}
-	};
-
-	// repositions the pointer each time the user finishes a set
-	$effect(() => {
-		appState.currentStep, reposition();
-	});
+	// purpose:	positions the pointer under the active item
+	//			and a bit lower when the user is resting
+	// ------------------------------------------------------------------------
+	let offset = $derived(appState.isResting
+		? `calc(${position.top + position.height}px + var(--size-spacing) / 2)`
+		: `${position.top + position.height}px`
+	);
 
 </script>
 
@@ -59,5 +53,5 @@
 <div
 	in:fade|global="{ {duration: 200} }"
 	class="sidebar-info-indicator"
-	style="transform: translateY({ position })"
+	style:transform="translateY({ offset })"
 ></div>
