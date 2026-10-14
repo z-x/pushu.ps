@@ -10,6 +10,7 @@
 	// ------------------------------------------------------------------------
 	import string from '../Data/translations.js';
 	import { appear, slide } from '../Helpers/transitions.js';
+	import install from '../Helpers/install.svelte.js';
 	import MainAction from '../UI/MainAction.svelte';
 	import Sidebar from '../UI/Sidebar.svelte';
 
@@ -41,6 +42,22 @@
 		background-position: right center;
 	}
 
+	.hello-install {
+		margin-top: 1rem;
+		padding-right: 2em;
+		display: inline-block;
+
+		background-image: var(--icon-arrowRight);
+		background-position: right center;
+		background-repeat: no-repeat;
+		background-size: 1.5em;
+
+		text-transform: uppercase;
+		font-size: .75rem;
+
+		user-select: none;
+	}
+
 </style>
 
 
@@ -57,6 +74,10 @@
 		{/if}
 		{#if isAndroid}
 			<p in:appear|global="{ {delay: 1500} }" class="text-note note-android">{string.saveAppAndroid}</p>
+		{/if}
+		<!-- only in browsers that offered installing the app -->
+		{#if install.available}
+			<button in:appear|global="{ {delay: 1500} }" class="hello-install" onclick={() => install.prompt()}>{string.installApp}</button>
 		{/if}
 	</div>
 

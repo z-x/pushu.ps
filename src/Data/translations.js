@@ -85,6 +85,11 @@ let translations = {
 		'pl-PL': 'Zamknij menu'
 	},
 
+	installApp: {
+		'en-US': 'Install the app',
+		'pl-PL': 'Zainstaluj apkę'
+	},
+
 	errorDismiss: {
 		'en-US': 'Dismiss this message',
 		'pl-PL': 'Schowaj tę informację'
@@ -120,12 +125,12 @@ let translations = {
 
 	saveAppApple: {
 		'en-US': 'If you are using an iPhone, you need to add this website to your Home Screen for it to remember the data',
-		'pl-PL': 'Na urządzeniach Apple musisz dodać tę apkę do swojego ekranu domowego, inaczej dane o Twoich postępach mogą zostać usunięte.'
+		'pl-PL': 'Na urządzeniach Apple musisz dodać tę apkę do swojego ekranu domowego, inaczej dane o Twoich postępach mogą zostać usunięte'
 	},
 
 	saveAppAndroid: {
-		'en-US': 'You can add this website to your Home Screen to access it quicker next time',
-		'pl-PL': 'Możesz zainstalować tę apkę na swoim ekranie głównym, żeby mieć do niej szybszy dostęp.'
+		'en-US': 'You can install this app on your Home Screen for easier access',
+		'pl-PL': 'Możesz zainstalować tę apkę na swoim ekranie głównym, żeby mieć do niej szybszy dostęp'
 	},
 
 	wantToStart: {

@@ -11,6 +11,7 @@
 	import appState from '../Data/state.svelte.js';
 	import string from '../Data/translations.js';
 	import Menu from '../UI/Menu.svelte';
+	import install from '../Helpers/install.svelte.js';
 
 
 	// purpose:		focuses the first menu item for keyboard users
@@ -112,6 +113,15 @@
 				{string.instructions}
 			</button>
 		</li>
+
+		<!-- only in browsers that offered installing the app -->
+		{#if install.available}
+			<li class="menu-item">
+				<button onclick={() => install.prompt()}>
+					{string.installApp}
+				</button>
+			</li>
+		{/if}
 
 		{#if appState.page === 'Hello' || appState.page === 'Home'}
 			<li class="menu-item">
