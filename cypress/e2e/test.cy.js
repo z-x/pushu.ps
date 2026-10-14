@@ -220,6 +220,17 @@ describe('News', () => {
 		cy.get('.infoPopup-content').should('not.exist');
 	});
 
+	it('Closes the news popup by clicking outside of it', () => {
+		localStorage.lastActive = 5555;
+		localStorage.page = 'Home';
+		localStorage.pushupsTotal = 5;
+
+		cy.visit('/');
+		cy.get('.infoPopup-content').should('be.visible');
+		cy.get('.infoPopup').click('bottom');
+		cy.get('.infoPopup-content').should('not.exist');
+	});
+
 });
 
 
@@ -250,6 +261,16 @@ describe('User interface', () => {
 		cy.contains('Yes').click();
 		cy.contains('Start next training').click();
 		cy.get('.sidebar-info li:nth-child(1)').should('have.class', 'sidebar-info-value-active');
+	});
+
+	it('Shows a fallback screen when a screen fails to render', () => {
+		localStorage.page = 'Home';
+		localStorage.level = 99;
+
+		cy.visit('/');
+		cy.contains('Something went wrong while showing this screen.');
+		cy.contains('Try again');
+		cy.get('.menu-toggle').should('be.visible');
 	});
 
 });

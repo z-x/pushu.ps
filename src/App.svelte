@@ -5,6 +5,8 @@
 	import Analytics from './Helpers/Analytics.svelte';
 	import ErrorMessage from './UI/Error.svelte';
 	import handleError from './Helpers/handleError.js';
+	import MainAction from './UI/MainAction.svelte';
+	import Sidebar from './UI/Sidebar.svelte';
 
 	// pages
 	// ------------------------------------------------------------------------
@@ -80,6 +82,15 @@
 	});
 
 
+	// purpose:		logs the error when a screen fails to render, the user
+	//				is shown a fallback screen instead of a blank page
+	// arguments:	the error thrown while rendering the screen
+	// ------------------------------------------------------------------------
+	function screenError(error){
+		new handleError(string.errorScreen, false, error);
+	};
+
+
 	// if user came here after a day, reset his training or test
 	// ------------------------------------------------------------------------
 	if((Date.now() - appState.lastActive > 86400000)){
@@ -105,7 +116,21 @@
 	class:app-unfocused="{ appState.popupShown || appState.menu }"
 	class:app-menuShown="{ appState.menu }"
 >
-	<Page />
+	<svelte:boundary onerror={screenError}>
+		<Page />
+
+		{#snippet failed(error, reset)}
+			<Sidebar />
+
+			<section class="main">
+				<div class="content content-readable">
+					<p class="text-title">{string.errorScreen}</p>
+				</div>
+
+				<MainAction onMainAction={reset}>{string.errorTryAgain}</MainAction>
+			</section>
+		{/snippet}
+	</svelte:boundary>
 </main>
 
 {#if appState.menu}

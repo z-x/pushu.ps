@@ -80,6 +80,11 @@ let translations = {
 		'pl-PL': 'Pokaż menu'
 	},
 
+	closeMenu: {
+		'en-US': 'Close menu',
+		'pl-PL': 'Zamknij menu'
+	},
+
 	errorDismiss: {
 		'en-US': 'Dismiss this message',
 		'pl-PL': 'Schowaj tę informację'
@@ -88,6 +93,16 @@ let translations = {
 	errorServiceWorker: {
 		'en-US': 'For unknown reason the offline mode was not initialized. The app will work, but you need the internet connection.',
 		'pl-PL': 'Z jakiegoś powodu nie udało się uruchomić trybu offline. Applikacja będzie działała, ale wymaga połączenia z internetem.'
+	},
+
+	errorScreen: {
+		'en-US': 'Something went wrong while showing this screen.',
+		'pl-PL': 'Coś poszło nie tak podczas wyświetlania tego ekranu.'
+	},
+
+	errorTryAgain: {
+		'en-US': 'Try again',
+		'pl-PL': 'Spróbuj ponownie'
 	},
 
 

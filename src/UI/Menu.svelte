@@ -204,7 +204,14 @@
 
 <svelte:window onresize={() => setMenuHeight(menuId)} onkeyup={closeMenuOnEsc} />
 
-<div id="{menuId}-overlay" class="menu-overlay" onclick={closeMenu}></div>
+<!-- keyboard users close the menu with Esc or the back button, so the overlay is left out of the tab order -->
+<button
+	id="{menuId}-overlay"
+	class="menu-overlay"
+	onclick={closeMenu}
+	aria-label={string.closeMenu}
+	tabindex="-1"
+></button>
 
 <section id="{menuId}" class="menu" in:slide="{ transitionInModifier }" out:slide="{ transitionOutModifier }">
 	<div class="menu-content {contentClass}">
