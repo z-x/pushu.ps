@@ -28,7 +28,7 @@
 
 	// stores
 	// ------------------------------------------------------------------------
-	import state from './Data/state.js';
+	import appState from './Data/state.js';
 	import translations from './Data/translations.js';
 
 
@@ -36,6 +36,10 @@
 	// ------------------------------------------------------------------------
 	let pages = {Hello, Test, Home, Training, Finish, Congrats};
 	let menus = {Main, ResetApp, ManualTrainingLevel, Instructions, PrivacyPolicy, CancelTraining, ManualLanguage};
+
+	// currently shown page and menu components
+	let Page = $derived(pages[$appState.page]);
+	let MenuScreen = $derived(menus[$appState.menu]);
 
 
 	// if iOS app in fullscreen mode add class
@@ -67,7 +71,7 @@
 			deferredInstallPrompt = event;
 		});
 
-		if($state.page === 'Home' && localStorage.installPromptShown === 'false' && deferredInstallPrompt){
+		if($appState.page === 'Home' && localStorage.installPromptShown === 'false' && deferredInstallPrompt){
 			deferredInstallPrompt.prompt();
 			localStorage.installPromptShown = true;
 
@@ -79,17 +83,16 @@
 
 	// if user came here after a day, reset his training or test
 	// ------------------------------------------------------------------------
-	if((Date.now() - $state.lastActive > 86400000)){
-		if($state.page === 'Training') {
-			state.setStep(0);
-			state.isResting(0);
-			state.setPage('Home');
+	if((Date.now() - $appState.lastActive > 86400000)){
+		if($appState.page === 'Training') {
+			appState.setStep(0);
+			appState.isResting(0);
+			appState.setPage('Home');
 		}
-		else if($state.page === 'Test'){
-			state.setPage('Hello');
+		else if($appState.page === 'Test'){
+			appState.setPage('Hello');
 		}
 	}
-
 
 </script>
 
@@ -100,14 +103,14 @@
 
 <main
 	class="app"
-	class:app-unfocused="{ $state.popupShown || $state.menu }"
-	class:app-menuShown="{ $state.menu }"
+	class:app-unfocused="{ $appState.popupShown || $appState.menu }"
+	class:app-menuShown="{ $appState.menu }"
 >
-	<svelte:component this="{ pages[$state.page] }" />
+	<Page />
 </main>
 
-{#if $state.menu}
-	<svelte:component this="{ menus[$state.menu] }" />
+{#if $appState.menu}
+	<MenuScreen />
 {/if}
 
 <Error />

@@ -9,7 +9,7 @@
 	// imports
 	// ------------------------------------------------------------------------
 	import { onMount } from 'svelte';
-	import state from '../Data/state.js';
+	import appState from '../Data/state.js';
 	import string from '../Data/translations.js';
 	import Menu from '../UI/Menu.svelte';
 
@@ -76,53 +76,53 @@
 
 <Menu
 	menuId="Main"
-	allowButtonBack="{ false }"
-	transitionInModifier="{ {direction: 'out'} }"
-	transitionOutModifier="{ {direction: 'out'} }"
+	allowButtonBack={false}
+	transitionInModifier={{direction: 'out'}}
+	transitionOutModifier={{direction: 'out'}}
 >
 	<ul class="menu-items">
 
-		{#if $state.page === 'Home'}
+		{#if $appState.page === 'Home'}
 			<li class="menu-item">
-				<button on:click="{ () => state.setMenu('ResetApp') }">
+				<button onclick={() => appState.setMenu('ResetApp')}>
 					{string.resetApp}
 				</button>
 			</li>
 		{/if}
 
-		{#if $state.page === 'Home' || $state.page === 'Hello' || $state.page === 'Test'}
+		{#if $appState.page === 'Home' || $appState.page === 'Hello' || $appState.page === 'Test'}
 			<li class="menu-item">
-				<button on:click="{ () => state.setMenu('ManualTrainingLevel') }">
+				<button onclick={() => appState.setMenu('ManualTrainingLevel')}>
 					{string.manuallySetTrainingLevel}
 				</button>
 			</li>
 		{/if}
 
-		{#if $state.page === 'Training' || $state.page === 'Finish'}
+		{#if $appState.page === 'Training' || $appState.page === 'Finish'}
 			<li class="menu-item">
-				<button on:click="{ () => state.setMenu('CancelTraining') }">
+				<button onclick={() => appState.setMenu('CancelTraining')}>
 					{string.cancelTraining}
 				</button>
 			</li>
 		{/if}
 
 		<li class="menu-item">
-			<button on:click="{ () => state.setMenu('Instructions') }">
+			<button onclick={() => appState.setMenu('Instructions')}>
 				{string.instructions}
 			</button>
 		</li>
 
-		{#if $state.page === 'Hello' || $state.page === 'Home'}
+		{#if $appState.page === 'Hello' || $appState.page === 'Home'}
 			<li class="menu-item">
-				<button on:click="{ () => state.setMenu('ManualLanguage') }">
+				<button onclick={() => appState.setMenu('ManualLanguage')}>
 					{string.setLanguage}
 				</button>
 			</li>
 		{/if}
 	
-		{#if $state.page !== 'Training'}
+		{#if $appState.page !== 'Training'}
 			<li class="menu-item">
-				<button on:click="{ () => state.setMenu('PrivacyPolicy') }">
+				<button onclick={() => appState.setMenu('PrivacyPolicy')}>
 					{string.privacyPolicy}
 				</button>
 			</li>

@@ -8,7 +8,7 @@
 
 	// imports
 	// ------------------------------------------------------------------------
-	import state from '../Data/state.js';
+	import appState from '../Data/state.js';
 	import string from '../Data/translations.js';
 	import { appear, slide } from '../Helpers/transitions.js';
 	import MainAction from '../UI/MainAction.svelte';
@@ -19,8 +19,8 @@
 	// return:		redirects to home screen
 	// ------------------------------------------------------------------------
 	function accept(){
-		state.setCongrats(true);
-		state.setPage('Home');
+		appState.setCongrats(true);
+		appState.setPage('Home');
 	};
 
 </script>
@@ -87,5 +87,5 @@
 		<p in:appear|global="{ {delay: 1000, duration: 600} }" class="text-subtitle">{string.respects}</p>
 	</div>
 
-	<MainAction delay="1300" on:mainAction="{ accept }">{string.thanks}</MainAction>
+	<MainAction delay="1300" onMainAction={accept}>{string.thanks}</MainAction>
 </section>

@@ -10,7 +10,7 @@
 	// ------------------------------------------------------------------------
 	import { onMount, onDestroy } from 'svelte';
 	import string from '../Data/translations.js';
-	import state from '../Data/state.js';
+	import appState from '../Data/state.js';
 	import training from '../Data/training.js';
 	import { slide } from '../Helpers/transitions.js';
 	import NoSleep from '../Helpers/noSleep.js';
@@ -42,7 +42,7 @@
 	// get the training data
 	// ------------------------------------------------------------------------
 	// current set
-	let currentSet = training[$state.level][$state.set];
+	let currentSet = training[$appState.level][$appState.set];
 	// the current pushups set
 	let currentPushups = currentSet['pushups'];
 
@@ -50,17 +50,17 @@
 	// purpose:		position the counter relative to sidebar value
 	//				for current set
 	// ------------------------------------------------------------------------
-	let counterPosition = 0;
+	let counterPosition = $state(0);
 
 	function positionCounter(){
 		// the function runs before the dom is updates so we need to check
 		if(document.querySelector('.sidebar-info-value')){
 			// the offset position of the current pushups value in sidebar
-			let sidebarValuePosition = document.querySelector(`.sidebar-info-value:nth-child(${ parseInt($state.currentStep) + 1 })`).offsetTop + 'px';
+			let sidebarValuePosition = document.querySelector(`.sidebar-info-value:nth-child(${ parseInt($appState.currentStep) + 1 })`).offsetTop + 'px';
 			// the margin added for the counter when resting is active
 			let restingMargin = 0;
 
-			if($state.isResting){
+			if($appState.isResting){
 				restingMargin = getComputedStyle(document.documentElement).getPropertyValue('--size-spacing');
 				counterPosition =  'calc(' + sidebarValuePosition + ' + ' + restingMargin + ' * 1.5)';
 			} else {
@@ -71,26 +71,28 @@
 	
 	// repositions the counter each time the resting phase is activated
 	// or when the pushups to be made is changed
-	$: $state.isResting, $state.currentStep, positionCounter();
+	$effect(() => {
+		$appState.isResting, $appState.currentStep, positionCounter();
+	});
 
 
 	// purpose:		moves the user to next step of pushups/resting
 	// ------------------------------------------------------------------------
 	function nextStep(){
 		// if it was the last pushups to make
-		if($state.currentStep === currentPushups.length-1){
+		if($appState.currentStep === currentPushups.length-1){
 			// update the user info about the amount of pushups he just did
-			state.lastSet(currentPushups.reduce((a, b) => a + b, 0));
+			appState.lastSet(currentPushups.reduce((a, b) => a + b, 0));
 			// and add those to the total he made
-			state.totalUpdate(currentPushups.reduce((a, b) => a + b, 0));
+			appState.totalUpdate(currentPushups.reduce((a, b) => a + b, 0));
 
 			// finally redirect the user to the finish screen
-			state.setPage('Finish');
+			appState.setPage('Finish');
 		}
 		// if there are more to do
 		else {
 			rest().then(() => {
-				state.setStep($state.currentStep + 1);
+				appState.setStep($appState.currentStep + 1);
 			});
 		}
 	};
@@ -101,7 +103,7 @@
 	// the time to rest for current set
 	let defaultRest = currentSet['rest'];
 	// the counter for current rest time left
-	let currentRest = defaultRest;
+	let currentRest = $state(defaultRest);
 	// the interval for resting behaviour
 	let restInterval;
 	// the alert sounds
@@ -114,7 +116,7 @@
 		return new Promise((resolve, reject) => {
 			restingPromiseResolve = resolve;
 
-			state.isResting(1);
+			appState.isResting(1);
 
 			restInterval = setInterval(() => {
 				currentRest--;
@@ -137,7 +139,7 @@
 	// ------------------------------------------------------------------------
 	function finishResting(){
 		clearInterval(restInterval);
-		state.isResting(0);
+		appState.isResting(0);
 		currentRest = defaultRest;
 		if(restingPromiseResolve){
 			restingPromiseResolve();
@@ -145,10 +147,10 @@
 	};
 
 	// when user closed the app before finishing the rest, let's resume the rest
-	if($state.isResting){ nextStep(); }
+	if($appState.isResting){ nextStep(); }
 
 	// every time the currentRest variable is changing updates the counter in html
-	$: secondsFormated = string.seconds(currentRest);
+	let secondsFormated = $derived(string.seconds(currentRest));
 
 </script>
 
@@ -199,7 +201,7 @@
 
 
 
-<Sidebar data="{ currentPushups }" markActive="{ true }" on:activeLoaded="{ positionCounter }" />
+<Sidebar data={currentPushups} markActive={true} onActiveLoaded={positionCounter} />
 
 <section class="main" in:slide|global out:slide|global="{ {direction: 'out'} }">
 
@@ -207,23 +209,23 @@
 		<div class="content-training" style="transform: translateY({ counterPosition })">
 		{#if counterPosition}
 			<div in:slide|global>
-				{#if !$state.isResting}
+				{#if !$appState.isResting}
 					{string.perform}
-					<strong class="training-number">{ currentPushups[$state.currentStep] }</strong>
-					{string.pushups(currentPushups[$state.currentStep])}
+					<strong class="training-number">{ currentPushups[$appState.currentStep] }</strong>
+					{string.pushups(currentPushups[$appState.currentStep])}
 				{:else}
 					{string.letsJust} <br>{string.restFor}
 					<strong class="training-number">{ currentRest }</strong>
 					{secondsFormated}<br>
-					<button class="training-skip" on:click="{ finishResting }">{string.skipTheWait}</button>
+					<button class="training-skip" onclick={finishResting}>{string.skipTheWait}</button>
 				{/if}
 			</div>
 		{/if}
 		</div>
 	</div>
 
-	{#if !$state.isResting}
-		<MainAction delay="400" on:mainAction="{ nextStep }">{string.madeIt}</MainAction>
+	{#if !$appState.isResting}
+		<MainAction delay="400" onMainAction={nextStep}>{string.madeIt}</MainAction>
 	{/if}
 
 </section>

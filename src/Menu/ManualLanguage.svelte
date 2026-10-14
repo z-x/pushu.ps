@@ -8,14 +8,14 @@
 
 	// imports
 	// ------------------------------------------------------------------------
-	import state from '../Data/state.js';
+	import appState from '../Data/state.js';
 	import string from '../Data/translations.js';
 	import Menu from '../UI/Menu.svelte';
 
 
 	// local properties
 	// ------------------------------------------------------------------------
-	let selectedLanguage = localStorage.language;
+	let selectedLanguage = $state(localStorage.language);
 
 
 	// purpose:		sets the language
@@ -33,9 +33,9 @@
 <Menu
 	menuId="ManualLanguage"
 	contentClass="menu-form"
-	buttonBackLabel="{ string.cancel }"
-	buttonNextLabel="{ string.accept }"
-	buttonNextAction="{ () => setLanguage() }"
+	buttonBackLabel={string.cancel}
+	buttonNextLabel={string.accept}
+	buttonNextAction={() => setLanguage()}
 >
 	<div class="form-row">
 		<h2 class="form-label">{string.setYourLanguageTo}</h2>

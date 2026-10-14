@@ -8,15 +8,15 @@
 
 	// imports
 	// ------------------------------------------------------------------------
-	import state from '../Data/state.js';
+	import appState from '../Data/state.js';
 	import string from '../Data/translations.js';
 	import Menu from '../UI/Menu.svelte';
 
 
 	// local properties
 	// ------------------------------------------------------------------------
-	let userSkill = $state.level.toString();
-	let userSet = $state.set.toString();
+	let userSkill = $state($appState.level.toString());
+	let userSet = $state($appState.set.toString());
 
 
 	// purpose:		sets the user info according to user input
@@ -25,9 +25,9 @@
 	function setSkill(){
 		window.dispatchEvent(new CustomEvent('manualSkill', { detail: {level: parseInt(userSkill), set: parseInt(userSet)} }));
 
-		state.setLevel(parseInt(userSkill));
-		state.setSet(parseInt(userSet));
-		state.setPage('Home');
+		appState.setLevel(parseInt(userSkill));
+		appState.setSet(parseInt(userSet));
+		appState.setPage('Home');
 	};
 
 </script>
@@ -38,9 +38,9 @@
 <Menu
 	menuId="ManualTrainingLevel"
 	contentClass="menu-form"
-	buttonBackLabel="{ string.cancel }"
-	buttonNextLabel="{ string.accept }"
-	buttonNextAction="{ () => setSkill() }"
+	buttonBackLabel={string.cancel}
+	buttonNextLabel={string.accept}
+	buttonNextAction={() => setSkill()}
 >
 	<div class="form-row">
 		<h2 class="form-label">{string.setYourSkillTo}</h2>

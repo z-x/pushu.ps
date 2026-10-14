@@ -10,35 +10,35 @@
 	// imports
 	// ------------------------------------------------------------------------
 	import { onMount } from 'svelte';
-	import state from '../Data/state.js';
+	import appState from '../Data/state.js';
 	import { appear } from '../Helpers/transitions.js';
-	import { createEventDispatcher } from 'svelte';
 
 
 	// properties
 	// ------------------------------------------------------------------------
-	// what page do you want to switch to
-	export let changePageTo = null;
-	// the delay after which the button will appear on the page
-	export let delay = 400;
-	// if the area for clicking should forced to small
-	export let forceSmallClickArea = false;
-
-
-	// local variables
-	// ------------------------------------------------------------------------
-	let dispatch = createEventDispatcher();
+	let {
+		// what page do you want to switch to
+		changePageTo = null,
+		// the delay after which the button will appear on the page
+		delay = 400,
+		// if the area for clicking should forced to small
+		forceSmallClickArea = false,
+		// the function to call when the button is clicked (function)
+		onMainAction,
+		// the content of the button
+		children
+	} = $props();
 
 
 	// purpose:		performs the main action assigned to the button
-	//				most likely changes the page or just dispatches an event
-	// returns:		shows changed page, or dispatches an 'mainAction' event
+	//				most likely changes the page or just calls the onMainAction
+	// returns:		shows changed page, or calls the onMainAction function
 	// ------------------------------------------------------------------------
 	let action = () => {
-		dispatch('mainAction');
+		onMainAction?.();
 
 		if(changePageTo) {
-			state.setPage(changePageTo);
+			appState.setPage(changePageTo);
 		}
 	};
 
@@ -78,7 +78,7 @@
 	type="button"
 	class="action-main"
 	class:action-main-small="{ forceSmallClickArea }"
-	on:click="{ action }"
+	onclick={action}
 >
-	<slot></slot>
+	{@render children?.()}
 </button>

@@ -1,6 +1,6 @@
 <!--  
 	Custom error message in small popup
-	Appears when $state.error is not empty
+	Appears when $appState.error is not empty
 -->
 
 
@@ -9,16 +9,16 @@
 
 	// imports
 	// ------------------------------------------------------------------------
-	import state from '../Data/state.js';
+	import appState from '../Data/state.js';
 	import string from '../Data/translations.js';
 	import { appear } from '../Helpers/transitions.js';
 
 
-	// purpose:		hides the error message by clearing the $state.error
+	// purpose:		hides the error message by clearing the $appState.error
 	// returns:		the state of the error, that is false as it was cleared (bool)
 	// ------------------------------------------------------------------------
 	function hideError(){
-		return state.setError(false);
+		return appState.setError(false);
 	}
 
 </script>
@@ -63,12 +63,12 @@
 
 
 
-{#if $state.error}
+{#if $appState.error}
 	<div class="error" in:appear|global="{ {from: 'bottom', duration: 200} }" out:appear|global="{ {from: 'bottom', duration: 200} }">
-		<p>{$state.error}</p>
+		<p>{$appState.error}</p>
 
 		<button
-			on:click="{ hideError }"
+			onclick={hideError}
 			class="error-dismiss"
 			title="{ string.errorDismiss }"
 		>
