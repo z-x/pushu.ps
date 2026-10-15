@@ -51,24 +51,23 @@
 		}
 	}
 
-	@supports at-rule(@property){
-		.counter {
-			animation-name: counter;
-			animation-duration: 4s;
-			animation-timing-function: ease-in-out;
-			animation-fill-mode: forwards;
-			counter-reset: num var(--num);
-		}
+	.counter {
+		animation-name: counter;
+		animation-duration: 4s;
+		animation-timing-function: ease-in-out;
+		animation-fill-mode: forwards;
+		counter-reset: num var(--num);
+	}
 
-		.counter:after {
-			content: counter(num);
-		}
+	.counter:after {
+		content: counter(num);
+	}
 
-		.sr {
-			position: absolute;
-			top: -200%;
-			left: -200%;
-		}
+	/* the number is shown by the counter above, this one is for screen readers */
+	.sr {
+		position: absolute;
+		top: -200%;
+		left: -200%;
 	}
 
 </style>
