@@ -40,11 +40,38 @@ function warmUpAudioContext(){
 	return audioContextWarmed = true;
 };
 
-if(!audioContextWarmed){
-	document.addEventListener('click', () => {
+
+// purpose:		resumes the audio context when the browser suspended it,
+//				iOS does it when the app goes to the background or after a call
+// returns:		a promise resolved when the audio context is running
+// ------------------------------------------------------------------------
+function resumeAudioContext(){
+	if(audioContext.state === 'running'){
+		return Promise.resolve();
+	}
+
+	return audioContext.resume();
+};
+
+// on every click, as browsers allow starting the audio only after user action
+document.addEventListener('click', () => {
+	if(!audioContextWarmed){
 		warmUpAudioContext();
-	}, {once: true});
-}
+	}
+
+	resumeAudioContext().catch(() => {
+		// it will be tried again on the next click
+	});
+});
+
+// when the user comes back to the app
+document.addEventListener('visibilitychange', () => {
+	if(document.visibilityState === 'visible'){
+		resumeAudioContext().catch(() => {
+			// it will be tried again on the next click
+		});
+	}
+});
 
 
 // purpose:		loads and play an audio file
@@ -86,10 +113,33 @@ class Sound {
 	};
 
 
-	// purpose:		plays the sound stored in the audio buffer
+	// purpose:		plays the sound, resuming the audio context first if needed
 	// returns:		the audio is played
 	// ------------------------------------------------------------------------
 	play() {
+		if(audioContext.state === 'running'){
+			this.start();
+			return;
+		}
+
+		// the sound is played only if the audio resumes right away, so it would
+		// not be played much later, when the user clicks something
+		let requested = Date.now();
+
+		resumeAudioContext().then(() => {
+			if(Date.now() - requested < 500){
+				this.start();
+			}
+		}).catch(() => {
+			// the audio can be resumed only after the user clicks something
+		});
+	};
+
+
+	// purpose:		starts playing the sound stored in the audio buffer
+	// returns:		the audio is played
+	// ------------------------------------------------------------------------
+	start() {
 		// create new audio source
 		let source = audioContext.createBufferSource();
 		// load our previously stored audio buffer into the source
