@@ -17,7 +17,12 @@
 
 	// detecting devices so we can inform the user how to add the app to home screen
 	// this will not detect every possible Android configuration but we can live with it
-	let isIOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
+	// iPads ask for the desktop sites by default and report as a Mac, but unlike Macs
+	// they have a touch screen
+	let isIOS = !!navigator.platform && (
+		/iPad|iPhone|iPod/.test(navigator.platform)
+		|| (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+	);
 	let isAndroid = navigator.userAgent.toLowerCase().indexOf('android') > -1;
 
 </script>
