@@ -30,16 +30,21 @@
 	// return: 		triggers an 'finished' event and redirects to the home screen
 	// ------------------------------------------------------------------------
 	function hard(){
+		let finished = {level: appState.level, set: appState.set};
+
 		resetTraining();
 		appState.setPage('Home');
 
-		window.dispatchEvent(new CustomEvent('finished', {detail: {howWasIt: 'hard', 'level': appState.level, 'set': appState.set}}));
+		window.dispatchEvent(new CustomEvent('finished', {detail: {howWasIt: 'hard', ...finished}}));
 	};
 
 	// purpose:		if user says the set was easy, let's move him to next one
 	// return:		triggers an 'finished', sets next training and redirects to home screen or congrats page if passed 100 pushups
 	// ------------------------------------------------------------------------
 	function easy(){
+		// the finished training, read before it is moved to the next set
+		let finished = {level: appState.level, set: appState.set};
+
 		resetTraining();
 
 		if(Object.keys(training[appState.level]).length !== appState.set){
@@ -52,7 +57,7 @@
 			appState.setPage('Home');
 		}
 
-		window.dispatchEvent(new CustomEvent('finished', {detail: {howWasIt: 'easy', 'level': appState.level, 'set': appState.set}}));
+		window.dispatchEvent(new CustomEvent('finished', {detail: {howWasIt: 'easy', ...finished}}));
 	};
 
 </script>
