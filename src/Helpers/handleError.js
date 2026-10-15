@@ -23,18 +23,18 @@ import appState from '../Data/state.svelte.js';
 // ------------------------------------------------------------------------
 class handleError extends Error {
 	constructor(userFriendlyError, showMessage = true, machineError, ...args){
-		super(...args);
-		Error.captureStackTrace(this, handleError);
+		super(userFriendlyError, ...args);
 
-		console.log(this);
+		// not available in Safari before 17.2 and Firefox before 138, the stack
+		// trace is still recorded without it, just with one more line in it
+		if(Error.captureStackTrace){
+			Error.captureStackTrace(this, handleError);
+		}
 
-		console.log(machineError);
+		console.error(this, machineError);
 
-		if(userFriendlyError){
-			if(showMessage){
-				appState.setError(userFriendlyError);
-			}
-			console.log(userFriendlyError);
+		if(userFriendlyError && showMessage){
+			appState.setError(userFriendlyError);
 		}
 
 		window.dispatchEvent(new CustomEvent('appError', { detail: { text: userFriendlyError, response: machineError} }));
