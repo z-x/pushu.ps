@@ -36,7 +36,9 @@
 			// as it is rendered outside of the screen error boundary
 			if(!latest?.[localStorage.language]?.title){ return; }
 
-			if(latest.date > appState.previousVisit && appState.pushupsTotal > 0){
+			// the date is an ISO date (e.g. 2026-10-14T12:50:31Z), a news
+			// with a date that can't be read is not shown
+			if(Date.parse(latest.date) > appState.previousVisit && appState.pushupsTotal > 0){
 				news = latest;
 				appState.setPopupShown(true);
 			}
