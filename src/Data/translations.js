@@ -65,6 +65,11 @@ let translations = {
 		'pl-PL': 'Tak'
 	},
 
+	no: {
+		'en-US': 'No',
+		'pl-PL': 'Nie'
+	},
+
 	menuEmpty: {
 		'en-US': 'This menu seems to be empty',
 		'pl-PL': 'To menu wydaje się być puste'
