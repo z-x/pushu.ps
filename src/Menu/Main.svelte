@@ -141,5 +141,5 @@
 
 	</ul>
 
-	<a href="http://secondgate.pl" target="_blank" class="secondgate">{string.appCreatedSecondGate}</a>
+	<a href="https://secondgate.pl" target="_blank" class="secondgate">{string.appCreatedSecondGate}</a>
 </Menu>

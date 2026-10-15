@@ -56,7 +56,8 @@
 			appState.setPopupShown(false);
 		}
 		else if (toDo === 'url'){
-			window.open(news.url, '_blank');
+			// the opened page gets no access back to the app
+			window.open(news.url, '_blank', 'noopener');
 			action();
 		}
 	};
@@ -102,11 +103,11 @@
 	function transitionBackground(){
 		if(appState.popupShown){
 			clearTimeout(transitionTimeout);
-			document.body.classList = 'app-popupShown';
+			document.body.classList.add('app-popupShown');
 		} else {
 			clearTimeout(transitionTimeout);
 			transitionTimeout = setTimeout(() => {
-				document.body.classList = '';
+				document.body.classList.remove('app-popupShown');
 			}, 600);
 		}
 	};
