@@ -82,21 +82,15 @@
 	}
 
 
-	// if user came here after a day, reset his training or test
+	// if user came here after a day, reset his training or test, this is checked
+	// also when the app is shown again, as it can stay open in the background
 	// ------------------------------------------------------------------------
-	if((Date.now() - appState.lastActive > 86400000)){
-		if(appState.page === 'Training') {
-			appState.setStep(0);
-			appState.setResting(0);
-			appState.setPage('Home');
-		}
-		else if(appState.page === 'Test'){
-			appState.setPage('Hello');
-		}
-	}
+	appState.markActive();
 
 </script>
 
+
+<svelte:document onvisibilitychange={() => { if(document.visibilityState === 'visible'){ appState.markActive(); } }} />
 
 <Analytics />
 

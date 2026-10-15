@@ -36,7 +36,7 @@
 			// as it is rendered outside of the screen error boundary
 			if(!latest?.[localStorage.language]?.title){ return; }
 
-			if(latest.date > appState.lastActive && appState.pushupsTotal > 0){
+			if(latest.date > appState.previousVisit && appState.pushupsTotal > 0){
 				news = latest;
 				appState.setPopupShown(true);
 			}
