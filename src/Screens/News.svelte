@@ -43,7 +43,7 @@
 				appState.setPopupShown(true);
 			}
 		}).catch((error) => {
-			new handleError('News could not be fetched', false, error);
+			handleError('News could not be fetched', false, error);
 		});
 	});
 
