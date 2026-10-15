@@ -75,6 +75,13 @@
 	};
 
 
+	// if the saved page is unknown (the saved data is broken), start from the beginning
+	// ------------------------------------------------------------------------
+	if(!pages[appState.page]){
+		appState.setPage('Hello');
+	}
+
+
 	// if user came here after a day, reset his training or test
 	// ------------------------------------------------------------------------
 	if((Date.now() - appState.lastActive > 86400000)){

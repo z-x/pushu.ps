@@ -8,6 +8,12 @@
 
 
 
+// imports
+// ------------------------------------------------------------------------
+import training from './training.js';
+
+
+
 // the local storage keys with the user progress, removed when the app is reset
 // the settings (like the chosen language) are not listed here, so they are kept
 const progressKeys = ['page', 'level', 'set', 'currentStep', 'isResting', 'restEndsAt', 'pushupsLast', 'pushupsTotal', 'congratsShown'];
@@ -37,6 +43,47 @@ class AppState {
 	// the height of the shown menu, kept up to date by the menu itself
 	menuHeight = $state(0);
 	error = $state(false);
+
+
+	// purpose:		makes sure the saved progress is valid when the app starts
+	// ------------------------------------------------------------------------
+	constructor(){
+		this.validateProgress();
+	};
+
+
+	// purpose:		keeps the saved progress in the training plan, it can be
+	//				outside of it when the plan changed since it was saved
+	//				or when the saved data is broken
+	// returns:		the level, set and step are set to the closest valid ones
+	// ------------------------------------------------------------------------
+	validateProgress(){
+		// unknown level, start from the beginning
+		if(!training[this.level]){
+			this.setLevel(1);
+			this.setSet(1);
+			this.setStep(0);
+			this.setResting(0);
+		}
+
+		// unknown set, move to the closest one, so the user keeps the progress
+		if(!training[this.level][this.set]){
+			let sets = Object.keys(training[this.level]).map(Number);
+			let closest = Math.min(Math.max(this.set || 1, Math.min(...sets)), Math.max(...sets));
+
+			this.setSet(closest);
+			this.setStep(0);
+			this.setResting(0);
+		}
+
+		// unknown step, start the training from the first pushups
+		let steps = training[this.level][this.set].pushups.length;
+
+		if(!(this.currentStep >= 0 && this.currentStep < steps)){
+			this.setStep(0);
+			this.setResting(0);
+		}
+	};
 
 
 	// purpose:		updates the state and sets corresponding page
