@@ -257,7 +257,6 @@ a:focus-visible {
 	right: 0;
 	top: 0;
 	bottom: 0;
-	z-index: var(-z-app);
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;

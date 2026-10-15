@@ -23,7 +23,7 @@ const hashedFiles = '/assets/';
 
 // the fonts, cached when possible, but the app is installed without them when
 // they fail to load, so a changed font address would not stop the app updates
-// (the same addresses are in global.css and index.html) (array)
+// (the same addresses are in src/global.css and index.html) (array)
 // ------------------------------------------------------------------------
 const fontFiles = [
 	'https://use.typekit.net/af/28f000/00000000000000003b9b2048/27/l?primer=e6066692ab328d1a92bb155659ed6609b693e1e352f0e8982e4224719b13bdfb&fvd=n5&v=3',
