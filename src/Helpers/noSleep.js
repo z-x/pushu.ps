@@ -46,17 +46,19 @@ class NoSleep {
     }
   }
 
+  // returns a promise with the info if the screen is kept on, false when the
+  // browser allows it only after a user action, like a click (bool)
   enable() {
     this._enabled = true;
 
     if (nativeWakeLock) {
-      navigator.wakeLock
+      return navigator.wakeLock
         .request("screen")
         .then((wakeLock) => {
           // disabled before the request finished
           if (!this._enabled) {
             wakeLock.release();
-            return;
+            return true;
           }
           // a lock requested again replaces the previous one
           this._wakeLock?.release();
@@ -68,16 +70,19 @@ class NoSleep {
             // (https://web.dev/wakelock/#wake-lock-lifecycle)
             console.log("Wake Lock released.");
           });
+          return true;
         })
         .catch((err) => {
           console.error(`${err.name}, ${err.message}`);
+          return false;
         });
     } else {
       // disabled before the video fallback finished loading
-      this._video.then((video) => {
-        if (this._enabled) {
-          video?.enable();
+      return this._video.then((video) => {
+        if (!video) {
+          return false;
         }
+        return this._enabled ? video.enable() : true;
       });
     }
   }
