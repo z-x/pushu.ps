@@ -50,13 +50,22 @@
 		});
 	})
 
-	// purpose:		when user goes through the next step of training
+	// purpose:		when user goes through the next step of training, not when
+	//				the app starts or the step goes back to the first one
 	// ------------------------------------------------------------------------
+	let lastStep = appState.currentStep;
+
 	$effect(() => {
-		gtag('event', 'training', {
-			'event_label': 'step',
-			'value': appState.currentStep
-		});
+		let step = appState.currentStep;
+
+		if(step > lastStep){
+			gtag('event', 'training', {
+				'event_label': 'step',
+				'value': step
+			});
+		}
+
+		lastStep = step;
 	});
 
 	// purpose:		when a screen is viewed
@@ -69,12 +78,12 @@
 	});
 
 
-	// purpose:		when user sets a level after training (or manually)
+	// purpose:		when user sets a level after the test (or manually)
 	// ------------------------------------------------------------------------
-	$effect(() => {
+	window.addEventListener('leveled', (event) => {
 		gtag('event', 'test', {
 			'event_label': 'leveled',
-			'value': appState.level
+			'value': event.detail.level
 		});
 	});
 
@@ -113,9 +122,11 @@
 		});
 	});
 
-	// purpose:		when user visits the menu
+	// purpose:		when user visits the menu, not when it is closed
 	// ------------------------------------------------------------------------
 	$effect(() => {
+		if(!appState.menu){ return; }
+
 		gtag('event', 'menu', {
 			'event_label': appState.menu
 		});

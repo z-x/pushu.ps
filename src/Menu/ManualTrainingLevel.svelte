@@ -23,10 +23,11 @@
 
 
 	// purpose:		sets the user info according to user input
-	// returns:		dispatches a 'manualSkill' event and redirects to Home page
+	// returns:		dispatches 'manualSkill' and 'leveled' events and redirects to Home page
 	// ------------------------------------------------------------------------
 	function setSkill(){
 		window.dispatchEvent(new CustomEvent('manualSkill', { detail: {level: userSkill, set: userSet} }));
+		window.dispatchEvent(new CustomEvent('leveled', { detail: {level: userSkill} }));
 
 		appState.setLevel(userSkill);
 		appState.setSet(userSet);
