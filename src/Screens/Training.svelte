@@ -6,7 +6,8 @@
 
 <script module>
 
-	// the alert sounds, loaded once and shared by all the trainings
+	// the alert sounds, shared by all the trainings, they are loaded the first
+	// time a training is shown and not when the app starts (see below)
 	// ------------------------------------------------------------------------
 	import Sound from '../Helpers/sound.js';
 
@@ -28,6 +29,12 @@
 	import NoSleep from '../Helpers/noSleep.js';
 	import MainAction from '../UI/MainAction.svelte';
 	import Sidebar from '../UI/Sidebar.svelte';
+
+
+	// load the alert sounds, only the first time a training is shown
+	// ------------------------------------------------------------------------
+	alert.load();
+	final.load();
 
 
 	// prevent the screen from dimming
