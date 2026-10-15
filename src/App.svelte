@@ -2,7 +2,8 @@
 
 	import { onMount } from 'svelte';
 	import string from './Data/translations.js';
-	import Analytics from './Helpers/Analytics.svelte';
+	// sends the app events to Google Analytics
+	import './Helpers/analytics.svelte.js';
 	import ErrorMessage from './UI/Error.svelte';
 	import handleError from './Helpers/handleError.js';
 	import MainAction from './UI/MainAction.svelte';
@@ -54,8 +55,7 @@
 
 	// register the service worker for the offline mode and installing the app
 	// (the install buttons are handled in Helpers/install.svelte.js)
-	// doing this in onMount so the <Analytics /> code would be already available
-	// and after the page has loaded, so caching the app files for offline use
+	// doing this after the page has loaded, so caching the app files for offline use
 	// would not slow down loading them for the first time
 	// ------------------------------------------------------------------------
 	onMount(() => {
@@ -101,8 +101,6 @@
 
 
 <svelte:document onvisibilitychange={() => { if(document.visibilityState === 'visible'){ appState.markActive(); } }} />
-
-<Analytics />
 
 <News />
 
