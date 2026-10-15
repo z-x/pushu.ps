@@ -36,7 +36,10 @@ class AppState {
 	restEndsAt = $state((localStorage.restEndsAt) ? parseInt(localStorage.restEndsAt) : 0);
 	pushupsLast = $state((localStorage.pushupsLast) ? parseInt(localStorage.pushupsLast) : 0);
 	pushupsTotal = $state((localStorage.pushupsTotal) ? parseInt(localStorage.pushupsTotal) : 0);
-	lastActive = $state((localStorage.lastActive) ? parseInt(localStorage.lastActive) : Date.now());
+	// when the user was last active (timestamp in ms)
+	lastActive = (localStorage.lastActive) ? parseInt(localStorage.lastActive) : Date.now();
+	// when the user was last active before this app start, the news since then are shown
+	previousVisit = this.lastActive;
 	congratsShown = $state(localStorage.congratsShown);
 	popupShown = $state(false);
 	menu = $state(false);
@@ -83,6 +86,26 @@ class AppState {
 			this.setStep(0);
 			this.setResting(0);
 		}
+	};
+
+
+	// purpose:		saves the time of the user activity, if the user came back
+	//				after a day, his training or test is reset
+	// ------------------------------------------------------------------------
+	markActive(){
+		if(Date.now() - this.lastActive > 86400000){
+			if(this.page === 'Training'){
+				this.setStep(0);
+				this.setResting(0);
+				this.setPage('Home');
+			}
+			else if(this.page === 'Test'){
+				this.setPage('Hello');
+			}
+		}
+
+		this.lastActive = Date.now();
+		localStorage.lastActive = this.lastActive;
 	};
 
 
