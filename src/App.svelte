@@ -46,13 +46,6 @@
 	let menuOffset = $derived(appState.menu ? appState.menuHeight : 0);
 
 
-	// if iOS app in fullscreen mode add class
-	// ------------------------------------------------------------------------
-	if(window.navigator.standalone === true){
-		document.documentElement.classList.add('app-appleFullscreen');
-	}
-
-
 	// register the service worker for the offline mode and installing the app
 	// (the install buttons are handled in Helpers/install.svelte.js)
 	// doing this after the page has loaded, so caching the app files for offline use
