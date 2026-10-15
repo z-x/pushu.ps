@@ -99,17 +99,17 @@
 
 <Sidebar />
 
-<section class="main" in:slide|global="{{ direction: 'in' }}" out:appear|global="{ {duration: 100} }">
+<section class="main" in:slide|global={{ direction: 'in' }} out:appear|global={{ duration: 100 }}>
 	<div class="content content-readable">
 		<h1 class={['text-title', 'moveable', !answered && 'visible']}>{string.firstTestYourself}</h1>
 		<p class={['text-subtitle', 'moveable', !answered && 'visible']}>{string.doAsManyPushups}</p>
-		<p class="text-title action-secondary">{string.iDid} <input type="number" placeholder="12" min="0" step="1" bind:value="{ pushups }" oninput={scrollToTop} onchange={filled}> {string.pushups(pushups)}</p>
+		<p class="text-title action-secondary">{string.iDid} <input type="number" placeholder="12" min="0" step="1" bind:value={pushups} oninput={scrollToTop} onchange={filled}> {string.pushups(pushups)}</p>
 		{#if pushups > 2}
-			<p in:appear|global="{{ delay: 500 }}" out:appear|global class="text-subtitle">{string.niceGoRest}</p>
+			<p in:appear|global={{ delay: 500 }} out:appear|global class="text-subtitle">{string.niceGoRest}</p>
 		{:else if answered && pushups >= 0}
-			<p in:appear|global="{{ delay: 500 }}" out:appear|global class="text-subtitle">{string.tryHalfPushups}</p>
+			<p in:appear|global={{ delay: 500 }} out:appear|global class="text-subtitle">{string.tryHalfPushups}</p>
 		{:else if answered && pushups < 0}
-			<p in:appear|global="{{ delay: 500 }}" out:appear|global class="text-subtitle">{string.levitationJoke}</p>
+			<p in:appear|global={{ delay: 500 }} out:appear|global class="text-subtitle">{string.levitationJoke}</p>
 		{/if}
 	</div>
 			

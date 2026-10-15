@@ -113,7 +113,7 @@
 		{#each data as item, i}
 			<li
 				bind:this={items[i]}
-				in:appear|global={ {delay: 200 * i, duration: 500} }
+				in:appear|global={{ delay: 200 * i, duration: 500 }}
 				class={['sidebar-info-value', !appState.isResting && markActive && appState.currentStep === i && 'sidebar-info-value-active']}
 				onintroend={() => { if(markActive && appState.currentStep === i){ activeShown = true; } }}
 			>

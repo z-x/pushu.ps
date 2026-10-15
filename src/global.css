@@ -137,12 +137,6 @@ q:after, q:before { content: ''; }
 	}
 }
 
-@media (max-height: 600px) {
-	:root {
-		--size-padding-bottom: 1.5rem;
-	}
-}
-
 @media (display-mode: standalone) {
 	:root {
 		--size-padding-bottom: 3rem;
@@ -329,12 +323,6 @@ input[type="number"] {
 	background-color: var(--color-input);
 
 	text-align: center;
-}
-
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0;
 }
 
 input[type="number"]::placeholder {

@@ -64,13 +64,13 @@
 
 
 {#if appState.error}
-	<div class="error" in:appear|global="{ {from: 'bottom', duration: 200} }" out:appear|global="{ {from: 'bottom', duration: 200} }">
+	<div class="error" in:appear|global={{ from: 'bottom', duration: 200 }} out:appear|global={{ from: 'bottom', duration: 200 }}>
 		<p>{appState.error}</p>
 
 		<button
 			onclick={hideError}
 			class="error-dismiss"
-			title="{ string.errorDismiss }"
+			title={string.errorDismiss}
 		>
 			{ string.errorDismiss }
 		</button>

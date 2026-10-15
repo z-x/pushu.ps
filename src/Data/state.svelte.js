@@ -31,7 +31,8 @@ class AppState {
 	level = $state((localStorage.level) ? parseInt(localStorage.level) : 1);
 	set = $state((localStorage.set) ? parseInt(localStorage.set) : 1);
 	currentStep = $state((localStorage.currentStep) ? parseInt(localStorage.currentStep) : 0);
-	isResting = $state((localStorage.isResting) ? parseInt(localStorage.isResting) : 0);
+	// if the user is resting, saved as 'true' or as '1' by the older versions (bool)
+	isResting = $state(localStorage.isResting === 'true' || localStorage.isResting === '1');
 	// when the current rest ends (timestamp in ms), 0 when not resting
 	restEndsAt = $state((localStorage.restEndsAt) ? parseInt(localStorage.restEndsAt) : 0);
 	pushupsLast = $state((localStorage.pushupsLast) ? parseInt(localStorage.pushupsLast) : 0);
@@ -66,7 +67,7 @@ class AppState {
 			this.setLevel(1);
 			this.setSet(1);
 			this.setStep(0);
-			this.setResting(0);
+			this.setResting(false);
 		}
 
 		// unknown set, move to the closest one, so the user keeps the progress
@@ -76,7 +77,7 @@ class AppState {
 
 			this.setSet(closest);
 			this.setStep(0);
-			this.setResting(0);
+			this.setResting(false);
 		}
 
 		// unknown step, start the training from the first pushups
@@ -84,7 +85,7 @@ class AppState {
 
 		if(!(this.currentStep >= 0 && this.currentStep < steps)){
 			this.setStep(0);
-			this.setResting(0);
+			this.setResting(false);
 		}
 	};
 
@@ -96,7 +97,7 @@ class AppState {
 		if(Date.now() - this.lastActive > 86400000){
 			if(this.page === 'Training'){
 				this.setStep(0);
-				this.setResting(0);
+				this.setResting(false);
 				this.setPage('Home');
 			}
 			else if(this.page === 'Test'){
@@ -172,11 +173,11 @@ class AppState {
 
 	// purpose:		sets the info if the user is resting and when the rest ends,
 	//				so the rest keeps going when the app is in the background
-	// arguments:	1 for user resting or 0 if not
+	// arguments:	if the user is resting (bool)
 	//				the rest length in seconds, when starting the rest (int)
 	// ------------------------------------------------------------------------
 	setResting(resting, restSeconds = 0){
-		this.isResting = (resting) ? 1 : 0;
+		this.isResting = resting;
 		this.restEndsAt = (resting) ? Date.now() + restSeconds * 1000 : 0;
 		localStorage.isResting = this.isResting;
 		localStorage.restEndsAt = this.restEndsAt;
@@ -212,7 +213,7 @@ class AppState {
 		this.level = 1;
 		this.set = 1;
 		this.currentStep = 0;
-		this.isResting = 0;
+		this.isResting = false;
 		this.restEndsAt = 0;
 		this.pushupsLast = 0;
 		this.pushupsTotal = 0;

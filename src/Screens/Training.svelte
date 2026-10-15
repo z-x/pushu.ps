@@ -105,7 +105,7 @@
 		}
 		// if there are more to do, rest first
 		else {
-			appState.setResting(1, defaultRest);
+			appState.setResting(true, defaultRest);
 		}
 	};
 
@@ -125,7 +125,7 @@
 
 		// the rest started before the end time was saved, start it again
 		if(!appState.restEndsAt){
-			appState.setResting(1, defaultRest);
+			appState.setResting(true, defaultRest);
 		}
 
 		let tick = () => {
@@ -164,7 +164,7 @@
 	// purpose:		finishes the resting behaviour and moves to next set
 	// ------------------------------------------------------------------------
 	function finishResting(){
-		appState.setResting(0);
+		appState.setResting(false);
 		currentRest = defaultRest;
 		appState.setStep(appState.currentStep + 1);
 	};
@@ -223,7 +223,7 @@
 
 <Sidebar data={currentPushups} markActive bind:activePosition />
 
-<section class="main" in:slide|global out:slide|global="{ {direction: 'out'} }">
+<section class="main" in:slide|global out:slide|global={{ direction: 'out' }}>
 
 	<div class="content">
 		<div class="content-training" style:transform="translateY({ counterOffset })">

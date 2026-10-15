@@ -51,7 +51,7 @@
 
 
 <div
-	in:fade|global="{ {duration: 200} }"
+	in:fade|global={{ duration: 200 }}
 	class="sidebar-info-indicator"
 	style:transform="translateY({ offset })"
 ></div>

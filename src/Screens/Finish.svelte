@@ -22,7 +22,7 @@
 	// ------------------------------------------------------------------------
 	function resetTraining(){
 		appState.setStep(0);
-		appState.setResting(0);
+		appState.setResting(false);
 	};
 
 
@@ -86,7 +86,7 @@
 
 <Sidebar />
 
-<section class="main" in:slide|global out:slide|global="{ {direction: 'out'} }">
+<section class="main" in:slide|global out:slide|global={{ direction: 'out' }}>
 	<div class="content">
 		<p>{string.nice}<br> {string.youveMadeIt}</p>
 		<p>{string.wasItHard}</p>
