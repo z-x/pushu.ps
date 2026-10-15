@@ -4,6 +4,19 @@
 
 
 
+<script module>
+
+	// the alert sounds, loaded once and shared by all the trainings
+	// ------------------------------------------------------------------------
+	import Sound from '../Helpers/sound.js';
+
+	const alert = new Sound('/audio/alert.mp3');
+	const final = new Sound('/audio/final.mp3');
+
+</script>
+
+
+
 <script>
 
 	// imports
@@ -13,7 +26,6 @@
 	import training from '../Data/training.js';
 	import { slide } from '../Helpers/transitions.js';
 	import NoSleep from '../Helpers/noSleep.js';
-	import Sound from '../Helpers/sound.js';
 	import MainAction from '../UI/MainAction.svelte';
 	import Sidebar from '../UI/Sidebar.svelte';
 
@@ -81,9 +93,6 @@
 	let defaultRest = currentSet['rest'];
 	// the counter for current rest time left (seconds)
 	let currentRest = $state(defaultRest);
-	// the alert sounds
-	let alert = new Sound('/audio/alert.mp3');
-	let final = new Sound('/audio/final.mp3');
 
 	// counts the rest down while the user is resting, the time left is taken
 	// from the rest end time, so the rest keeps going when the phone is locked

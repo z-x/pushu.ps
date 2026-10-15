@@ -18,8 +18,8 @@
 
 	// get the training data
 	// ------------------------------------------------------------------------
-	let commingUp = $derived(training[appState.level][appState.set]['pushups'].reduce((a, b) => a + b, 0));
-	let sidebarData = $derived([appState.pushupsLast, commingUp, appState.set]);
+	let comingUp = $derived(training[appState.level][appState.set]['pushups'].reduce((a, b) => a + b, 0));
+	let sidebarData = $derived([appState.pushupsLast, comingUp, appState.set]);
 
 </script>
 
