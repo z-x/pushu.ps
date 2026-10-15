@@ -5,7 +5,8 @@
 const cacheName = 'pushups-__BUILD_VERSION__';
 
 
-// basic list of files that require caching (array)
+// basic list of files that require caching, the app is not installed for
+// offline use when any of them fails to load (array)
 // ------------------------------------------------------------------------
 const cacheFiles = [
 	'/',
@@ -22,7 +23,15 @@ const cacheFiles = [
 	'/img/favicon-196.png',
 	'/audio/alert.mp3',
 	'/audio/final.mp3',
-	'/pushups.webmanifest',
+	'/pushups.webmanifest'
+];
+
+
+// the fonts, cached when possible, but the app is installed without them when
+// they fail to load, so a changed font address would not stop the app updates
+// (the same addresses are in global.css and index.html) (array)
+// ------------------------------------------------------------------------
+const fontFiles = [
 	'https://use.typekit.net/af/28f000/00000000000000003b9b2048/27/l?primer=e6066692ab328d1a92bb155659ed6609b693e1e352f0e8982e4224719b13bdfb&fvd=n5&v=3',
 	'https://use.typekit.net/af/8a200c/00000000000000003b9b204a/27/l?primer=e6066692ab328d1a92bb155659ed6609b693e1e352f0e8982e4224719b13bdfb&fvd=n6&v=3',
 	'https://use.typekit.net/af/d3af1d/00000000000000003b9b0ef9/27/l?primer=592708b04bace7901bbf402b49fc07acf6f622abacda535ca47331b6917becfb&fvd=n7&v=3',
@@ -30,23 +39,10 @@ const cacheFiles = [
 ];
 
 
-// list of files that should be updated as soon as possible
+// the news, always taken from the internet and never cached, as it is useful
+// only when connected, when offline an empty list is returned so no news is shown
 // ------------------------------------------------------------------------
-const refreshFiles = [
-	'/data/news.json'
-];
-
-
-
-// purpose:		checks if given string ends with any of the strings in array
-// arguments:	suffixes to check (array), string to do the check on (string)
-// returns:		if given string ends with any of the strings in array (bool)
-// ------------------------------------------------------------------------
-function endsWithAny(suffixes, string) {
-	return suffixes.some(function (suffix) {
-		return string.endsWith(suffix);
-	});
-}
+const newsFile = '/data/news.json';
 
 
 
@@ -59,6 +55,9 @@ self.addEventListener('install', (event) => {
 	event.waitUntil((async() => {
 		const cache = await caches.open(cacheName);
 		await cache.addAll(cacheFiles.map((file) => new Request(file, { cache: 'reload' })));
+
+		// the fonts one by one, a font that fails to load is just skipped
+		await Promise.all(fontFiles.map((file) => cache.add(file).catch(() => {})));
 	})());
 
 	// use the new version right away instead of waiting for all the app
@@ -90,22 +89,43 @@ self.addEventListener('activate', (event) => {
 // return the content of the specific file from cache if no network available
 // ------------------------------------------------------------------------
 self.addEventListener('fetch', (event) => {
+	const url = new URL(event.request.url);
+
+	// the news only from the internet, an empty news list when offline
+	if(url.origin === self.location.origin && url.pathname === newsFile){
+		event.respondWith(
+			fetch(event.request.url, { cache: 'no-cache' })
+				.catch(() => new Response('[]', { headers: { 'Content-Type': 'application/json' } }))
+		);
+		return;
+	}
+
+	// the app pages are the same single page, so the address
+	// (e.g. with ?utm_source=) does not matter for finding it in the cache
+	const isPage = event.request.mode === 'navigate';
+
 	event.respondWith((async () => {
 
-		// for files that should not be updated as soon as possible, return them from cache
-		const cached = await caches.match(event.request);
+		// return the files from cache
+		const cached = await caches.match(event.request, { ignoreSearch: isPage });
 		if(cached){
-			if(!endsWithAny(refreshFiles, event.request.url)){
-				return cached;
-			}
+			return cached;
 		}
 
-		// if the files are not cached, get the from the server
-		return fetch(event.request)
-			.then(response => {
-				return response;
-			})
-			.catch(() => { return new Response('', { "status": 500, "statusText": 'Offline' }); });
+		// if the files are not cached, get them from the server
+		try {
+			return await fetch(event.request);
+		}
+		catch(error){
+			// an app page that was not cached under its address, e.g. opened
+			// from a link, still opens the app when offline
+			if(isPage){
+				const app = await caches.match('/index.html');
+				if(app){ return app; }
+			}
+
+			return new Response('', { "status": 500, "statusText": 'Offline' });
+		}
 
 	})());
 });
