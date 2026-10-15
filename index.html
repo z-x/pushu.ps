@@ -6,12 +6,30 @@
 
 	<title>Pushu.ps</title>
 
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-TX477BR0HC"></script>
+	<!-- the events are queued in dataLayer until the analytics script loads,
+	     it is loaded when the browser is idle after the page has loaded,
+	     so it would not slow down loading the app -->
 	<script>
 		window.dataLayer = window.dataLayer || [];
 		function gtag(){dataLayer.push(arguments);}
 			gtag('js', new Date());
 			gtag('config', 'G-TX477BR0HC');
+
+		function loadAnalytics(){
+			let script = document.createElement('script');
+			script.async = true;
+			script.src = 'https://www.googletagmanager.com/gtag/js?id=G-TX477BR0HC';
+			document.head.appendChild(script);
+		}
+
+		// Safari has no requestIdleCallback, a short timeout is used there instead
+		window.addEventListener('load', () => {
+			if('requestIdleCallback' in window){
+				requestIdleCallback(loadAnalytics, { timeout: 5000 });
+			} else {
+				setTimeout(loadAnalytics, 1000);
+			}
+		}, { once: true });
 	</script>
 
 	<script type="module" src="/src/main.js"></script>
