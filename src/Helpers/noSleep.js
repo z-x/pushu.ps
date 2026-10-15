@@ -24,8 +24,11 @@ class NoSleep {
   constructor() {
     if (nativeWakeLock) {
       this._wakeLock = null;
+      // if the wake lock should be held, it is released by the browser when
+      // the page is hidden, so it needs to be requested again
+      this._enabled = false;
       const handleVisibilityChange = () => {
-        if (this._wakeLock !== null && document.visibilityState === "visible") {
+        if (this._enabled && document.visibilityState === "visible") {
           this.enable();
         }
       };
@@ -78,9 +81,17 @@ class NoSleep {
 
   enable() {
     if (nativeWakeLock) {
+      this._enabled = true;
       navigator.wakeLock
         .request("screen")
         .then((wakeLock) => {
+          // disabled before the request finished
+          if (!this._enabled) {
+            wakeLock.release();
+            return;
+          }
+          // a lock requested again replaces the previous one
+          this._wakeLock?.release();
           this._wakeLock = wakeLock;
           console.log("Wake Lock active.");
           this._wakeLock.addEventListener("release", () => {
@@ -113,7 +124,9 @@ class NoSleep {
 
   disable() {
     if (nativeWakeLock) {
-      this._wakeLock.release();
+      this._enabled = false;
+      // the wake lock is missing when the request failed or is not finished yet
+      this._wakeLock?.release();
       this._wakeLock = null;
     } else if (oldIOS) {
       if (this.noSleepTimer) {
