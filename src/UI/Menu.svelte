@@ -101,12 +101,19 @@
 		padding-right: var(--size-padding);
 		padding-left: var(--size-padding);
 
-		/* above the home indicator on the phones that have it */
-		padding-bottom: env(safe-area-inset-bottom, 0px);
-
 		border-top: 1px solid var(--color-pureSeparator);
 	}
 
+		:global(.app-appleFullscreen .menu-navigation) {
+			padding-bottom: 3rem !important;
+		}
+
+		@media (display-mode: standalone) {
+			.menu-navigation {
+				padding-bottom: 3rem;
+			}
+		}
+	
 	.menu-navigation .menu-contentWrapper {
 		display: flex;
 		justify-content: space-between;
