@@ -25,11 +25,14 @@
 
 	// purpose:		sets the user level based on pushups he did in the test,
 	//				0 and negative values also set the first level
+	// returns:		triggers a 'leveled' event with the set level
 	// ------------------------------------------------------------------------
 	function setLevel(){
 		if(pushups <= 5) { appState.setLevel(1); }
 		else if (pushups > 5 && pushups <= 10) { appState.setLevel(2); }
 		else { appState.setLevel(3); }
+
+		window.dispatchEvent(new CustomEvent('leveled', {detail: {level: appState.level}}));
 	}
 
 
