@@ -285,10 +285,16 @@ describe('User interface', () => {
 	});
 
 	it('Shows a fallback screen when a screen fails to render', () => {
-		localStorage.page = 'Home';
-		localStorage.level = 99;
+		localStorage.page = 'Test';
 
-		cy.visit('/');
+		// the test screen uses the plural rules for the pushups label,
+		// so breaking them makes the screen fail to render
+		// (a new address, as visiting the current one can skip onBeforeLoad)
+		cy.visit('/?broken-screen', {
+			onBeforeLoad(window){
+				window.Intl.PluralRules = function(){ throw new Error('Broken on purpose'); };
+			}
+		});
 		cy.contains('Something went wrong while showing this screen.');
 		cy.contains('Try again');
 		cy.get('.menu-toggle').should('be.visible');

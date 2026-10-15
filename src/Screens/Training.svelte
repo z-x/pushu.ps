@@ -57,8 +57,9 @@
 	// purpose:		moves the user to next step of pushups/resting
 	// ------------------------------------------------------------------------
 	function nextStep(){
-		// if it was the last pushups to make
-		if(appState.currentStep === currentPushups.length-1){
+		// if it was the last pushups to make (or the step is somehow past them,
+		// so the training can still be finished)
+		if(appState.currentStep >= currentPushups.length-1){
 			// update the user info about the amount of pushups he just did
 			appState.lastSet(currentPushups.reduce((a, b) => a + b, 0));
 			// and add those to the total he made
