@@ -487,13 +487,39 @@ let supportedLanguages = {
 	'pl-PL': ['Polski', 'pl-PL', 'pl']
 }
 
-// check for supported languages and if found, set it
-if(!localStorage.language && navigator.language){
-	let userLanguage = navigator.language;
+// purpose:		finds the supported language for the given language code,
+//				first exactly and then by the language part only (like 'en-AU')
+// arguments:	language code (string)
+// returns:		the supported language key or undefined if there is none
+// ------------------------------------------------------------------------
+function findLanguage(code){
+	let language = String(code).toLowerCase();
+	let entries = Object.entries(supportedLanguages);
+	let exact = entries.find(([key, codes]) => codes.slice(1).some((c) => c.toLowerCase() === language));
 
-	for(let [key, value] of Object.entries(supportedLanguages)){
-		if(value.indexOf(userLanguage) >= 0){
-			localStorage.language = key;
+	if(exact){ return exact[0]; }
+
+	let prefix = language.split('-')[0];
+	let partial = entries.find(([key, codes]) => codes.slice(1).some((c) => c.toLowerCase().split('-')[0] === prefix));
+
+	return partial?.[0];
+};
+
+// the saved language is not supported anymore (or the saved data is broken)
+if(localStorage.language && !supportedLanguages[localStorage.language]){
+	localStorage.removeItem('language');
+}
+
+// check the user languages in his order of preference and set the first supported
+if(!localStorage.language){
+	let userLanguages = navigator.languages?.length ? navigator.languages : [navigator.language];
+
+	for(let code of userLanguages){
+		let found = code && findLanguage(code);
+
+		if(found){
+			localStorage.language = found;
+			break;
 		}
 	}
 }
@@ -502,6 +528,9 @@ if(!localStorage.language && navigator.language){
 if(!localStorage.language){
 	localStorage.language = 'en-US';
 }
+
+// let the browser know the page language (for screen readers, hyphenation)
+document.documentElement.lang = localStorage.language;
 
 // export the strings
 let exportedStrings = {};
