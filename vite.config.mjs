@@ -12,7 +12,6 @@ import path from 'node:path';
 // ------------------------------------------------------------------------
 function isCached(file){
 	return file === 'index.html'
-		|| file === 'global.css'
 		|| file === 'pushups.webmanifest'
 		|| (file.startsWith('assets/') && !file.endsWith('.map'))
 		|| file.startsWith('audio/')
