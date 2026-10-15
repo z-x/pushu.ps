@@ -22,6 +22,18 @@
 	let sets = $derived(Object.keys(training[userSkill]).map(Number));
 
 
+	// purpose:		changes the skill and keeps the chosen set in the sets of
+	//				that skill, moving it to the closest one when it has no such set
+	// arguments:	the chosen skill (int)
+	// ------------------------------------------------------------------------
+	function changeSkill(skill){
+		let skillSets = Object.keys(training[skill]).map(Number);
+
+		userSkill = skill;
+		userSet = Math.min(Math.max(userSet, Math.min(...skillSets)), Math.max(...skillSets));
+	};
+
+
 	// purpose:		sets the user info according to user input
 	// returns:		dispatches 'manualSkill' and 'leveled' events and redirects to Home page
 	// ------------------------------------------------------------------------
@@ -47,7 +59,7 @@
 >
 	<div class="form-row">
 		<h2 class="form-label">{string.setYourSkillTo}</h2>
-		<select bind:value={userSkill}>
+		<select bind:value={() => userSkill, changeSkill}>
 			<option value={1}>{string.beginner}</option>
 			<option value={2}>{string.intermediate}</option>
 			<option value={3}>{string.advanced}</option>
