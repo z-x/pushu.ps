@@ -79,6 +79,9 @@
 		bottom: 0;
 		z-index: var(--z-overlay);
 		cursor: s-resize;
+
+		/* the overlay stays invisible, also without the dark highlight iOS shows on tap */
+		-webkit-tap-highlight-color: transparent;
 	}
 
 	.menu-content {
