@@ -2,6 +2,7 @@
 	Plays a sound using AudioContext API
 
 	Usage:	let sound = new Sound('/path/audio.mp3');
+			sound.load();
 			sound.play();
 */
 
@@ -84,15 +85,19 @@ class Sound {
 		this.path = path;
 		// the stored file buffer to play later
 		this.buffer = null;
-
-		// loads the audio file
-		this.load();
+		// if the file is loading or loaded, so it is loaded only once (bool)
+		this.loading = false;
 	}
 
-	// purpose:		loads the audio file to the buffer to play it later
+	// purpose:		loads the audio file to the buffer to play it later, only
+	//				the first time it is called, or again when it failed before
 	// returns:		stores the audio buffer in this.buffer
 	// ------------------------------------------------------------------------
 	load() {
+		if(this.loading){ return; }
+
+		this.loading = true;
+
 		fetch(this.path).then((response) => {
 			if(!response.ok){ return Promise.reject(response); }
 			// we return the response as an array buffer
@@ -108,6 +113,8 @@ class Sound {
 			});
 		})
 		.catch((error) => {
+			// it will be loaded again the next time it is needed
+			this.loading = false;
 			new handleError('The alert sound could not be played', false, error);
 		});
 	};
