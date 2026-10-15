@@ -86,6 +86,15 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
 	const url = new URL(event.request.url);
 
+	// only the app files and the fonts are cached, anything else
+	// (e.g. the analytics) goes to the internet without the service worker
+	if(event.request.method !== 'GET'){
+		return;
+	}
+	if(url.origin !== self.location.origin && !fontFiles.includes(url.href)){
+		return;
+	}
+
 	// the news only from the internet, an empty news list when offline
 	if(url.origin === self.location.origin && url.pathname === newsFile){
 		event.respondWith(
