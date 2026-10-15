@@ -36,13 +36,7 @@
 	// ------------------------------------------------------------------------
 	function scrollToTop(event){
 		if(event.currentTarget.value !== '' && window.scrollY > 0){
-			let interval = setInterval(() => {
-				window.scrollTo({
-					top: --window.scrollY
-				});
-
-				if(window.scrollY <= 0){ clearInterval(interval); }
-			}, 2);
+			window.scrollTo({ top: 0, behavior: 'smooth' });
 		}
 	}
 

@@ -26,14 +26,22 @@
 	// ------------------------------------------------------------------------
 	onMount(() => {
 		fetch('/data/news.json').then((response) => {
+			if(!response.ok){ return Promise.reject(response); }
+
 			return response.json();
 		}).then((data) => {
-			if(data[0].date > appState.lastActive && appState.pushupsTotal > 0){
-				news = data[0];
+			let latest = Array.isArray(data) ? data[0] : null;
+
+			// the news is shown only when it has the message in the user language,
+			// as it is rendered outside of the screen error boundary
+			if(!latest?.[localStorage.language]?.title){ return; }
+
+			if(latest.date > appState.lastActive && appState.pushupsTotal > 0){
+				news = latest;
 				appState.setPopupShown(true);
 			}
 		}).catch((error) => {
-			new handleError('News could not be fetched', false);
+			new handleError('News could not be fetched', false, error);
 		});
 	});
 

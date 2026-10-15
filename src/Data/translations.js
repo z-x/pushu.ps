@@ -97,7 +97,7 @@ let translations = {
 
 	errorServiceWorker: {
 		'en-US': 'For unknown reason the offline mode was not initialized. The app will work, but you need the internet connection.',
-		'pl-PL': 'Z jakiegoś powodu nie udało się uruchomić trybu offline. Applikacja będzie działała, ale wymaga połączenia z internetem.'
+		'pl-PL': 'Z jakiegoś powodu nie udało się uruchomić trybu offline. Aplikacja będzie działała, ale wymaga połączenia z internetem.'
 	},
 
 	errorScreen: {
@@ -458,11 +458,11 @@ let translations = {
 			<ul>
 				<li>Dane o tym w jaki sposób używasz aplikacji.</li>
 				<li>Dane o tym jakie robisz postępy w treningu.</li>
-				<li>Dane o Twojej przeglądarce i użądzeniu przy pomocy Google Analytics. Dokładne informacje znajdziesz na stronie <a href="https://policies.google.com/privacy?hl=pl">polityki prywatności</a> w Google.</p>
+				<li>Dane o Twojej przeglądarce i urządzeniu przy pomocy Google Analytics. Dokładne informacje znajdziesz na stronie <a href="https://policies.google.com/privacy?hl=pl">polityki prywatności</a> w Google.</li>
 			</ul>
 			<p>Dane o Twoich postępach przechowywane są tylko na tym urządzeniu przy użyciu localStorage.</p>
 			<h2>Dlaczego?</h2>
-			<p>Dane zbierane są w sposób anonimowy dla mnie, choć Google pewnie jest w stanie namierzyć Cię dokładniej. Potrzebuję ich, żeby ulepszać apkę, np. chciałbym w przyszłosci posłużyć się uczeniem maszynowym, żeby automatycznie tworzyć program treningowy dostosowany jak najlepiej do Ciebie.</p>
+			<p>Dane zbierane są w sposób anonimowy dla mnie, choć Google pewnie jest w stanie namierzyć Cię dokładniej. Potrzebuję ich, żeby ulepszać apkę, np. chciałbym w przyszłości posłużyć się uczeniem maszynowym, żeby automatycznie tworzyć program treningowy dostosowany jak najlepiej do Ciebie.</p>
 			<p>Jestem też zwyczajnie ciekawy czy ktoś tego wszystkiego używa. :)</p>
 		`
 	},
