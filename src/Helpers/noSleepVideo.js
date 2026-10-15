@@ -49,8 +49,10 @@ class NoSleepVideo {
     element.appendChild(source);
   }
 
+  // returns a promise with the info if the video plays, false when the
+  // browser allows playing it only after a user action, like a click (bool)
   enable() {
-    this.noSleepVideo.play();
+    return this.noSleepVideo.play().then(() => true, () => false);
   }
 
   disable() {

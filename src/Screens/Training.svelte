@@ -14,6 +14,15 @@
 	const alert = new Sound('/audio/alert.mp3');
 	const final = new Sound('/audio/final.mp3');
 
+
+	// keeping the screen on, shared by all the trainings, it is created the
+	// first time a training is shown, so the video used by the browsers without
+	// the Wake Lock API is not loaded when the app starts (see below)
+	// ------------------------------------------------------------------------
+	import NoSleep from '../Helpers/noSleep.js';
+
+	let noSleep = null;
+
 </script>
 
 
@@ -26,7 +35,6 @@
 	import appState from '../Data/state.svelte.js';
 	import training from '../Data/training.js';
 	import { slide } from '../Helpers/transitions.js';
-	import NoSleep from '../Helpers/noSleep.js';
 	import MainAction from '../UI/MainAction.svelte';
 	import Sidebar from '../UI/Sidebar.svelte';
 
@@ -39,14 +47,22 @@
 
 	// prevent the screen from dimming
 	// ------------------------------------------------------------------------
-	// enabled on the first click as browsers require a user gesture for it
+	// enabled right away, so the screen stays on during the first pushups, and
+	// on the first click in the browsers that allow it only after a user action
 	$effect(() => {
-		let noSleep = new NoSleep();
+		noSleep ??= new NoSleep();
+
+		let shown = true;
 		let enableNoSleep = () => noSleep.enable();
 
-		document.addEventListener('click', enableNoSleep, {once: true});
+		noSleep.enable().then((enabled) => {
+			if(!enabled && shown){
+				document.addEventListener('click', enableNoSleep, {once: true});
+			}
+		});
 
 		return () => {
+			shown = false;
 			document.removeEventListener('click', enableNoSleep);
 			noSleep.disable();
 		};
