@@ -5,10 +5,27 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 
-// purpose:		puts the version of the build into the service worker cache name,
-//				so the users get the new files after every deploy that changed them
+// purpose:		tells if the built file is cached by the service worker, the app
+//				is not installed for offline use when any of them fails to load
+// arguments:	the file path relative to the build directory (string)
+// returns:		if the file should be cached (bool)
+// ------------------------------------------------------------------------
+function isCached(file){
+	return file === 'index.html'
+		|| file === 'global.css'
+		|| file === 'pushups.webmanifest'
+		|| (file.startsWith('assets/') && !file.endsWith('.map'))
+		|| file.startsWith('audio/')
+		|| file.startsWith('img/favicon-');
+};
+
+
+// purpose:		puts the version of the build and the list of the built files
+//				into the service worker, so the users get the new files after
+//				every deploy that changed them
 // returns:		the Vite plugin replacing __BUILD_VERSION__ in service-worker.js
-//				with a hash of all the other built files
+//				with a hash of all the other built files and the
+//				__CACHE_FILES__ comment with the files to cache
 // ------------------------------------------------------------------------
 function serviceWorkerVersion(){
 	let outDir;
@@ -37,11 +54,18 @@ function serviceWorkerVersion(){
 
 			let content = fs.readFileSync(worker, 'utf8');
 
-			if(!content.includes('__BUILD_VERSION__')){
-				throw new Error('service-worker.js is missing the __BUILD_VERSION__ placeholder');
+			for(let placeholder of ['__BUILD_VERSION__', '/* __CACHE_FILES__ */']){
+				if(!content.includes(placeholder)){
+					throw new Error(`service-worker.js is missing the ${placeholder} placeholder`);
+				}
 			}
 
-			fs.writeFileSync(worker, content.replaceAll('__BUILD_VERSION__', hash.digest('hex').slice(0, 12)));
+			let cacheFiles = files.filter(isCached).map((file) => `'/${file}'`).join(',\n\t');
+
+			fs.writeFileSync(worker, content
+				.replaceAll('__BUILD_VERSION__', hash.digest('hex').slice(0, 12))
+				.replace('/* __CACHE_FILES__ */', cacheFiles)
+			);
 		}
 	};
 };
@@ -64,15 +88,10 @@ export default defineConfig({
 		host: true
 	},
 
+	// the built files get a hash in their names (assets/index-[hash].js),
+	// so they are cached for a year (see vercel.json) and the service worker
+	// gets their names on every build
 	build: {
-		sourcemap: true,
-		rollupOptions: {
-			output: {
-				// keep the file names stable as service-worker.js caches them
-				entryFileNames: 'build/bundle.js',
-				chunkFileNames: 'build/[name].js',
-				assetFileNames: (asset) => asset.names.some((name) => name.endsWith('.css')) ? 'build/bundle.css' : 'build/[name][extname]'
-			}
-		}
+		sourcemap: true
 	}
 });

@@ -55,14 +55,24 @@
 	// register the service worker for the offline mode and installing the app
 	// (the install buttons are handled in Helpers/install.svelte.js)
 	// doing this in onMount so the <Analytics /> code would be already available
+	// and after the page has loaded, so caching the app files for offline use
+	// would not slow down loading them for the first time
 	// ------------------------------------------------------------------------
 	onMount(() => {
-		if('serviceWorker' in navigator){
+		if(!('serviceWorker' in navigator)){ return; }
+
+		let register = () => {
 			navigator.serviceWorker.register('/service-worker.js')
 				.catch((error) => {
 					new handleError(string.errorServiceWorker);
 				});
 		};
+
+		if(document.readyState === 'complete'){
+			register();
+		} else {
+			window.addEventListener('load', register, { once: true });
+		}
 	});
 
 
