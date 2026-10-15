@@ -41,6 +41,15 @@
 		window.dispatchEvent(new CustomEvent('manualSkill', { detail: {level: userSkill, set: userSet} }));
 		window.dispatchEvent(new CustomEvent('leveled', { detail: {level: userSkill} }));
 
+		// the congratulations for passing 100 pushups are shown again when
+		// the user moves to another skill or to one of the first 6 levels
+		let skillChanged = userSkill !== appState.level;
+		let levelChanged = userSet !== appState.set && userSet < 7;
+
+		if(skillChanged || levelChanged){
+			appState.setCongrats(false);
+		}
+
 		appState.setLevel(userSkill);
 		appState.setSet(userSet);
 		appState.setPage('Home');

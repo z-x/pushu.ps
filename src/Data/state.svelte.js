@@ -41,7 +41,8 @@ class AppState {
 	lastActive = (localStorage.lastActive) ? parseInt(localStorage.lastActive) : Date.now();
 	// when the user was last active before this app start, the news since then are shown
 	previousVisit = this.lastActive;
-	congratsShown = $state(localStorage.congratsShown);
+	// if the congratulations for passing 100 pushups were shown, saved as 'true' (bool)
+	congratsShown = $state(localStorage.congratsShown === 'true');
 	popupShown = $state(false);
 	menu = $state(false);
 	// the height of the shown menu, kept up to date by the menu itself
@@ -217,7 +218,7 @@ class AppState {
 		this.restEndsAt = 0;
 		this.pushupsLast = 0;
 		this.pushupsTotal = 0;
-		this.congratsShown = undefined;
+		this.congratsShown = false;
 	};
 
 
