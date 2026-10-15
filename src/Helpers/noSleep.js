@@ -41,7 +41,7 @@ class NoSleep {
       this._video = import("./noSleepVideo.js")
         .then(({ default: NoSleepVideo }) => new NoSleepVideo())
         .catch((error) => {
-          new handleError("The screen could not be kept on", false, error);
+          handleError("The screen could not be kept on", false, error);
         });
     }
   }

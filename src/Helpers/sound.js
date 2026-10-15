@@ -129,7 +129,7 @@ class Sound {
 		catch(error){
 			// it will be loaded again the next time it is needed
 			this.loading = false;
-			new handleError('The alert sound could not be played', false, error);
+			handleError('The alert sound could not be played', false, error);
 		}
 	};
 

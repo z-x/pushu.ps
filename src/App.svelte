@@ -64,7 +64,7 @@
 		let register = () => {
 			navigator.serviceWorker.register('/service-worker.js')
 				.catch((error) => {
-					new handleError(string.errorServiceWorker);
+					handleError(string.errorServiceWorker, true, error);
 				});
 		};
 
@@ -81,7 +81,7 @@
 	// arguments:	the error thrown while rendering the screen
 	// ------------------------------------------------------------------------
 	function screenError(error){
-		new handleError(string.errorScreen, false, error);
+		handleError(string.errorScreen, false, error);
 	};
 
 
