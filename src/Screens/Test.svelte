@@ -19,9 +19,12 @@
 	// ------------------------------------------------------------------------
 	// how many pushups the user did in the test (int)
 	let pushups = $state();
+	// if the user filled the field, the cleared field gives null, not undefined
+	let answered = $derived(pushups != null);
 
 
-	// purpose:		sets the user level based on pushups he did in the test
+	// purpose:		sets the user level based on pushups he did in the test,
+	//				0 and negative values also set the first level
 	// ------------------------------------------------------------------------
 	function setLevel(){
 		if(pushups <= 5) { appState.setLevel(1); }
@@ -46,6 +49,8 @@
 	// returns:		triggers an event 'testDataFilled' with test data
 	// ------------------------------------------------------------------------
 	function filled(){
+		if(!answered){ return; }
+
 		window.dispatchEvent(new CustomEvent('testDataFilled', {detail: {pushups: pushups}}));
 	}
 
@@ -93,19 +98,19 @@
 
 <section class="main" in:slide|global="{{ direction: 'in' }}" out:appear|global="{ {duration: 100} }">
 	<div class="content content-readable">
-		<h1 class={['text-title', 'moveable', typeof pushups === 'undefined' && 'visible']}>{string.firstTestYourself}</h1>
-		<p class={['text-subtitle', 'moveable', typeof pushups === 'undefined' && 'visible']}>{string.doAsManyPushups}</p>
+		<h1 class={['text-title', 'moveable', !answered && 'visible']}>{string.firstTestYourself}</h1>
+		<p class={['text-subtitle', 'moveable', !answered && 'visible']}>{string.doAsManyPushups}</p>
 		<p class="text-title action-secondary">{string.iDid} <input type="number" placeholder="12" min="0" step="1" bind:value="{ pushups }" oninput={scrollToTop} onchange={filled}> {string.pushups(pushups)}</p>
 		{#if pushups > 2}
 			<p in:appear|global="{{ delay: 500 }}" out:appear|global class="text-subtitle">{string.niceGoRest}</p>
-		{:else if pushups <= 2 && pushups >= 0 && typeof pushups !== 'undefined'}
+		{:else if answered && pushups >= 0}
 			<p in:appear|global="{{ delay: 500 }}" out:appear|global class="text-subtitle">{string.tryHalfPushups}</p>
-		{:else if pushups < 0}
+		{:else if answered && pushups < 0}
 			<p in:appear|global="{{ delay: 500 }}" out:appear|global class="text-subtitle">{string.levitationJoke}</p>
 		{/if}
 	</div>
 			
-	{#if typeof pushups !== 'undefined'}
+	{#if answered}
 		<MainAction delay={900} onMainAction={setLevel} changePageTo="Home">{string.whatsNext}</MainAction>
 	{/if}
 </section>
