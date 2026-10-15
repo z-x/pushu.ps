@@ -4,20 +4,18 @@
 
 
 
-// purpose:		checks if the PluralRules API is available and returns
-//				corresponding string based on given number
+// the plural rules for the user language, created once the language is set
+// (see below), changing the language reloads the app
+let pluralRules;
+
+
+// purpose:		returns corresponding string based on given number
 // arguments: 	number of items (int)
 //				strings (object that contains 'many', 'few', 'one' and 'other')
 // return:		a string that is right for given number
 // ------------------------------------------------------------------------
 function intlNumber(number, strings){
-	if('PluralRules' in Intl){
-		let rules = new Intl.PluralRules(localStorage.language);
-
-		return strings[rules.select(number)];
-	} else {
-		return strings['other'];
-	}
+	return strings[pluralRules.select(number)];
 };
 
 
@@ -536,6 +534,9 @@ if(!localStorage.language){
 
 // let the browser know the page language (for screen readers, hyphenation)
 document.documentElement.lang = localStorage.language;
+
+// the plural forms of the user language, used by intlNumber()
+pluralRules = new Intl.PluralRules(localStorage.language);
 
 // export the strings
 let exportedStrings = {};

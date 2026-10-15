@@ -288,10 +288,11 @@ describe('User interface', () => {
 		localStorage.page = 'Test';
 
 		// the test screen uses the plural rules for the pushups label,
-		// so breaking them makes the screen fail to render
+		// so breaking them makes the screen fail to render (the rules are
+		// created when the app loads and used when the screen renders)
 		cy.visit('/', {
 			onBeforeLoad(window){
-				window.Intl.PluralRules = function(){ throw new Error('Broken on purpose'); };
+				window.Intl.PluralRules.prototype.select = function(){ throw new Error('Broken on purpose'); };
 			}
 		});
 		cy.contains('Something went wrong while showing this screen.');
