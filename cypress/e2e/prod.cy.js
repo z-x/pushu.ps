@@ -1,6 +1,6 @@
 // need to disable service worker as it caches the page and this breaks Cypress
 Cypress.on('window:before:load', window => {
-  delete window.navigator.__proto__.ServiceWorker;
+  delete window.navigator.__proto__.serviceWorker;
 });
 
 // with testIsolation disabled, Cypress no longer clears localStorage between tests

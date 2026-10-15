@@ -41,6 +41,7 @@ q:after, q:before { content: ''; }
 
 
 /* fonts
+   the same addresses are in index.html and service-worker.js
 ============================================================================ */
 @font-face {
 	font-family: 'neue-haas-grotesk-display';

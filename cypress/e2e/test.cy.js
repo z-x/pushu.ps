@@ -1,6 +1,6 @@
 // need to disable service worker as it caches the page and this breaks Cypress
 Cypress.on('window:before:load', window => {
-  delete window.navigator.__proto__.ServiceWorker;
+  delete window.navigator.__proto__.serviceWorker;
 });
 
 // with testIsolation disabled, Cypress no longer clears localStorage between tests
@@ -289,8 +289,7 @@ describe('User interface', () => {
 
 		// the test screen uses the plural rules for the pushups label,
 		// so breaking them makes the screen fail to render
-		// (a new address, as visiting the current one can skip onBeforeLoad)
-		cy.visit('/?broken-screen', {
+		cy.visit('/', {
 			onBeforeLoad(window){
 				window.Intl.PluralRules = function(){ throw new Error('Broken on purpose'); };
 			}
