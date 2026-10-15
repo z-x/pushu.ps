@@ -9,7 +9,7 @@ jobs:
 
       - name: Set commit in progress status
         run: |
-          curl --request POST \
+          curl --fail-with-body --request POST \
           --url https://api.github.com/repos/${{ github.repository }}/statuses/${{ github.sha }} \
           --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
           --header 'content-type: application/json' \
@@ -42,14 +42,18 @@ jobs:
       - name: Set commit final status
         if: always()
         # set the merge commit status check using GitHub REST API see https://docs.github.com/en/rest/reference/repos#create-a-commit-status
+        # the API accepts only success, failure, error and pending, so a cancelled
+        # or skipped Cypress step (e.g. when the setup failed) is reported as an error
+        env:
+          STATE: ${{ steps.cypress.outcome == 'success' && 'success' || (steps.cypress.outcome == 'failure' && 'failure' || 'error') }}
         run: |
-          curl --request POST \
+          curl --fail-with-body --request POST \
           --url https://api.github.com/repos/${{ github.repository }}/statuses/${{ github.sha }} \
           --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
           --header 'content-type: application/json' \
           --data '{
             "context": "CheckProdData",
-            "state": "${{ steps.cypress.outcome }}",
+            "state": "'"$STATE"'",
             "description": "Tests finished: ${{ steps.cypress.outcome }}",
             "target_url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           }'
