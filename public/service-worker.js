@@ -6,25 +6,19 @@ const cacheName = 'pushups-__BUILD_VERSION__';
 
 
 // basic list of files that require caching, the app is not installed for
-// offline use when any of them fails to load (array)
+// offline use when any of them fails to load, the built files are added
+// on every build (see isCached() in vite.config.mjs) (array)
 // ------------------------------------------------------------------------
 const cacheFiles = [
 	'/',
-	'/index.html',
-	'/build/bundle.js',
-	'/global.css',
-	'/build/bundle.css',
-	'/img/favicon-32.png',
-	'/img/favicon-128.png',
-	'/img/favicon-152.png',
-	'/img/favicon-167.png',
-	'/img/favicon-180.png',
-	'/img/favicon-192.png',
-	'/img/favicon-196.png',
-	'/audio/alert.mp3',
-	'/audio/final.mp3',
-	'/pushups.webmanifest'
+	/* __CACHE_FILES__ */
 ];
+
+
+// the built files with a hash in their names, they never change, so they
+// can be taken from the browser cache that already has them (string)
+// ------------------------------------------------------------------------
+const hashedFiles = '/assets/';
 
 
 // the fonts, cached when possible, but the app is installed without them when
@@ -50,11 +44,12 @@ const newsFile = '/data/news.json';
 // ------------------------------------------------------------------------
 self.addEventListener('install', (event) => {
 
-	// load requested files into cache, skipping the browser cache
-	// so the new cache would not get the files of the previous version
+	// load requested files into cache, skipping the browser cache for the files
+	// without a hash, so the new cache would not get the files of the previous
+	// version, the hashed ones are not downloaded again after the page loaded them
 	event.waitUntil((async() => {
 		const cache = await caches.open(cacheName);
-		await cache.addAll(cacheFiles.map((file) => new Request(file, { cache: 'reload' })));
+		await cache.addAll(cacheFiles.map((file) => new Request(file, { cache: file.startsWith(hashedFiles) ? 'default' : 'reload' })));
 
 		// the fonts one by one, a font that fails to load is just skipped
 		await Promise.all(fontFiles.map((file) => cache.add(file).catch(() => {})));
