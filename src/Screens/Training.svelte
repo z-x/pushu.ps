@@ -223,7 +223,7 @@
 
 <Sidebar data={currentPushups} markActive bind:activePosition />
 
-<section class="main" in:slide|global out:slide|global="{ {direction: 'out'} }">
+<section class="main" in:slide|global out:slide|global={{ direction: 'out' }}>
 
 	<div class="content">
 		<div class="content-training" style:transform="translateY({ counterOffset })">

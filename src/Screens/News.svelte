@@ -224,7 +224,7 @@
 
 {#if news}
 	<dialog class="infoPopup" {@attach showModal} onclick={closeOnBackdrop} oncancel={closeOnEsc}>
-		<div in:fromTop|global="{ {duration: 700, delay: 500} }" out:fromTop|global="{ {duration: 700} }" class="infoPopup-content">
+		<div in:fromTop|global={{ duration: 700, delay: 500 }} out:fromTop|global={{ duration: 700 }} class="infoPopup-content">
 			<h1 class="infoPopup-heading">{@html message.title}</h1>
 			{@html message.content}
 

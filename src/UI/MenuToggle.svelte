@@ -78,7 +78,7 @@
 	{@attach focusWhenMenuClosed}
 	onclick={() => appState.setMenu('Main')}
 	class="menu-toggle"
-	title="{string.showMenu}"
+	title={string.showMenu}
 >
 	{string.menu}
 </button>

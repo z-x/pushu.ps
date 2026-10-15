@@ -38,9 +38,9 @@
 >
 	<div class="form-row">
 		<h2 class="form-label">{string.setYourLanguageTo}</h2>
-		<select bind:value="{ selectedLanguage }">
+		<select bind:value={selectedLanguage}>
 			{#each Object.keys(string.supportedLanguages) as lang}
-				<option value="{lang}">{string.supportedLanguages[lang][0]}</option>
+				<option value={lang}>{string.supportedLanguages[lang][0]}</option>
 			{/each}
 		</select>
 	</div>

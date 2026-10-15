@@ -28,12 +28,12 @@
 
 <Sidebar data={sidebarData} />
 
-<section class="main" out:slide|global="{ {direction: 'out'} }">
+<section class="main" out:slide|global={{ direction: 'out' }}>
 	<div class="content">
 		<ul class="content-info">
 			<li in:appear|global class="content-info-value">{string.lastDay}</li>
-			<li in:appear|global="{ {delay: 200} }" class="content-info-value">{string.comingUp}</li>
-			<li in:appear|global="{ {delay: 400} }" class="content-info-value">{string.currentLevel}</li>
+			<li in:appear|global={{ delay: 200 }} class="content-info-value">{string.comingUp}</li>
+			<li in:appear|global={{ delay: 400 }} class="content-info-value">{string.currentLevel}</li>
 		</ul>
 	</div>
 

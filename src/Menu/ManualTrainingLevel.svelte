@@ -47,7 +47,7 @@
 >
 	<div class="form-row">
 		<h2 class="form-label">{string.setYourSkillTo}</h2>
-		<select bind:value="{ userSkill }">
+		<select bind:value={userSkill}>
 			<option value={1}>{string.beginner}</option>
 			<option value={2}>{string.intermediate}</option>
 			<option value={3}>{string.advanced}</option>
@@ -55,7 +55,7 @@
 	</div>
 	<div class="form-row">
 		<h2 class="form-label">{string.setYourLevelTo}</h2>
-		<select bind:value="{ userSet }">
+		<select bind:value={userSet}>
 			{#each sets as set (set)}
 				<option value={set}>{set}</option>
 			{/each}

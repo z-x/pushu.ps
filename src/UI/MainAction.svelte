@@ -73,7 +73,7 @@
 
 
 <button
-	in:appear|global="{ {from: 'bottom', delay} }"
+	in:appear|global={{ from: 'bottom', delay }}
 	type="button"
 	class={['action-main', forceSmallClickArea && 'action-main-small']}
 	onclick={action}

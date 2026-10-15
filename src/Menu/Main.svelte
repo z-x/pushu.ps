@@ -79,8 +79,8 @@
 
 <Menu
 	allowButtonBack={false}
-	transitionInModifier={{direction: 'out'}}
-	transitionOutModifier={{direction: 'out'}}
+	transitionInModifier={{ direction: 'out' }}
+	transitionOutModifier={{ direction: 'out' }}
 >
 	<ul class="menu-items" {@attach focusFirstItem}>
 

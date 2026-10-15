@@ -70,19 +70,19 @@
 
 <Sidebar />
 
-<section class="main" out:slide|global="{ {direction: 'out'} }">
+<section class="main" out:slide|global={{ direction: 'out' }}>
 	<div class="content content-readable">
-		<h1 in:appear|global="{ {delay: 200, duration: 600} }" class="text-title">{string.helloThere}</h1>
-		<p in:appear|global="{ {delay: 900} }" class="text-subtitle">{string.progressRemember}</p>
+		<h1 in:appear|global={{ delay: 200, duration: 600 }} class="text-title">{string.helloThere}</h1>
+		<p in:appear|global={{ delay: 900 }} class="text-subtitle">{string.progressRemember}</p>
 		{#if isIOS}
-			<p in:appear|global="{ {delay: 1500} }" class="text-note note-ios">{string.saveAppApple}</p>
+			<p in:appear|global={{ delay: 1500 }} class="text-note note-ios">{string.saveAppApple}</p>
 		{/if}
 		{#if isAndroid}
-			<p in:appear|global="{ {delay: 1500} }" class="text-note note-android">{string.saveAppAndroid}</p>
+			<p in:appear|global={{ delay: 1500 }} class="text-note note-android">{string.saveAppAndroid}</p>
 		{/if}
 		<!-- only in browsers that offered installing the app -->
 		{#if install.available}
-			<button in:appear|global="{ {delay: 1500} }" class="hello-install" onclick={() => install.prompt()}>{string.installApp}</button>
+			<button in:appear|global={{ delay: 1500 }} class="hello-install" onclick={() => install.prompt()}>{string.installApp}</button>
 		{/if}
 	</div>
 
