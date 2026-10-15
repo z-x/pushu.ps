@@ -9,7 +9,7 @@
 	// the alert sounds, shared by all the trainings, they are loaded the first
 	// time a training is shown and not when the app starts (see below)
 	// ------------------------------------------------------------------------
-	import Sound from '../Helpers/sound.js';
+	import Sound, { enableSounds, disableSounds } from '../Helpers/sound.js';
 
 	const alert = new Sound('/audio/alert.mp3');
 	const final = new Sound('/audio/final.mp3');
@@ -43,6 +43,14 @@
 	// ------------------------------------------------------------------------
 	alert.load();
 	final.load();
+
+	// the audio runs only while the training is shown, the training is usually
+	// started with a click, so the browsers allow starting the audio right away
+	$effect(() => {
+		enableSounds();
+
+		return () => disableSounds();
+	});
 
 
 	// prevent the screen from dimming
