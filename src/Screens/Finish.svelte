@@ -8,7 +8,6 @@
 
 	// imports
 	// ------------------------------------------------------------------------
-	import { onDestroy } from 'svelte';
 	import appState from '../Data/state.svelte.js';
 	import string from '../Data/translations.js';
 	import training from '../Data/training.js';
@@ -17,17 +16,21 @@
 	import Sidebar from '../UI/Sidebar.svelte';
 
 
-	// reset current state when user finishes the training
-	onDestroy(() => {
+	// purpose:		resets the training progress, so the next training starts
+	//				from the first pushups, done here and not when this screen
+	//				is destroyed, as that can happen after the next training starts
+	// ------------------------------------------------------------------------
+	function resetTraining(){
 		appState.setStep(0);
 		appState.setResting(0);
-	});
+	};
 
 
 	// purpose:		we want the user to repeat this set if it was hard for him
 	// return: 		triggers an 'finished' event and redirects to the home screen
 	// ------------------------------------------------------------------------
 	function hard(){
+		resetTraining();
 		appState.setPage('Home');
 
 		window.dispatchEvent(new CustomEvent('finished', {detail: {howWasIt: 'hard', 'level': appState.level, 'set': appState.set}}));
@@ -37,6 +40,8 @@
 	// return:		triggers an 'finished', sets next training and redirects to home screen or congrats page if passed 100 pushups
 	// ------------------------------------------------------------------------
 	function easy(){
+		resetTraining();
+
 		if(Object.keys(training[appState.level]).length !== appState.set){
 			appState.nextSet();
 		}
