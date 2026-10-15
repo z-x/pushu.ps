@@ -22,7 +22,7 @@
 	// ------------------------------------------------------------------------
 	function resetTraining(){
 		appState.setStep(0);
-		appState.setResting(0);
+		appState.setResting(false);
 	};
 
 
