@@ -10,7 +10,7 @@
 
 // the local storage keys with the user progress, removed when the app is reset
 // the settings (like the chosen language) are not listed here, so they are kept
-const progressKeys = ['page', 'level', 'set', 'currentStep', 'isResting', 'pushupsLast', 'pushupsTotal', 'congratsShown'];
+const progressKeys = ['page', 'level', 'set', 'currentStep', 'isResting', 'restEndsAt', 'pushupsLast', 'pushupsTotal', 'congratsShown'];
 
 
 
@@ -26,6 +26,8 @@ class AppState {
 	set = $state((localStorage.set) ? parseInt(localStorage.set) : 1);
 	currentStep = $state((localStorage.currentStep) ? parseInt(localStorage.currentStep) : 0);
 	isResting = $state((localStorage.isResting) ? parseInt(localStorage.isResting) : 0);
+	// when the current rest ends (timestamp in ms), 0 when not resting
+	restEndsAt = $state((localStorage.restEndsAt) ? parseInt(localStorage.restEndsAt) : 0);
 	pushupsLast = $state((localStorage.pushupsLast) ? parseInt(localStorage.pushupsLast) : 0);
 	pushupsTotal = $state((localStorage.pushupsTotal) ? parseInt(localStorage.pushupsTotal) : 0);
 	lastActive = $state((localStorage.lastActive) ? parseInt(localStorage.lastActive) : Date.now());
@@ -98,12 +100,16 @@ class AppState {
 	};
 
 
-	// purpose:		sets the info if the user is resting
-	// arguments:	1 for user resting (default) or 0 if not
+	// purpose:		sets the info if the user is resting and when the rest ends,
+	//				so the rest keeps going when the app is in the background
+	// arguments:	1 for user resting or 0 if not
+	//				the rest length in seconds, when starting the rest (int)
 	// ------------------------------------------------------------------------
-	setResting(resting){
+	setResting(resting, restSeconds = 0){
 		this.isResting = (resting) ? 1 : 0;
+		this.restEndsAt = (resting) ? Date.now() + restSeconds * 1000 : 0;
 		localStorage.isResting = this.isResting;
+		localStorage.restEndsAt = this.restEndsAt;
 	};
 
 
@@ -137,6 +143,7 @@ class AppState {
 		this.set = 1;
 		this.currentStep = 0;
 		this.isResting = 0;
+		this.restEndsAt = 0;
 		this.pushupsLast = 0;
 		this.pushupsTotal = 0;
 		this.congratsShown = undefined;

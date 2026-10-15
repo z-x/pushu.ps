@@ -69,7 +69,7 @@
 		}
 		// if there are more to do, rest first
 		else {
-			appState.setResting(1);
+			appState.setResting(1, defaultRest);
 		}
 	};
 
@@ -78,31 +78,51 @@
 	// ------------------------------------------------------------------------
 	// the time to rest for current set
 	let defaultRest = currentSet['rest'];
-	// the counter for current rest time left
+	// the counter for current rest time left (seconds)
 	let currentRest = $state(defaultRest);
 	// the alert sounds
 	let alert = new Sound('/audio/alert.mp3');
 	let final = new Sound('/audio/final.mp3');
 
-	// counts the rest down while the user is resting, this also resumes
-	// the rest when user closed the app before finishing it
+	// counts the rest down while the user is resting, the time left is taken
+	// from the rest end time, so the rest keeps going when the phone is locked
+	// or the app was closed, as the timers are paused in the background
 	$effect(() => {
 		if(!appState.isResting){ return; }
 
-		let restInterval = setInterval(() => {
-			currentRest--;
+		// the rest started before the end time was saved, start it again
+		if(!appState.restEndsAt){
+			appState.setResting(1, defaultRest);
+		}
+
+		let tick = () => {
+			// the rest was ended elsewhere (skipped or the training was canceled)
+			// and this screen is still being removed, so it is not counted anymore
+			if(!appState.isResting){ return; }
+
+			let restLeft = Math.max(0, Math.ceil((appState.restEndsAt - Date.now()) / 1000));
+
+			// checked a few times a second, so act only when the second changes
+			if(restLeft === currentRest){ return; }
+
+			currentRest = restLeft;
 
 			// if the resting is near the end, play the alert sound
-			if(currentRest <= 5 && currentRest > 0 ){
+			if(currentRest <= 5 && currentRest > 0){
 				alert.play();
 			}
 
 			// when the resting finishes
-			if(currentRest == 0){
+			if(currentRest === 0){
 				final.play();
 				finishResting();
 			}
-		}, 1000);
+		};
+
+		// show the time left right away, the sounds are played by the ticks
+		currentRest = Math.max(1, Math.ceil((appState.restEndsAt - Date.now()) / 1000));
+
+		let restInterval = setInterval(tick, 250);
 
 		// stops the countdown when the resting ends or user leaves the training
 		return () => clearInterval(restInterval);
