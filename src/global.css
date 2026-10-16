@@ -141,7 +141,11 @@ q:after, q:before { content: ''; }
 
 /* general styling
 ============================================================================ */
+/* in the browser the height follows the visible area, so nothing ends up
+   behind the Safari toolbar, the installed iOS app has no toolbar but there
+   dvh comes out shorter than the screen, so it uses the full screen height */
 html, body {
+	height: 100vh;
 	height: 100dvh;
 	position: relative;
 	overflow: hidden;
@@ -150,6 +154,11 @@ html, body {
 	background-color: var(--color-background);
 
 	font-family: var(--font-normal);
+}
+
+.app-appleFullscreen,
+.app-appleFullscreen body {
+	height: 100vh;
 }
 
 /* this is needed to set the proper colors for iOS PWA that takes the
