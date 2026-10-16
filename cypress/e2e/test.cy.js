@@ -131,7 +131,7 @@ describe('Do the workout', () => {
 
 		cy.contains('I made it').click();
 		cy.contains('It was ok').click();
-		cy.contains('Hey there, you’ve just passed');
+		cy.contains('Congrats on hitting');
 		cy.contains('Thanks!').click();
 		cy.get('.sidebar-info li:nth-child(3)').contains('2');
 	});

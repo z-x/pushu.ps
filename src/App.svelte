@@ -2,7 +2,6 @@
 
 	import { onMount } from 'svelte';
 	import string from './Data/translations.js';
-	// sends the app events to Google Analytics
 	import './Helpers/analytics.svelte.js';
 	import ErrorMessage from './UI/Error.svelte';
 	import handleError from './Helpers/handleError.js';

@@ -58,7 +58,7 @@
 	}
 
 	.action-main:not(.action-main-small):only-of-type {
-		padding-top: 18vh;
+		padding-top: 16vh;
 	}
 
 	@media (min-height: 551px) and (max-height: 630px) {

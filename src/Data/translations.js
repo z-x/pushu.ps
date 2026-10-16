@@ -262,23 +262,18 @@ let translations = {
 	// screen: 	congrats
 	// ------------------------------------------------------------------------
 	youvePassed: {
-		'en-US': 'Hey there, you’ve just passed',
-		'pl-PL': 'Nieźle, właśnie przekraczasz'
+		'en-US': 'Congrats on hitting',
+		'pl-PL': 'Gratulacje z okazji dobicia do'
 	},
 
 	inSinglePractice: {
-		'en-US': 'in a single practice',
-		'pl-PL': 'w jednym treningu'
-	},
-
-	movingOn: {
-		'en-US': 'and you’re moving on',
-		'pl-PL': 'i chyba masz ochotę na więcej'
+		'en-US': 'in a single workout!',
+		'pl-PL': 'w jednym treningu!'
 	},
 
 	respects: {
-		'en-US': 'I have a great respect for this accomplishment, congratulations!',
-		'pl-PL': 'Przesyłam wyrazy uznania i gratuluję!'
+		'en-US': 'Impressive milestone — keep up the great work!',
+		'pl-PL': 'Imponujący wynik - tak trzymaj!'
 	},
 
 	thanks: {

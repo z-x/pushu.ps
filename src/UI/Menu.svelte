@@ -86,7 +86,7 @@
 
 	.menu-content {
 		max-height: 70vh;
-		padding: var(--size-padding);
+		padding: var(--size-padding) var(--size-padding) calc(max(env(safe-area-inset-bottom, 0px), var(--size-padding)) / 1.2) var(--size-padding);
 		overflow: auto;
 	}
 
@@ -100,19 +100,10 @@
 		width: 100%;
 		padding-right: var(--size-padding);
 		padding-left: var(--size-padding);
+		padding-block-end: calc(env(safe-area-inset-bottom, 0px) / 2);
 
 		border-top: 1px solid var(--color-pureSeparator);
 	}
-
-		:global(.app-appleFullscreen .menu-navigation) {
-			padding-bottom: 3rem !important;
-		}
-
-		@media (display-mode: standalone) {
-			.menu-navigation {
-				padding-bottom: 3rem;
-			}
-		}
 	
 	.menu-navigation .menu-contentWrapper {
 		display: flex;

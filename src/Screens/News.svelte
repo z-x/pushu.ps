@@ -142,7 +142,7 @@
 		position: relative;
 		top: -15vh;
 		padding: calc(var(--size-padding) * 2);
-		padding-top: calc(var(--size-padding) * 2 + 15vh);
+		padding-top: calc(var(--size-padding) + env(safe-area-inset-top, 0px) + 15vh);
 		overflow: auto;
 
 		background-color: var(--color-pure);

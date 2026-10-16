@@ -56,8 +56,8 @@
 
 	.sidebar {
 		width: calc(2 * 1rem + 2 * var(--size-spacing));
-		padding-top: var(--size-padding);
-		padding-bottom: var(--size-padding-bottom);
+		padding-top: calc(var(--size-padding) + env(safe-area-inset-top, 0px));
+		padding-bottom: calc(var(--size-padding) + env(safe-area-inset-bottom, 0px));
 		position: absolute;
 		left: 0;
 		top: 0;
@@ -65,11 +65,27 @@
 		display: flex;
 		flex-direction: column;
 
-		border-right: 1px solid var(--color-separator);
 		background-color: var(--color-background);
 
 		transition: filter .5s ease-in-out;
 		transform: translateZ(0);
+	}
+
+		:global(.app-appleFullscreen) .sidebar {
+			padding-bottom: calc(var(--size-padding) / 2 + env(safe-area-inset-bottom, 0px));
+		}
+
+	/* vertical separator */
+	.sidebar::after {
+		width: 1px;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		right: -1px;
+
+		background-image: linear-gradient(to bottom, transparent env(safe-area-inset-top, 0px), var(--color-separator) calc(env(safe-area-inset-top, 0px) * 1.2), var(--color-separator));
+
+		content: '';
 	}
 
 	.sidebar-info {

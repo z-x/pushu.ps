@@ -28,7 +28,11 @@
 	.menu-items {
 		margin-left: calc(var(--size-padding) * -1);
 		margin-right: calc(var(--size-padding) * -1);
-		margin-bottom: var(--size-spacing);
+		margin-bottom: calc(max(env(safe-area-inset-bottom, 0px), var(--size-padding)) / 1.2);
+	}
+
+	:global(.app-appleFullscreen) .menu-items {
+		margin-bottom: calc(max(env(safe-area-inset-bottom, 0px), var(--size-padding)) / 2);
 	}
 
 	.menu-item {
@@ -53,6 +57,10 @@
 				background-image: var(--icon-arrowRight-light);
 			}
 		}
+
+	footer {
+		text-align: center;
+	}
 
 	.secondgate {
 		padding-left: 2.3em;
@@ -141,5 +149,7 @@
 
 	</ul>
 
-	<a href="https://secondgate.pl" target="_blank" class="secondgate">{string.appCreatedSecondGate}</a>
+	<footer>
+		<a href="https://secondgate.pl" target="_blank" class="secondgate">{string.appCreatedSecondGate}</a>
+	</footer>
 </Menu>
