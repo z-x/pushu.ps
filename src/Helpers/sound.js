@@ -32,6 +32,12 @@ let soundsEnabled = false;
 // returns:		the audio context
 // ------------------------------------------------------------------------
 function getAudioContext(){
+	// mix the sounds with the music the user listens to, instead of stopping it
+	// (iOS mutes them then when the phone is in silent mode)
+	if('audioSession' in navigator){
+		navigator.audioSession.type = 'ambient';
+	}
+
 	return audioContext ??= new (window.AudioContext || window.webkitAudioContext)();
 };
 
