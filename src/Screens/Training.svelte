@@ -184,8 +184,10 @@
 
 <style>
 
+	/* moved by the position of the active sidebar item, that already includes
+	   the top spacing, so the spacing of .main is taken back here */
 	.content-training {
-		margin-top: calc(-1 * var(--size-padding));
+		margin-top: calc(-1 * (var(--size-padding) + env(safe-area-inset-top, 0px)));
 		position: relative;
 		display: inline-block;
 
