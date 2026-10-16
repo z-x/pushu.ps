@@ -142,7 +142,7 @@ q:after, q:before { content: ''; }
 /* general styling
 ============================================================================ */
 html, body {
-	height: 100vh;
+	height: 100dvh;
 	position: relative;
 	overflow: hidden;
 	overscroll-behavior: none;
